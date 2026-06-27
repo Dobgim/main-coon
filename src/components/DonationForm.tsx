@@ -20,7 +20,7 @@ export default function DonationForm() {
 
   const copyBank = async () => {
     const { bank } = site.donation;
-    const text = `${bank.accountName} | Sort code ${bank.sortCode} | Acc ${bank.accountNumber}`;
+    const text = `${bank.accountName} | Routing ${bank.routingNumber} | Acc ${bank.accountNumber}`;
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
@@ -73,12 +73,12 @@ export default function DonationForm() {
                   : 'border-sand text-muted hover:border-forest/40'
               }`}
             >
-              £{p}
+              ${p}
             </button>
           ))}
         </div>
 
-        <FormField label="Other amount (£)" htmlFor="d-custom" className="mt-4">
+        <FormField label="Other amount ($)" htmlFor="d-custom" className="mt-4">
           <input
             id="d-custom"
             type="number"
@@ -92,7 +92,7 @@ export default function DonationForm() {
 
         <p className="mt-4 rounded-2xl bg-forest-50 px-4 py-3 text-sm font-semibold text-forest-800">
           You&apos;re giving{' '}
-          <span className="text-ember">£{effectiveAmount || 0}</span>{' '}
+          <span className="text-ember">${effectiveAmount || 0}</span>{' '}
           {frequency === 'monthly' ? 'every month' : 'today'}. Thank you!
         </p>
 
@@ -104,7 +104,7 @@ export default function DonationForm() {
           onClick={() => recordAndThank('PayPal')}
           className="btn mt-5 w-full bg-[#0070ba] text-base text-white hover:bg-[#005ea6]"
         >
-          Donate £{effectiveAmount || 0} with PayPal
+          Donate ${effectiveAmount || 0} with PayPal
         </a>
 
         {/* Demo card form */}
@@ -132,7 +132,7 @@ export default function DonationForm() {
             onClick={() => recordAndThank('Card (demo)')}
             className="btn-primary mt-4 w-full"
           >
-            Donate £{effectiveAmount || 0} Now
+            Donate ${effectiveAmount || 0} Now
           </motion.button>
           <p className="mt-2 text-xs text-muted">
             Demo only — no card data is processed or stored. Connect Stripe/PayPal for live payments.
@@ -147,7 +147,7 @@ export default function DonationForm() {
           <dl className="mt-3 space-y-2 text-sm">
             <Row label="Account name" value={site.donation.bank.accountName} />
             <Row label="Bank" value={site.donation.bank.bankName} />
-            <Row label="Sort code" value={site.donation.bank.sortCode} />
+            <Row label="Routing number" value={site.donation.bank.routingNumber} />
             <Row label="Account no." value={site.donation.bank.accountNumber} />
             <Row label="Reference" value={site.donation.bank.reference} />
           </dl>
@@ -176,7 +176,7 @@ export default function DonationForm() {
 
       <Modal open={success} onClose={() => setSuccess(false)} title="Thank you!">
         Your generosity helps us rescue more Maine Coons. A confirmation will follow by email once
-        your {frequency === 'monthly' ? 'monthly gift' : 'donation'} of £{effectiveAmount || 0} is
+        your {frequency === 'monthly' ? 'monthly gift' : 'donation'} of ${effectiveAmount || 0} is
         processed.
       </Modal>
     </div>

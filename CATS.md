@@ -18,8 +18,8 @@ from this one file — add a cat here and it appears everywhere automatically.
   ageGroup: 'Adult',                  // 'Kitten' | 'Young' | 'Adult' | 'Senior' (used by the age filter)
   gender: 'Male',                     // 'Male' | 'Female'
   color: 'Blue smoke',
-  location: 'Leeds, Yorkshire',       // shown on the card
-  region: 'Yorkshire',                // used by the location filter (keep consistent!)
+  location: 'Denver, Colorado',       // shown on the card
+  region: 'Colorado',                 // used by the location filter (keep consistent!)
   status: 'Available',                // 'Available' | 'Pending' | 'Adopted'
   neutered: true,
   vaccinated: true,
@@ -51,7 +51,7 @@ from this one file — add a cat here and it appears everywhere automatically.
 
 - The **Location** filter is built automatically from the distinct `region` values
   (`regions` is derived at the bottom of `cats.ts`). Keep region spelling consistent
-  (e.g. always `"Yorkshire"`) so cats group correctly.
+  (e.g. always `"Colorado"`) so cats group correctly.
 - The **Age** filter uses `ageGroup`, not `ageLabel`.
 
 ## Mark a cat as adopted

@@ -15,7 +15,7 @@ export default function About() {
     <>
       <PageHero
         title={`About ${site.name}`}
-        subtitle="A dedicated team of volunteers giving Maine Coon cats across the UK a second chance at a happy life."
+        subtitle="A dedicated team of volunteers giving Maine Coon cats across the US a second chance at a happy life."
         image={heroImg}
         breadcrumb="About Us"
       />
@@ -44,14 +44,14 @@ export default function About() {
               grooming and companionship needs. We set out to change that.
             </p>
             <p className="mt-4 leading-relaxed text-ink/85">
-              Since then we&apos;ve grown into a UK-wide network of volunteers, foster carers and vet
+              Since then we&apos;ve grown into a US-wide network of volunteers, foster carers and vet
               partners. Together we&apos;ve rehomed{' '}
               <strong className="text-forest-700">{site.rehomedCount} cats</strong> — and counting.
             </p>
             <div className="mt-6 rounded-2xl bg-forest-50 p-5">
               <p className="font-bold text-forest-800">Our mission</p>
               <p className="mt-1 text-sm text-ink/80">
-                To rescue, rehabilitate and rehome Maine Coon cats across the UK — and to support
+                To rescue, rehabilitate and rehome Maine Coon cats across the US — and to support
                 their families for life.
               </p>
             </div>
@@ -64,7 +64,7 @@ export default function About() {
         <div className="container-page grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <TrustBadge icon={<ShieldIcon />} title="Registered Charity" subtitle={`No. ${site.charityNumber}`} />
           <TrustBadge icon={<HeartIcon />} title="500+ Rehomed" subtitle="Since 2010" />
-          <TrustBadge icon={<PawIcon />} title="UK-Wide Network" subtitle="Volunteers & foster carers" />
+          <TrustBadge icon={<PawIcon />} title="US-Wide Network" subtitle="Volunteers & foster carers" />
           <TrustBadge icon={<StarIcon />} title="5-Star Rescue" subtitle="Trusted by adopters" />
         </div>
       </section>

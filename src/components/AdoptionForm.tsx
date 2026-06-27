@@ -58,7 +58,7 @@ export default function AdoptionForm({ catId, catName }: { catId: string; catNam
       else if (!phonePattern.test(data.phone)) next.phone = 'Enter a valid phone number.';
     }
     if (current === 1) {
-      if (!data.address.trim()) next.address = 'Please add your town and postcode area.';
+      if (!data.address.trim()) next.address = 'Please add your city and ZIP code area.';
     }
     if (current === 2 && !data.agree) {
       next.agree = 'Please confirm you accept the adoption process.';
@@ -141,10 +141,10 @@ export default function AdoptionForm({ catId, catName }: { catId: string; catNam
 
             {step === 1 && (
               <div className="grid gap-5 sm:grid-cols-2">
-                <FormField label="Town & postcode area" htmlFor="a-addr" required
+                <FormField label="City & ZIP code area" htmlFor="a-addr" required
                   error={errors.address} className="sm:col-span-2">
                   <input id="a-addr" className={inputCls('address')} value={data.address}
-                    onChange={(e) => update('address', e.target.value)} placeholder="e.g. Leeds, LS1" />
+                    onChange={(e) => update('address', e.target.value)} placeholder="e.g. Denver, CO 80202" />
                 </FormField>
                 <FormField label="Home type" htmlFor="a-home">
                   <select id="a-home" className="input" value={data.homeType}

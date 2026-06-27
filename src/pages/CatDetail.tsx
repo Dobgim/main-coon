@@ -40,7 +40,7 @@ export default function CatDetail() {
     ['Gender', cat.gender],
     ['Colour', cat.color],
     ['Location', cat.location],
-    ['Adoption fee', `£${cat.adoptionFee}`],
+    ['Adoption fee', `$${cat.adoptionFee}`],
     ['Status', cat.status],
   ];
 
@@ -201,7 +201,7 @@ export default function CatDetail() {
           <ul className="mt-4 space-y-2 text-sm text-ink/85">
             <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A friendly home visit before adoption</li>
             <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A reference check (vet or personal)</li>
-            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> An adoption fee of £{cat.adoptionFee} towards care costs</li>
+            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> An adoption fee of ${cat.adoptionFee} towards care costs</li>
             <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A commitment to {cat.name}&apos;s wellbeing for life</li>
           </ul>
         </div>

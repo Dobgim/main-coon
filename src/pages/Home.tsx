@@ -29,7 +29,7 @@ const services = [
   {
     icon: <PawIcon className="h-7 w-7" />,
     title: 'Dedicated Rescue',
-    text: 'We step in for Maine Coons in crisis, wherever they are in the UK.',
+    text: 'We step in for Maine Coons in crisis, wherever they are in the US.',
   },
   {
     icon: <HomeIcon className="h-7 w-7" />,
@@ -181,7 +181,7 @@ export default function Home() {
             <p className="mt-5 leading-relaxed text-ink/85">
               Founded in 2010 by a group of Maine Coon lovers, we stepped in because these
               beautiful cats were ending up in shelters not equipped for their specialist needs.
-              Today we are a UK-wide network of volunteers, foster carers and vet partners.
+              Today we are a US-wide network of volunteers, foster carers and vet partners.
             </p>
             <p className="mt-4 leading-relaxed text-ink/85">
               Every Maine Coon in our care is fully health-checked, vaccinated and micro-chipped

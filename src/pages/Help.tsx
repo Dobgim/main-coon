@@ -38,10 +38,10 @@ export default function Help() {
             />
             <ul className="mt-6 space-y-4">
               {[
-                ['£10', 'feeds a rescued Maine Coon for two weeks'],
-                ['£25', 'covers a vaccination and health check'],
-                ['£50', 'pays for microchipping and neutering'],
-                ['£100', 'funds emergency vet care for a cat in crisis'],
+                ['$10', 'feeds a rescued Maine Coon for two weeks'],
+                ['$25', 'covers a vaccination and health check'],
+                ['$50', 'pays for microchipping and neutering'],
+                ['$100', 'funds emergency vet care for a cat in crisis'],
               ].map(([amt, desc]) => (
                 <li key={amt} className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-soft">
                   <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-ember-100 text-lg font-extrabold text-ember-700">

@@ -5,7 +5,7 @@ const sections: Array<{ h: string; p: string[] }> = [
   {
     h: 'Who we are',
     p: [
-      `${site.name} is a UK Maine Coon cat rescue. This policy explains how we handle the personal information you share with us through this website.`,
+      `${site.name} is a US Maine Coon cat rescue. This policy explains how we handle the personal information you share with us through this website.`,
       'Note: this is a demonstration template. Replace this text with your charity\'s reviewed, GDPR-compliant privacy policy before going live.',
     ],
   },
@@ -32,7 +32,7 @@ const sections: Array<{ h: string; p: string[] }> = [
   {
     h: 'Your rights',
     p: [
-      'Under UK GDPR you have the right to access, correct or request deletion of your personal data. To exercise these rights, contact us at ' + site.email + '.',
+      'Under applicable US data-privacy laws (such as the CCPA) you have the right to access, correct or request deletion of your personal data. To exercise these rights, contact us at ' + site.email + '.',
     ],
   },
   {

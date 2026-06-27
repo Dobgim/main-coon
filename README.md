@@ -1,6 +1,6 @@
 # Maine Coons in Need — Charity Website Template
 
-A warm, trustworthy, production-ready website **template** for a UK Maine Coon cat
+A warm, trustworthy, production-ready website **template** for a US Maine Coon cat
 rescue charity. Built with React 18, Vite, TypeScript, Tailwind CSS, React Router,
 GSAP and Framer Motion.
 

@@ -1,11 +1,24 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { gsap, prefersReducedMotion } from '@/lib/gsap-config';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PawIcon, ArrowRightIcon, HeartIcon } from './Icons';
 
-const heroImg =
-  'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1400&q=70';
+const heroImages = [
+  {
+    src: 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1400&q=70',
+    alt: 'A fluffy white Maine Coon cat resting peacefully',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=1400&q=70',
+    alt: 'A majestic brown Maine Coon gazing into the distance',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?auto=format&fit=crop&w=1400&q=70',
+    alt: 'A gentle Maine Coon curled up in a cosy home',
+  },
+];
+
+const SLIDE_INTERVAL = 3000;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -17,23 +30,14 @@ const fadeUp = {
 };
 
 export default function Hero() {
-  const imgRef = useRef<HTMLImageElement>(null);
+  const [index, setIndex] = useState(0);
 
-  useLayoutEffect(() => {
-    if (!imgRef.current || prefersReducedMotion()) return;
-    const ctx = gsap.context(() => {
-      gsap.to(imgRef.current, {
-        yPercent: 14,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: imgRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    });
-    return () => ctx.revert();
+  useEffect(() => {
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % heroImages.length),
+      SLIDE_INTERVAL,
+    );
+    return () => clearInterval(id);
   }, []);
 
   return (
@@ -49,7 +53,7 @@ export default function Hero() {
             variants={fadeUp}
             className="badge inline-flex items-center gap-1.5 bg-ember-100 text-ember-700"
           >
-            <PawIcon className="h-4 w-4" /> UK Maine Coon Cat Rescue
+            <PawIcon className="h-4 w-4" /> US Maine Coon Cat Rescue
           </motion.span>
 
           <motion.h1
@@ -70,7 +74,7 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-5 max-w-xl text-lg leading-relaxed text-muted"
           >
-            We rescue, rehabilitate and rehome gentle giants across the UK. Every cat
+            We rescue, rehabilitate and rehome gentle giants across the US. Every cat
             deserves warmth, safety and a family to call their own — help us give them one.
           </motion.p>
 
@@ -114,24 +118,49 @@ export default function Hero() {
           </motion.dl>
         </div>
 
-        {/* Image */}
+        {/* Image slideshow */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="relative"
         >
-          <div className="relative overflow-hidden rounded-[2.5rem] shadow-lift ring-1 ring-black/5">
-            <img
-              ref={imgRef}
-              src={heroImg}
-              alt="A fluffy Maine Coon cat resting peacefully"
-              className="h-[460px] w-full scale-110 object-cover"
-              fetchPriority="high"
-            />
+          <div className="relative h-[460px] overflow-hidden rounded-[2.5rem] shadow-lift ring-1 ring-black/5">
+            <AnimatePresence>
+              <motion.img
+                key={index}
+                src={heroImages[index].src}
+                alt={heroImages[index].alt}
+                className="absolute inset-0 h-full w-full object-cover"
+                initial={{ opacity: 0, scale: 1.12 }}
+                animate={{ opacity: 1, scale: 1.04 }}
+                exit={{ opacity: 0, scale: 1.04 }}
+                transition={{
+                  opacity: { duration: 0.7, ease: 'easeInOut' },
+                  scale: { duration: SLIDE_INTERVAL / 1000 + 0.7, ease: 'easeOut' },
+                }}
+                fetchPriority="high"
+              />
+            </AnimatePresence>
+
+            {/* Slide indicators */}
+            <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+              {heroImages.map((img, i) => (
+                <button
+                  key={img.src}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  aria-label={`Show cat photo ${i + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    i === index ? 'w-7 bg-white' : 'w-2 bg-white/60 hover:bg-white/80'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
+
           <motion.div
-            className="absolute -bottom-5 -left-5 hidden rounded-2xl bg-white p-4 shadow-lift ring-1 ring-black/5 sm:block"
+            className="absolute -bottom-5 -left-5 z-10 hidden rounded-2xl bg-white p-4 shadow-lift ring-1 ring-black/5 sm:block"
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           >

@@ -7,15 +7,15 @@
  */
 export const site = {
   name: 'Maine Coons in Need',
-  tagline: 'UK Maine Coon Cat Rescue',
+  tagline: 'US Maine Coon Cat Rescue',
   shortPitch: 'Gentle giants deserve gentle homes.',
   foundedYear: 2010,
   rehomedCount: '500+',
 
   // --- Placeholder contact details ---
   email: 'info@example-rescue.org',
-  phone: '+44 0000 000000',
-  address: 'Demo Lane, Yorkshire, United Kingdom',
+  phone: '+1 (000) 000-0000',
+  address: 'Demo Lane, Denver, Colorado, United States',
   responseTime: "We aim to reply within 24 hours.",
 
   // --- Placeholder registration / trust info ---
@@ -31,12 +31,12 @@ export const site = {
   // --- Placeholder donation details (NOT real) ---
   donation: {
     paypalUrl: 'https://www.paypal.com/donate', // replace with real hosted button URL
-    amazonWishlist: 'https://www.amazon.co.uk/',
+    amazonWishlist: 'https://www.amazon.com/',
     bank: {
       accountName: 'Maine Coons in Need (placeholder)',
       bankName: 'Example Bank',
-      sortCode: '00-00-00',
-      accountNumber: '00000000',
+      routingNumber: '000000000',
+      accountNumber: '000000000',
       reference: 'Your name',
     },
   },

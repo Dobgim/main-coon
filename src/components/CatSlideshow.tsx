@@ -11,7 +11,7 @@ const slides = [
     eyebrow: 'Meet Oliver',
     heading: 'Every cat deserves a place to call home',
     sub: 'A 4-year-old gentle giant waiting patiently for his forever family.',
-    location: 'Manchester',
+    location: 'Seattle, WA',
     catId: 'oliver',
   },
   {
@@ -21,7 +21,7 @@ const slides = [
     eyebrow: 'Meet Luna',
     heading: 'Fill your home with love and purrs',
     sub: 'Playful, affectionate and utterly charming — Luna is ready to steal your heart.',
-    location: 'London',
+    location: 'New York, NY',
     catId: 'luna',
   },
   {
@@ -31,7 +31,7 @@ const slides = [
     eyebrow: 'Meet Finn',
     heading: 'Gentle giants need gentle hearts',
     sub: 'Rescued from difficult circumstances, Finn is now ready to shower you with love.',
-    location: 'Edinburgh',
+    location: 'Austin, TX',
     catId: 'finn',
   },
 ];

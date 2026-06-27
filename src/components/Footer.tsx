@@ -33,7 +33,7 @@ export default function Footer() {
           <Logo variant="light" />
           <p className="mt-4 max-w-xs text-sm text-cream/70">
             {site.name} — {site.tagline}. Rescuing, rehabilitating and rehoming gentle
-            giants across the UK.
+            giants across the US.
           </p>
           <div className="mt-5 flex gap-3">
             <SocialLink href={site.social.facebook} label="Facebook">

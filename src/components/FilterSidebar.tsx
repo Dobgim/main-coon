@@ -104,7 +104,7 @@ export default function FilterSidebar({ regions, onApply, resultCount }: Props) 
               value={draft.region}
               onChange={(e) => set('region', e.target.value)}
             >
-              <option value="all">Anywhere in the UK</option>
+              <option value="all">Anywhere in the US</option>
               {regions.map((r) => (
                 <option key={r} value={r}>
                   {r}

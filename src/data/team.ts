@@ -8,7 +8,7 @@ export const team: TeamMember[] = [
   {
     name: 'Jacky Holmes',
     role: 'Rehoming Coordinator',
-    bio: 'Jacky matches every cat with the right family and oversees home visits across Yorkshire.',
+    bio: 'Jacky matches every cat with the right family and oversees home visits across Colorado.',
     image: img('1494790108377-be9c29b29330'),
   },
   {
@@ -19,8 +19,8 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Marek Nowak',
-    role: 'Northern Region Coordinator',
-    bio: 'Marek runs collections, transport and assessments for cats across the North of England.',
+    role: 'Western Region Coordinator',
+    bio: 'Marek runs collections, transport and assessments for cats across the West Coast.',
     image: img('1500648767791-00dcc994a43e'),
   },
   {

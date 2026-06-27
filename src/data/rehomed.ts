@@ -11,7 +11,7 @@ export const rehomedStories: RehomedStory[] = [
     title: 'From timid stray to confident king',
     year: 2024,
     adopter: 'Sarah & James',
-    location: 'London',
+    location: 'New York, NY',
     rating: 5,
     quote:
       'Oscar settled in within days and now rules the house with the gentlest paw. We cannot imagine life without him — thank you for trusting us with him.',
@@ -24,7 +24,7 @@ export const rehomedStories: RehomedStory[] = [
     title: 'A senior girl finds her sofa',
     year: 2023,
     adopter: 'The Patel family',
-    location: 'Birmingham',
+    location: 'Austin, TX',
     rating: 5,
     quote:
       'We adopted Bella at nine years old and she has brought so much calm and joy to our home. Adopting a senior was the best decision we ever made.',
@@ -37,7 +37,7 @@ export const rehomedStories: RehomedStory[] = [
     title: 'Best friends from day one',
     year: 2024,
     adopter: 'Hannah',
-    location: 'Manchester',
+    location: 'Seattle, WA',
     rating: 5,
     quote:
       'Teddy and my older cat became inseparable almost immediately. The matching advice from the team was spot on. He is the most affectionate boy.',
@@ -50,7 +50,7 @@ export const rehomedStories: RehomedStory[] = [
     title: 'Patience pays off',
     year: 2022,
     adopter: 'David & Lin',
-    location: 'Edinburgh',
+    location: 'Denver, CO',
     rating: 5,
     quote:
       'Misty needed time to trust us, and the foster team prepared us perfectly. A year on she sleeps on our bed every night. Truly a transformation.',
@@ -63,7 +63,7 @@ export const rehomedStories: RehomedStory[] = [
     title: 'A gentle giant for the kids',
     year: 2023,
     adopter: 'The Okoro family',
-    location: 'Leeds',
+    location: 'Boston, MA',
     rating: 5,
     quote:
       'Leo is endlessly patient with our two children and follows them around like a dog. He is the heart of our family now.',
@@ -76,7 +76,7 @@ export const rehomedStories: RehomedStory[] = [
     title: 'From shelter to spotlight',
     year: 2024,
     adopter: 'Megan',
-    location: 'Cardiff',
+    location: 'Portland, OR',
     rating: 5,
     quote:
       'Cleo was overlooked for months because she was shy. Now she greets every guest and naps in the sunniest spot in the house. So grateful.',

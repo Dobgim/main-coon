@@ -37,7 +37,7 @@ export default function Cats() {
     <>
       <PageHero
         title="Cats Available for Adoption"
-        subtitle="Meet the Maine Coons currently looking for their forever homes across the UK."
+        subtitle="Meet the Maine Coons currently looking for their forever homes across the US."
         image={heroImg}
       />
 
