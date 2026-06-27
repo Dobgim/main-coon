@@ -14,7 +14,7 @@ export default function Donate() {
         image={heroImg}
       >
         <span className="badge bg-white/15 text-white">
-          🐾 100% of donations go directly to cat care
+          100% of donations go directly to cat care
         </span>
       </PageHero>
 

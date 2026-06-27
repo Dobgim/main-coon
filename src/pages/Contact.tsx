@@ -92,7 +92,7 @@ export default function Contact() {
             <div className="card overflow-hidden">
               <div className="flex aspect-video items-center justify-center bg-forest-50 text-center text-sm text-muted">
                 <span className="px-6">
-                  🗺️ Map embed goes here — add a Google Maps iframe with the rescue&apos;s real
+                  Map embed goes here — add a Google Maps iframe with the rescue&apos;s real
                   location.
                 </span>
               </div>

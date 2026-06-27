@@ -12,6 +12,7 @@ import {
   ShareIcon,
   MailIcon,
   PhoneIcon,
+  PawIcon,
 } from '@/components/Icons';
 import { getCatById } from '@/data/cats';
 
@@ -24,7 +25,7 @@ export default function CatDetail() {
   if (!cat) {
     return (
       <div className="container-page flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
-        <span className="text-6xl">🐾</span>
+        <PawIcon className="h-16 w-16 text-forest-200" />
         <h1 className="text-3xl font-extrabold">We couldn&apos;t find that cat</h1>
         <p className="text-muted">They may already have found their forever home.</p>
         <Link to="/cats" className="btn-primary">

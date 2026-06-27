@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { gsap, prefersReducedMotion } from '@/lib/gsap-config';
-import { PawIcon, ArrowRightIcon } from './Icons';
+import { PawIcon, ArrowRightIcon, HeartIcon } from './Icons';
 
 const heroImg =
   'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1400&q=70';
@@ -19,7 +19,6 @@ const fadeUp = {
 export default function Hero() {
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // Subtle parallax: the hero image drifts as the user scrolls.
   useLayoutEffect(() => {
     if (!imgRef.current || prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
@@ -48,7 +47,7 @@ export default function Hero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="badge bg-ember-100 text-ember-700"
+            className="badge inline-flex items-center gap-1.5 bg-ember-100 text-ember-700"
           >
             <PawIcon className="h-4 w-4" /> UK Maine Coon Cat Rescue
           </motion.span>
@@ -89,8 +88,8 @@ export default function Hero() {
               animate={{ scale: [1, 1.04, 1] }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <Link to="/donate" className="btn-accent text-base shadow-glow">
-                ❤️ Donate Now
+              <Link to="/donate" className="btn-accent inline-flex items-center gap-2 text-base shadow-glow">
+                <HeartIcon className="h-5 w-5" filled /> Donate Now
               </Link>
             </motion.div>
           </motion.div>
@@ -136,7 +135,9 @@ export default function Hero() {
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <p className="text-sm font-bold text-forest-800">🐾 Adopt, don't shop</p>
+            <p className="flex items-center gap-1.5 text-sm font-bold text-forest-800">
+              <PawIcon className="h-4 w-4 text-forest-600" /> Adopt, don&apos;t shop
+            </p>
             <p className="text-xs text-muted">Gentle giants need you</p>
           </motion.div>
         </motion.div>

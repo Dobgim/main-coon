@@ -139,7 +139,7 @@ export default function ContactForm() {
         </motion.button>
       </form>
 
-      <Modal open={success} onClose={() => setSuccess(false)} title="Message sent! 🐾">
+      <Modal open={success} onClose={() => setSuccess(false)} title="Message sent!">
         Thank you for getting in touch. We&apos;ll reply within 24 hours.
       </Modal>
     </>

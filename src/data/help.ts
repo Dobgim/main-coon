@@ -4,7 +4,7 @@ import { site } from './site';
 export const helpWays: HelpWay[] = [
   {
     id: 'donate',
-    icon: '💚',
+    icon: 'heart',
     title: 'Donate Money',
     description:
       'Every pound helps fund vet care, food, and safe shelter for Maine Coons in our care.',
@@ -13,7 +13,7 @@ export const helpWays: HelpWay[] = [
   },
   {
     id: 'volunteer',
-    icon: '🤝',
+    icon: 'handshake',
     title: 'Volunteer',
     description:
       'Help with transport, home checks, grooming days, events and admin. Every hour matters.',
@@ -22,7 +22,7 @@ export const helpWays: HelpWay[] = [
   },
   {
     id: 'foster',
-    icon: '🏠',
+    icon: 'home',
     title: 'Foster a Cat',
     description:
       'Open your home temporarily and give a rescued cat the time and care they need to thrive.',
@@ -31,7 +31,7 @@ export const helpWays: HelpWay[] = [
   },
   {
     id: 'wishlist',
-    icon: '🛒',
+    icon: 'shopping-bag',
     title: 'Amazon Wishlist',
     description:
       'Send food, litter, beds and toys straight to our door through our online wishlist.',
@@ -41,7 +41,7 @@ export const helpWays: HelpWay[] = [
   },
   {
     id: 'fundraise',
-    icon: '🎉',
+    icon: 'sparkles',
     title: 'Fundraise',
     description:
       'Run a bake sale, sponsored walk or birthday fundraiser to support our rescue work.',
@@ -50,7 +50,7 @@ export const helpWays: HelpWay[] = [
   },
   {
     id: 'spread',
-    icon: '📢',
+    icon: 'megaphone',
     title: 'Spread the Word',
     description:
       'Follow and share our cats on social media — a single share can find a cat their home.',

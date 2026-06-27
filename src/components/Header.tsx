@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from './Logo';
+import { HeartIcon } from './Icons';
 import { navLinks } from '@/data/site';
 
 export default function Header() {
@@ -83,10 +84,10 @@ export default function Header() {
           >
             <Link
               to="/donate"
-              className="btn-accent shadow-glow"
+              className="btn-accent inline-flex items-center gap-2 shadow-glow"
               aria-label="Donate now"
             >
-              ❤️ Donate Now
+              <HeartIcon className="h-4 w-4" filled /> Donate Now
             </Link>
           </motion.div>
 
@@ -161,8 +162,8 @@ export default function Header() {
                 ))}
               </nav>
 
-              <Link to="/donate" className="btn-accent mt-6 w-full">
-                ❤️ Donate Now
+              <Link to="/donate" className="btn-accent mt-6 inline-flex w-full items-center justify-center gap-2">
+                <HeartIcon className="h-4 w-4" filled /> Donate Now
               </Link>
             </motion.div>
           </>

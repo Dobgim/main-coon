@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { PawIcon } from './Icons';
 
 interface Props {
   eyebrow?: string;
@@ -24,8 +25,8 @@ export default function SectionHeading({
       ].join(' ')}
     >
       {eyebrow && (
-        <span className="badge bg-forest-50 text-forest-700">
-          🐾 {eyebrow}
+        <span className="badge inline-flex items-center gap-1.5 bg-forest-50 text-forest-700">
+          <PawIcon className="h-3.5 w-3.5" /> {eyebrow}
         </span>
       )}
       <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>

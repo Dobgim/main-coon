@@ -9,6 +9,8 @@ import {
   PhoneIcon,
   PinIcon,
   ShieldIcon,
+  StarIcon,
+  LockIcon,
 } from './Icons';
 import { site } from '@/data/site';
 
@@ -91,10 +93,10 @@ export default function Footer() {
               <ShieldIcon className="h-4 w-4 text-ember-200" /> Registered Charity
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
-              ⭐ 5-Star Rescue
+              <StarIcon className="h-3.5 w-3.5 text-ember-200" /> 5-Star Rescue
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
-              🔒 Secure Donation
+              <LockIcon className="h-3.5 w-3.5 text-ember-200" /> Secure Donation
             </span>
           </div>
         </div>

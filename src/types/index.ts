@@ -50,7 +50,7 @@ export interface TeamMember {
 
 export interface HelpWay {
   id: string;
-  icon: string;
+  icon: 'heart' | 'handshake' | 'home' | 'shopping-bag' | 'sparkles' | 'megaphone';
   title: string;
   description: string;
   ctaLabel: string;

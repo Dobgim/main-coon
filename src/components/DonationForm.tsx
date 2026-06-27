@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import FormField from './FormField';
 import Modal from './Modal';
 import TrustBadge from './TrustBadge';
-import { ShieldIcon, CheckIcon } from './Icons';
+import { ShieldIcon, CheckIcon, PawIcon, StarIcon } from './Icons';
 import { appendSubmission } from '@/lib/localStorage-utils';
 import { site } from '@/data/site';
 
@@ -93,7 +93,7 @@ export default function DonationForm() {
         <p className="mt-4 rounded-2xl bg-forest-50 px-4 py-3 text-sm font-semibold text-forest-800">
           You&apos;re giving{' '}
           <span className="text-ember">£{effectiveAmount || 0}</span>{' '}
-          {frequency === 'monthly' ? 'every month' : 'today'}. Thank you! 💚
+          {frequency === 'monthly' ? 'every month' : 'today'}. Thank you!
         </p>
 
         {/* PayPal */}
@@ -168,13 +168,13 @@ export default function DonationForm() {
           title="Secure payment"
           subtitle="Encrypted & PCI-compliant providers"
         />
-        <TrustBadge icon={<span className="text-lg">🐾</span>} title="100% to cat care"
+        <TrustBadge icon={<PawIcon />} title="100% to cat care"
           subtitle="Vet bills, food, shelter & transport" />
-        <TrustBadge icon={<span className="text-lg">🏅</span>} title="Verified charity"
+        <TrustBadge icon={<StarIcon />} title="Verified charity"
           subtitle={`Registered no. ${site.charityNumber}`} />
       </div>
 
-      <Modal open={success} onClose={() => setSuccess(false)} title="Thank you! 💚">
+      <Modal open={success} onClose={() => setSuccess(false)} title="Thank you!">
         Your generosity helps us rescue more Maine Coons. A confirmation will follow by email once
         your {frequency === 'monthly' ? 'monthly gift' : 'donation'} of £{effectiveAmount || 0} is
         processed.

@@ -114,3 +114,79 @@ export const TwitterIcon = (p: IconProps) => (
     <path d="M18.2 2H21l-6.5 7.4L22 22h-6.8l-4.7-6.2L5 22H2.2l7-8L2 2h6.9l4.3 5.7L18.2 2zm-2.4 18h1.5L8.3 3.8H6.7L15.8 20z" />
   </svg>
 );
+
+export const HomeIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
+    <path d="M9 21V12h6v9" />
+  </svg>
+);
+
+export const StarIcon = (p: IconProps) => (
+  <svg {...base(p)} fill="currentColor" stroke="none">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </svg>
+);
+
+export const LockIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <rect x="3" y="11" width="18" height="11" rx="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
+export const HandshakeIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M20.5 14.5 22 13l-5-5-1.5 1.5" />
+    <path d="M15.5 9.5 13 7H9L2 13l2 2 2.5-2.5" />
+    <path d="m2 13 5 5 1.5-1.5" />
+    <path d="M9 7 7 9" />
+    <path d="m13 7 5 5" />
+    <path d="m7.5 14.5 3 3 6.5-6.5" />
+  </svg>
+);
+
+export const ShoppingBagIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+    <line x1="3" x2="21" y1="6" y2="6" />
+    <path d="M16 10a4 4 0 0 1-8 0" />
+  </svg>
+);
+
+export const MegaphoneIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="m3 11 19-9-9 19-2-8-8-2z" />
+  </svg>
+);
+
+export const SparklesIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M12 3v4M12 17v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M3 12h4M17 12h4M4.2 19.8l2.8-2.8M17 7 19.8 4.2" />
+    <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const SearchIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.35-4.35" />
+  </svg>
+);
+
+export const ClipboardIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <rect x="8" y="2" width="8" height="4" rx="1" />
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+    <path d="M9 14l2 2 4-4" />
+  </svg>
+);
+
+export const UsersIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);

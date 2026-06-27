@@ -52,7 +52,7 @@ export default function Help() {
               ))}
             </ul>
             <Link to="/donate" className="btn-accent mt-8">
-              ❤️ Donate Now
+              Donate Now
             </Link>
           </div>
           <div className="overflow-hidden rounded-[2.5rem] shadow-lift ring-1 ring-black/5">

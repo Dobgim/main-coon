@@ -1,6 +1,7 @@
 import type { Cat } from '@/types';
 import CatCard from './CatCard';
 import Reveal from './Reveal';
+import { PawIcon } from './Icons';
 
 interface Props {
   cats: Cat[];
@@ -12,7 +13,7 @@ export default function CatGrid({ cats, emptyMessage }: Props) {
   if (cats.length === 0) {
     return (
       <div className="card flex flex-col items-center gap-3 px-6 py-16 text-center">
-        <span className="text-5xl">🐾</span>
+        <PawIcon className="h-12 w-12 text-forest-300" />
         <p className="text-lg font-semibold text-forest-800">
           {emptyMessage ?? 'No cats currently available — check back soon!'}
         </p>

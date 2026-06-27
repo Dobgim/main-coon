@@ -142,7 +142,7 @@ export default function Rehomed() {
         </div>
       )}
 
-      <Modal open={done} onClose={() => setDone(false)} title="Thank you! 🐾">
+      <Modal open={done} onClose={() => setDone(false)} title="Thank you!">
         Your story has been submitted. We may feature it on this page soon!
       </Modal>
     </>

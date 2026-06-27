@@ -224,7 +224,7 @@ export default function AdoptionForm({ catId, catName }: { catId: string; catNam
         </div>
       </form>
 
-      <Modal open={success} onClose={() => setSuccess(false)} title="Application received! 🐾">
+      <Modal open={success} onClose={() => setSuccess(false)} title="Application received!">
         Thank you for applying to adopt {catName}. Our rehoming team will be in touch within 24
         hours to talk through the next steps.
       </Modal>

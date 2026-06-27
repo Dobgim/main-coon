@@ -3,7 +3,7 @@ import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 import TrustBadge from '@/components/TrustBadge';
-import { ShieldIcon, HeartIcon, PawIcon, ArrowRightIcon } from '@/components/Icons';
+import { ShieldIcon, HeartIcon, PawIcon, ArrowRightIcon, StarIcon } from '@/components/Icons';
 import { team } from '@/data/team';
 import { site } from '@/data/site';
 
@@ -65,7 +65,7 @@ export default function About() {
           <TrustBadge icon={<ShieldIcon />} title="Registered Charity" subtitle={`No. ${site.charityNumber}`} />
           <TrustBadge icon={<HeartIcon />} title="500+ Rehomed" subtitle="Since 2010" />
           <TrustBadge icon={<PawIcon />} title="UK-Wide Network" subtitle="Volunteers & foster carers" />
-          <TrustBadge icon={<span className="text-lg">⭐</span>} title="5-Star Rescue" subtitle="Trusted by adopters" />
+          <TrustBadge icon={<StarIcon />} title="5-Star Rescue" subtitle="Trusted by adopters" />
         </div>
       </section>
 
@@ -104,7 +104,7 @@ export default function About() {
             />
           </div>
           <div className="lg:order-1">
-            <span className="badge bg-white/15 text-white">🐾 The breed</span>
+            <span className="badge inline-flex items-center gap-1.5 bg-white/15 text-white"><PawIcon className="h-3.5 w-3.5" /> The breed</span>
             <h2 className="mt-3 text-3xl font-extrabold text-white">Why Maine Coons need us</h2>
             <p className="mt-4 leading-relaxed text-cream/85">
               Maine Coons are one of the largest and most affectionate cat breeds — gentle,
