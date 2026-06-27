@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-forest-800;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    @apply bg-ember/20 text-ember-700;
+  }
+
+  /* Accessible focus ring */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-ember ring-offset-2 ring-offset-cream;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
+      transition-all duration-200 min-h-[44px] focus-visible:outline-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-forest text-white shadow-soft hover:bg-forest-600 hover:shadow-lift hover:-translate-y-0.5;
+  }
+
+  .btn-accent {
+    @apply btn bg-ember text-white shadow-soft hover:bg-ember-600 hover:shadow-lift hover:-translate-y-0.5;
+  }
+
+  .btn-ghost {
+    @apply btn border-2 border-forest/30 bg-white/70 text-forest-700 hover:border-forest hover:bg-white;
+  }
+
+  .btn-outline-white {
+    @apply btn border-2 border-white/80 bg-white/10 text-white backdrop-blur hover:bg-white/20;
+  }
+
+  .card {
+    @apply rounded-3xl bg-white shadow-soft ring-1 ring-black/5;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-sand bg-white px-4 py-3 text-ink placeholder:text-muted/70
+      transition focus:border-forest focus:ring-2 focus:ring-forest/30;
+  }
+
+  .input-error {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-200;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-forest-800;
+  }
+
+  .link-quiet {
+    @apply text-forest-700 underline-offset-4 transition hover:text-ember hover:underline;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Respect reduced-motion preferences across GSAP + CSS animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

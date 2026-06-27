@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72" width="300" height="72" role="img" aria-label="Maine Coons in Need logo">
+  <defs>
+    <linearGradient id="badge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5aae6a"/>
+      <stop offset="1" stop-color="#2a7440"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(4 4)">
+    <rect width="64" height="64" rx="16" fill="url(#badge)"/>
+    <g fill="#faf7f1">
+      <path d="M16 20l3-7 7 5z"/>
+      <path d="M48 20l-3-7-7 5z"/>
+      <path d="M32 18c-9 0-15 6-15 15 0 9 6 16 15 16s15-7 15-16c0-9-6-15-15-15z"/>
+    </g>
+    <g fill="#2a7440">
+      <ellipse cx="26" cy="31" rx="2.6" ry="3.4"/>
+      <ellipse cx="38" cy="31" rx="2.6" ry="3.4"/>
+    </g>
+    <path d="M32 36l-2.4 2.4h4.8z" fill="#f25c0a"/>
+    <path d="M32 39c-2 2-4 1.5-5 0M32 39c2 2 4 1.5 5 0" fill="none" stroke="#2a7440" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+  <g font-family="Poppins, sans-serif">
+    <text x="82" y="34" font-size="22" font-weight="800" fill="#235c35">Maine Coons</text>
+    <text x="82" y="56" font-size="16" font-weight="600" fill="#f25c0a" letter-spacing="3">IN&#160;NEED</text>
+  </g>
+</svg>
