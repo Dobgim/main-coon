@@ -31,6 +31,23 @@ export const site = {
     tiktok: 'https://www.tiktok.com/@royalcoonkittens?_r=1&_t=ZT-97aIEINMEaT',
   },
 
+  // --- Payment details shown to buyers at checkout so they can pay you. ---
+  // Fill in the methods you use; any left blank are hidden automatically.
+  payment: {
+    paypal: '' as string, // paypal.me link or PayPal email
+    zelle: '' as string, // Zelle email or phone number
+    cashApp: '' as string, // $cashtag (with or without the $)
+    venmo: '' as string, // @handle
+    bank: {
+      accountName: '' as string,
+      bankName: '' as string,
+      routingNumber: '' as string,
+      accountNumber: '' as string,
+    },
+    instructions:
+      'Please include your order reference in the payment note. Once paid, reply to your confirmation email or message us on WhatsApp with a screenshot and we will confirm your kitten. Kittens are held for 48 hours.' as string,
+  },
+
   // --- Placeholder donation details (NOT real) ---
   donation: {
     paypalUrl: 'https://www.paypal.com/donate', // replace with real hosted button URL
