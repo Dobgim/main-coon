@@ -4,7 +4,7 @@ import NewsletterSignup from './NewsletterSignup';
 import {
   FacebookIcon,
   InstagramIcon,
-  TwitterIcon,
+  TikTokIcon,
   MailIcon,
   PhoneIcon,
   PinIcon,
@@ -42,8 +42,8 @@ export default function Footer() {
             <SocialLink href={site.social.instagram} label="Instagram">
               <InstagramIcon />
             </SocialLink>
-            <SocialLink href={site.social.twitter} label="Twitter / X">
-              <TwitterIcon />
+            <SocialLink href={site.social.tiktok} label="TikTok">
+              <TikTokIcon />
             </SocialLink>
           </div>
         </div>

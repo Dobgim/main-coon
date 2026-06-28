@@ -1,9 +1,12 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import PageLoader from './components/PageLoader';
+
+// Admin dashboard is fully isolated (its own chrome, no public header/footer).
+const AdminApp = lazy(() => import('./admin/AdminApp'));
 
 // Route-level code splitting — each page is its own chunk.
 const Home = lazy(() => import('./pages/Home'));
@@ -19,6 +22,17 @@ const Terms = lazy(() => import('./pages/Terms'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 export default function App() {
+  const { pathname } = useLocation();
+
+  // The admin dashboard renders without the public site header/footer.
+  if (pathname.startsWith('/admin')) {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <AdminApp />
+      </Suspense>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-cream">
       <ScrollToTop />

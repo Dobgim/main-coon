@@ -14,13 +14,22 @@ import {
   PhoneIcon,
   PawIcon,
 } from '@/components/Icons';
-import { getCatById } from '@/data/cats';
+import { useCat } from '@/hooks/useCats';
 
 export default function CatDetail() {
   const { id } = useParams();
-  const cat = id ? getCatById(id) : undefined;
+  const { cat, loading } = useCat(id);
   const [active, setActive] = useState(0);
   const [shareOpen, setShareOpen] = useState(false);
+
+  if (loading) {
+    return (
+      <div className="container-page flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
+        <PawIcon className="h-12 w-12 animate-pulse text-forest-300" />
+        <p className="text-muted">Loading…</p>
+      </div>
+    );
+  }
 
   if (!cat) {
     return (

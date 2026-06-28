@@ -115,6 +115,12 @@ export const TwitterIcon = (p: IconProps) => (
   </svg>
 );
 
+export const TikTokIcon = (p: IconProps) => (
+  <svg {...base(p)} fill="currentColor" stroke="none">
+    <path d="M16.5 3c.3 2.2 1.6 3.8 3.9 4.1v2.6c-1.4.1-2.7-.3-3.9-1v5.9c0 4.2-3.1 6.6-6.6 5.7-2.9-.7-4.3-3.9-3.3-6.7.8-2.2 2.9-3.4 5.3-3.1v2.7c-.4-.1-.8-.2-1.2-.1-1.2.1-2 .9-2 2.1 0 1.3 1 2.2 2.3 2.1 1.3-.1 2-1 2-2.4V3h3.5z" />
+  </svg>
+);
+
 export const HomeIcon = (p: IconProps) => (
   <svg {...base(p)}>
     <path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />

@@ -6,6 +6,7 @@ import Modal from '@/components/Modal';
 import SectionHeading from '@/components/SectionHeading';
 import FormField from '@/components/FormField';
 import { appendSubmission } from '@/lib/localStorage-utils';
+import { submitStory } from '@/lib/db';
 import { rehomedStories } from '@/data/rehomed';
 
 const heroImg =
@@ -20,6 +21,7 @@ export default function Rehomed() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    submitStory(story).catch(() => {});
     appendSubmission('mcin:stories', story);
     setStory({ name: '', catName: '', message: '' });
     setOpen(false);

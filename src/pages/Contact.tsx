@@ -6,7 +6,7 @@ import {
   PinIcon,
   FacebookIcon,
   InstagramIcon,
-  TwitterIcon,
+  TikTokIcon,
 } from '@/components/Icons';
 import { site } from '@/data/site';
 
@@ -71,7 +71,7 @@ export default function Contact() {
                   {[
                     { href: site.social.facebook, label: 'Facebook', icon: <FacebookIcon /> },
                     { href: site.social.instagram, label: 'Instagram', icon: <InstagramIcon /> },
-                    { href: site.social.twitter, label: 'Twitter / X', icon: <TwitterIcon /> },
+                    { href: site.social.tiktok, label: 'TikTok', icon: <TikTokIcon /> },
                   ].map((s) => (
                     <a
                       key={s.label}

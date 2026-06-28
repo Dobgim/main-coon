@@ -17,7 +17,7 @@ import {
   CheckIcon,
   UsersIcon,
 } from '@/components/Icons';
-import { cats } from '@/data/cats';
+import { useCats } from '@/hooks/useCats';
 import { rehomedStories } from '@/data/rehomed';
 
 const services = [
@@ -80,6 +80,7 @@ const cardVariants = {
 };
 
 export default function Home() {
+  const { cats } = useCats();
   const featured = cats.filter((c) => c.status !== 'Adopted').slice(0, 3);
   const topStories = rehomedStories.slice(0, 3);
 

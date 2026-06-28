@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { appendSubmission } from '@/lib/localStorage-utils';
+import { submitNewsletter } from '@/lib/db';
 import { ArrowRightIcon, CheckIcon } from './Icons';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,6 +17,7 @@ export default function NewsletterSignup() {
       setStatus('error');
       return;
     }
+    submitNewsletter(email).catch(() => {});
     appendSubmission('mcin:newsletter', { email });
     setStatus('done');
     setEmail('');

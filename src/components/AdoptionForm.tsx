@@ -4,6 +4,7 @@ import FormField from './FormField';
 import Modal from './Modal';
 import { appendSubmission } from '@/lib/localStorage-utils';
 import { sendEmail } from '@/lib/emailjs-config';
+import { submitAdoption } from '@/lib/db';
 import { CheckIcon } from './Icons';
 
 interface AdoptionData {
@@ -74,6 +75,7 @@ export default function AdoptionForm({ catId, catName }: { catId: string; catNam
     e.preventDefault();
     if (!validateStep(2)) return;
     setSubmitting(true);
+    await submitAdoption(data).catch(() => {});
     await sendEmail({ form: 'adoption', ...data });
     appendSubmission('mcin:adoptions', data);
     setSubmitting(false);

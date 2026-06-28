@@ -15,7 +15,7 @@ export const site = {
   // --- Placeholder contact details ---
   email: 'info@example-rescue.org',
   phone: '+1 (000) 000-0000',
-  address: 'Demo Lane, Denver, Colorado, United States',
+  address: '219 S Grand Ave, Evansville, Indiana 47713',
   responseTime: "We aim to reply within 24 hours.",
 
   // --- Placeholder registration / trust info ---
@@ -25,7 +25,7 @@ export const site = {
   social: {
     facebook: 'https://facebook.com/',
     instagram: 'https://instagram.com/',
-    twitter: 'https://twitter.com/',
+    tiktok: 'https://www.tiktok.com/@royalcoonkittens?_r=1&_t=ZT-97aIEINMEaT',
   },
 
   // --- Placeholder donation details (NOT real) ---

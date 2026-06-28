@@ -5,6 +5,7 @@ import Modal from './Modal';
 import TrustBadge from './TrustBadge';
 import { ShieldIcon, CheckIcon, PawIcon, StarIcon } from './Icons';
 import { appendSubmission } from '@/lib/localStorage-utils';
+import { submitDonation } from '@/lib/db';
 import { site } from '@/data/site';
 
 const presets = [10, 25, 50, 100];
@@ -31,6 +32,7 @@ export default function DonationForm() {
   };
 
   const recordAndThank = (method: string) => {
+    submitDonation({ amount: effectiveAmount, frequency, method }).catch(() => {});
     appendSubmission('mcin:donations', { amount: effectiveAmount, frequency, method });
     setSuccess(true);
   };
