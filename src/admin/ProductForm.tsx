@@ -124,9 +124,9 @@ export default function ProductForm() {
     setForm((f) => ({ ...f, name: value, slug: slugTouched ? f.slug : slugify(value) }));
   };
 
-  const addFiles = (list: FileList | null) => {
-    if (!list) return;
-    setFiles((prev) => [...prev, ...Array.from(list)]);
+  const addFiles = (picked: File[]) => {
+    if (picked.length === 0) return;
+    setFiles((prev) => [...prev, ...picked]);
   };
 
   const removeExisting = (url: string) =>
@@ -137,12 +137,16 @@ export default function ProductForm() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
+    const fail = (msg: string) => {
+      setError(msg);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
     if (!form.name.trim()) {
-      setError('Please enter a name.');
+      fail('Please enter a name.');
       return;
     }
     if (form.images.length === 0 && files.length === 0) {
-      setError('Please add at least one photo.');
+      fail('Please add at least one photo.');
       return;
     }
     setSaving(true);
@@ -162,8 +166,8 @@ export default function ProductForm() {
       else await createCat(payload);
       navigate('/admin/products');
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Save failed.');
       setSaving(false);
+      fail(e instanceof Error ? e.message : 'Save failed. Please try again.');
     }
   };
 
@@ -334,8 +338,11 @@ export default function ProductForm() {
               multiple
               className="hidden"
               onChange={(e) => {
-                addFiles(e.target.files);
+                // Capture the files BEFORE clearing the input, otherwise the
+                // selection is wiped before React reads it.
+                const picked = e.target.files ? Array.from(e.target.files) : [];
                 e.target.value = ''; // allow re-selecting / adding more
+                addFiles(picked);
               }}
             />
           </label>
