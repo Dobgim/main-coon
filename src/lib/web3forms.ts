@@ -8,7 +8,8 @@
  */
 const PLACEHOLDER = 'YOUR_WEB3FORMS_ACCESS_KEY';
 
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? PLACEHOLDER;
+const ACCESS_KEY =
+  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? '95056a37-546a-4850-a044-c0cd6fb80b35';
 
 /** True once a real access key has been configured. */
 export const WEB3FORMS_READY = Boolean(ACCESS_KEY) && ACCESS_KEY !== PLACEHOLDER;
