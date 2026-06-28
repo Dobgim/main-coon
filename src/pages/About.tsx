@@ -1,14 +1,48 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/SectionHeading';
-import Reveal from '@/components/Reveal';
 import TrustBadge from '@/components/TrustBadge';
-import { ShieldIcon, HeartIcon, PawIcon, ArrowRightIcon, StarIcon } from '@/components/Icons';
+import {
+  ShieldIcon,
+  HeartIcon,
+  PawIcon,
+  ArrowRightIcon,
+  StarIcon,
+  HandshakeIcon,
+} from '@/components/Icons';
 import { team } from '@/data/team';
 import { site } from '@/data/site';
 
 const heroImg =
   'https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=1400&q=70';
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.08, duration: 0.5, ease: 'easeOut' },
+  }),
+};
+
+const values = [
+  {
+    icon: <HeartIcon className="h-7 w-7" />,
+    title: 'Compassion first',
+    text: 'Every cat is treated with patience, dignity and love — from the day we rescue them to the day they go home.',
+  },
+  {
+    icon: <ShieldIcon className="h-7 w-7" />,
+    title: 'Health guaranteed',
+    text: 'Vet checks, vaccinations and honest health records come standard before any kitten is placed.',
+  },
+  {
+    icon: <HandshakeIcon className="h-7 w-7" />,
+    title: 'Lifelong support',
+    text: 'We stay in touch long after adoption day, with friendly advice whenever you need it.',
+  },
+];
 
 export default function About() {
   return (
@@ -69,27 +103,65 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Our values */}
       <section className="container-page py-14 md:py-20">
         <SectionHeading
-          eyebrow="Meet the team"
-          title="The volunteers behind the rescue"
-          description="A small but mighty group of people who give their time so cats can find homes."
+          eyebrow="What we stand for"
+          title="Our values"
+          description="The principles that guide every rescue, every match and every forever home."
         />
-        <Reveal stagger={0.08} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((m) => (
-            <div key={m.name} className="card overflow-hidden text-center transition hover:-translate-y-1 hover:shadow-lift">
-              <div className="aspect-square overflow-hidden">
-                <img src={m.image} alt={m.name} loading="lazy" className="h-full w-full object-cover" />
-              </div>
-              <div className="p-5">
-                <h3 className="text-lg font-extrabold text-forest-800">{m.name}</h3>
-                <p className="text-sm font-semibold text-ember">{m.role}</p>
-                <p className="mt-2 text-sm text-muted">{m.bio}</p>
-              </div>
-            </div>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {values.map((v, i) => (
+            <motion.div
+              key={v.title}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={cardVariants}
+              className="card p-7 text-center transition hover:-translate-y-1 hover:shadow-lift"
+            >
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-50 text-forest-600">
+                {v.icon}
+              </span>
+              <h3 className="mt-5 text-lg font-extrabold text-forest-800">{v.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{v.text}</p>
+            </motion.div>
           ))}
-        </Reveal>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="bg-sand/40 py-14 md:py-20">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Meet the team"
+            title="The volunteers behind the rescue"
+            description="A small but mighty group of people who give their time so cats can find homes."
+          />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {team.map((m, i) => (
+              <motion.div
+                key={m.name}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-60px' }}
+                variants={cardVariants}
+                className="card overflow-hidden text-center transition hover:-translate-y-1 hover:shadow-lift"
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img src={m.image} alt={m.name} loading="lazy" className="h-full w-full object-cover" />
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-extrabold text-forest-800">{m.name}</h3>
+                  <p className="text-sm font-semibold text-ember">{m.role}</p>
+                  <p className="mt-2 text-sm text-muted">{m.bio}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Why Maine Coons */}
