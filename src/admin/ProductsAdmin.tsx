@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchAllCats, deleteCat, importSeedCats, type AdminCat } from '@/lib/db';
+import { fetchAllCats, deleteCat, importSeedCats, setCatPublished, type AdminCat } from '@/lib/db';
 import { ArrowRightIcon, PawIcon } from '@/components/Icons';
 
 const statusStyles: Record<string, string> = {
@@ -39,6 +39,18 @@ export default function ProductsAdmin() {
       await load();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Delete failed.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const togglePublish = async (cat: AdminCat) => {
+    setBusy(true);
+    try {
+      await setCatPublished(cat.rowId, !cat.published);
+      await load();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Could not change visibility.');
     } finally {
       setBusy(false);
     }
@@ -101,9 +113,8 @@ export default function ProductsAdmin() {
             <thead className="bg-sand/50 text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-4 py-3">Cat</th>
-                <th className="hidden px-4 py-3 sm:table-cell">Location</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="hidden px-4 py-3 md:table-cell">Live?</th>
+                <th className="hidden px-4 py-3 sm:table-cell">Status</th>
+                <th className="px-4 py-3">Live</th>
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
@@ -123,21 +134,28 @@ export default function ProductsAdmin() {
                       </div>
                     </div>
                   </td>
-                  <td className="hidden px-4 py-3 text-muted sm:table-cell">{cat.location || '—'}</td>
-                  <td className="px-4 py-3">
+                  <td className="hidden px-4 py-3 sm:table-cell">
                     <span className={`badge ${statusStyles[cat.status] ?? 'bg-sand text-muted'}`}>
                       {cat.status}
                     </span>
                   </td>
-                  <td className="hidden px-4 py-3 md:table-cell">
-                    {cat.published ? (
-                      <span className="text-emerald-600">Published</span>
-                    ) : (
-                      <span className="text-muted">Hidden</span>
-                    )}
+                  <td className="px-4 py-3">
+                    <button
+                      type="button"
+                      onClick={() => togglePublish(cat)}
+                      disabled={busy}
+                      title={cat.published ? 'Tap to hide from the website' : 'Tap to publish to the website'}
+                      className={`rounded-full px-3 py-1.5 text-xs font-bold transition disabled:opacity-60 ${
+                        cat.published
+                          ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
+                          : 'bg-ember text-white hover:bg-ember-600'
+                      }`}
+                    >
+                      {cat.published ? 'Live ✓' : 'Publish'}
+                    </button>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex justify-end gap-2">
+                    <div className="flex flex-wrap justify-end gap-2">
                       <Link to={`/admin/products/${cat.rowId}`} className="btn-ghost px-3 py-1.5 text-xs">
                         Edit
                       </Link>

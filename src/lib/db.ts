@@ -224,6 +224,12 @@ export async function deleteCat(rowId: string): Promise<void> {
   if (error) throw error;
 }
 
+/** Quick publish / unpublish toggle from the product list. */
+export async function setCatPublished(rowId: string, published: boolean): Promise<void> {
+  const { error } = await supabase.from('cats').update({ published }).eq('id', rowId);
+  if (error) throw error;
+}
+
 /** Upload one image file to storage and return its public URL. */
 export async function uploadCatImage(file: File, slug: string): Promise<string> {
   const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
