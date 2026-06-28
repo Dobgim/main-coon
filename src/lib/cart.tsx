@@ -75,17 +75,29 @@ export const RESERVE_DEPOSIT = 200;
 export const BREEDING_RIGHTS_ADDON = 500;
 export const WARRANTY_ADDON = 500;
 
-/** Build the purchase options for a kitten from its base price. */
-export function buildPurchaseOptions(basePrice: number): PurchaseOption[] {
+interface PricedCat {
+  adoptionFee: number;
+  reservePrice?: number;
+  breedingPrice?: number;
+  warrantyPrice?: number;
+}
+
+/**
+ * Build the purchase options for a kitten. Uses the per-kitten prices set in the
+ * admin dashboard when provided (> 0), otherwise sensible defaults.
+ */
+export function buildPurchaseOptions(cat: PricedCat): PurchaseOption[] {
+  const base = cat.adoptionFee;
+  const reserve = cat.reservePrice && cat.reservePrice > 0 ? cat.reservePrice : RESERVE_DEPOSIT;
+  const breeding =
+    cat.breedingPrice && cat.breedingPrice > 0 ? cat.breedingPrice : base + BREEDING_RIGHTS_ADDON;
+  const warranty =
+    cat.warrantyPrice && cat.warrantyPrice > 0 ? cat.warrantyPrice : base + WARRANTY_ADDON;
   return [
-    { id: 'reserve', label: 'Reserve', price: RESERVE_DEPOSIT, note: 'deposit, rest on pickup' },
-    { id: 'full', label: 'Full Payment', price: basePrice },
-    { id: 'breeding', label: 'Add breeding rights', price: basePrice + BREEDING_RIGHTS_ADDON },
-    {
-      id: 'warranty',
-      label: 'Extend health warranty 6 → 12 months',
-      price: basePrice + WARRANTY_ADDON,
-    },
+    { id: 'reserve', label: 'Reserve', price: reserve, note: 'deposit, rest on pickup' },
+    { id: 'full', label: 'Full Payment', price: base },
+    { id: 'breeding', label: 'Add breeding rights', price: breeding },
+    { id: 'warranty', label: 'Extend health warranty 6 → 12 months', price: warranty },
   ];
 }
 

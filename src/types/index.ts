@@ -20,7 +20,10 @@ export interface Cat {
   goodWithCats: boolean;
   goodWithDogs: boolean;
   indoorOnly: boolean;
-  adoptionFee: number;
+  adoptionFee: number; // kitten price (Full Payment)
+  reservePrice?: number; // reservation deposit (0 = use default)
+  breedingPrice?: number; // price with breeding rights (0 = use default)
+  warrantyPrice?: number; // price with extended warranty (0 = use default)
   coordinator: { name: string; email: string; phone: string };
   personality: string[];
   shortDescription: string;

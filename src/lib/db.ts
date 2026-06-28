@@ -23,6 +23,9 @@ export interface CatRow {
   good_with_dogs: boolean;
   indoor_only: boolean;
   adoption_fee: number;
+  reserve_price: number;
+  breeding_price: number;
+  warranty_price: number;
   coordinator_name: string;
   coordinator_email: string;
   coordinator_phone: string;
@@ -55,6 +58,9 @@ export interface CatInput {
   goodWithDogs: boolean;
   indoorOnly: boolean;
   adoptionFee: number;
+  reservePrice: number;
+  breedingPrice: number;
+  warrantyPrice: number;
   coordinatorName: string;
   coordinatorEmail: string;
   coordinatorPhone: string;
@@ -92,6 +98,9 @@ const rowToAdminCat = (r: CatRow): AdminCat => ({
   goodWithDogs: r.good_with_dogs,
   indoorOnly: r.indoor_only,
   adoptionFee: Number(r.adoption_fee),
+  reservePrice: Number(r.reserve_price ?? 0),
+  breedingPrice: Number(r.breeding_price ?? 0),
+  warrantyPrice: Number(r.warranty_price ?? 0),
   coordinator: {
     name: r.coordinator_name,
     email: r.coordinator_email,
@@ -124,6 +133,9 @@ const inputToRow = (c: CatInput) => ({
   good_with_dogs: c.goodWithDogs,
   indoor_only: c.indoorOnly,
   adoption_fee: c.adoptionFee,
+  reserve_price: c.reservePrice,
+  breeding_price: c.breedingPrice,
+  warranty_price: c.warrantyPrice,
   coordinator_name: c.coordinatorName,
   coordinator_email: c.coordinatorEmail,
   coordinator_phone: c.coordinatorPhone,
@@ -245,6 +257,9 @@ export async function importSeedCats(): Promise<number> {
     good_with_dogs: c.goodWithDogs,
     indoor_only: c.indoorOnly,
     adoption_fee: c.adoptionFee,
+    reserve_price: 0,
+    breeding_price: 0,
+    warranty_price: 0,
     coordinator_name: c.coordinator.name,
     coordinator_email: c.coordinator.email,
     coordinator_phone: c.coordinator.phone,

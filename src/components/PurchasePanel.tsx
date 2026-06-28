@@ -9,7 +9,7 @@ import { site } from '@/data/site';
 
 export default function PurchasePanel({ cat }: { cat: Cat }) {
   const { add, has } = useCart();
-  const options = buildPurchaseOptions(cat.adoptionFee);
+  const options = buildPurchaseOptions(cat);
   const [selected, setSelected] = useState(options[1].id); // default: Full Payment
   const inCart = has(cat.id);
 

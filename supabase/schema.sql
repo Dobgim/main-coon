@@ -46,6 +46,11 @@ create table if not exists public.cats (
 );
 create index if not exists cats_created_at_idx on public.cats (created_at desc);
 
+-- Per-kitten purchase pricing (added later; safe to re-run).
+alter table public.cats add column if not exists reserve_price  numeric not null default 0;
+alter table public.cats add column if not exists breeding_price numeric not null default 0;
+alter table public.cats add column if not exists warranty_price numeric not null default 0;
+
 -- ---------- FORM SUBMISSIONS --------------------------------------------------
 create table if not exists public.contact_messages (
   id          uuid primary key default gen_random_uuid(),

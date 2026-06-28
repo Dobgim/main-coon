@@ -30,6 +30,9 @@ const empty: CatInput = {
   goodWithDogs: false,
   indoorOnly: false,
   adoptionFee: 0,
+  reservePrice: 0,
+  breedingPrice: 0,
+  warrantyPrice: 0,
   coordinatorName: '',
   coordinatorEmail: '',
   coordinatorPhone: '',
@@ -95,6 +98,9 @@ export default function ProductForm() {
           goodWithDogs: cat.goodWithDogs,
           indoorOnly: cat.indoorOnly,
           adoptionFee: cat.adoptionFee,
+          reservePrice: cat.reservePrice ?? 0,
+          breedingPrice: cat.breedingPrice ?? 0,
+          warrantyPrice: cat.warrantyPrice ?? 0,
           coordinatorName: cat.coordinator.name,
           coordinatorEmail: cat.coordinator.email,
           coordinatorPhone: cat.coordinator.phone,
@@ -223,15 +229,6 @@ export default function ProductForm() {
                 {statuses.map((s) => <option key={s}>{s}</option>)}
               </select>
             </Field>
-            <Field label="Adoption fee ($)">
-              <input
-                type="number"
-                min={0}
-                className="input"
-                value={form.adoptionFee}
-                onChange={(e) => set('adoptionFee', Number(e.target.value) || 0)}
-              />
-            </Field>
           </div>
           <Field label="Personality traits" hint="Comma separated, e.g. Affectionate, Playful">
             <input className="input" value={personalityText} onChange={(e) => setPersonalityText(e.target.value)} />
@@ -245,6 +242,53 @@ export default function ProductForm() {
             />
             Published (visible on the live site)
           </label>
+        </section>
+
+        {/* Pricing & purchase options */}
+        <section className="card space-y-4 p-6">
+          <h2 className="text-lg font-extrabold text-forest-800">Pricing &amp; purchase options</h2>
+          <p className="text-sm text-muted">
+            These are the prices buyers see on this kitten&apos;s page. Leave an add-on at 0 to use
+            the default shown.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Field label="Kitten price — Full Payment ($)" required>
+              <input
+                type="number"
+                min={0}
+                className="input"
+                value={form.adoptionFee}
+                onChange={(e) => set('adoptionFee', Number(e.target.value) || 0)}
+              />
+            </Field>
+            <Field label="Reservation deposit ($)" hint="default $200">
+              <input
+                type="number"
+                min={0}
+                className="input"
+                value={form.reservePrice}
+                onChange={(e) => set('reservePrice', Number(e.target.value) || 0)}
+              />
+            </Field>
+            <Field label="Add breeding rights — price ($)" hint="default = price + $500">
+              <input
+                type="number"
+                min={0}
+                className="input"
+                value={form.breedingPrice}
+                onChange={(e) => set('breedingPrice', Number(e.target.value) || 0)}
+              />
+            </Field>
+            <Field label="Extend health warranty — price ($)" hint="default = price + $500">
+              <input
+                type="number"
+                min={0}
+                className="input"
+                value={form.warrantyPrice}
+                onChange={(e) => set('warrantyPrice', Number(e.target.value) || 0)}
+              />
+            </Field>
+          </div>
         </section>
 
         {/* Photos */}
