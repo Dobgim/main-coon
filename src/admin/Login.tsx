@@ -12,13 +12,24 @@ export default function Login() {
 
   if (!loading && session && isAdmin) return <Navigate to="/admin" replace />;
 
+  const friendlyError = (msg: string): string => {
+    const m = msg.toLowerCase();
+    if (m.includes('not confirmed')) {
+      return 'Your email is not confirmed yet. Open the confirmation link in your inbox, or confirm the user in Supabase → Authentication → Users.';
+    }
+    if (m.includes('invalid login')) {
+      return 'Wrong email or password — or this account has not been created yet in Supabase.';
+    }
+    return msg;
+  };
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setBusy(true);
     setError('');
     const { error: err } = await signIn(email.trim(), password);
     setBusy(false);
-    if (err) setError(err);
+    if (err) setError(friendlyError(err));
   };
 
   return (
