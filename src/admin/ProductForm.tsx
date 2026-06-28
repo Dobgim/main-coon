@@ -192,16 +192,6 @@ export default function ProductForm() {
             <Field label="Name" required>
               <input className="input" value={form.name} onChange={(e) => onName(e.target.value)} />
             </Field>
-            <Field label="URL slug" hint="Used in the web address">
-              <input
-                className="input"
-                value={form.slug}
-                onChange={(e) => {
-                  setSlugTouched(true);
-                  set('slug', slugify(e.target.value));
-                }}
-              />
-            </Field>
             <Field label="Age label" hint="e.g. 2 years old">
               <input className="input" value={form.ageLabel} onChange={(e) => set('ageLabel', e.target.value)} />
             </Field>
@@ -217,12 +207,6 @@ export default function ProductForm() {
             </Field>
             <Field label="Color / coat" hint="e.g. Brown classic tabby">
               <input className="input" value={form.color} onChange={(e) => set('color', e.target.value)} />
-            </Field>
-            <Field label="Location" hint="e.g. Evansville, Indiana">
-              <input className="input" value={form.location} onChange={(e) => set('location', e.target.value)} />
-            </Field>
-            <Field label="Region" hint="Used by the location filter">
-              <input className="input" value={form.region} onChange={(e) => set('region', e.target.value)} />
             </Field>
             <Field label="Status">
               <select className="input" value={form.status} onChange={(e) => set('status', e.target.value as CatStatus)}>
@@ -293,12 +277,22 @@ export default function ProductForm() {
 
         {/* Photos */}
         <section className="card space-y-4 p-6">
-          <h2 className="text-lg font-extrabold text-forest-800">Photos</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-extrabold text-forest-800">Photo gallery</h2>
+            <span className="text-sm text-muted">
+              {form.images.length + files.length} photo{form.images.length + files.length === 1 ? '' : 's'}
+            </span>
+          </div>
           {(form.images.length > 0 || files.length > 0) && (
             <div className="flex flex-wrap gap-3">
-              {form.images.map((url) => (
+              {form.images.map((url, i) => (
                 <div key={url} className="relative">
                   <img src={url} alt="" className="h-24 w-24 rounded-xl object-cover" />
+                  {i === 0 && (
+                    <span className="absolute bottom-1 left-1 rounded bg-forest px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      Main
+                    </span>
+                  )}
                   <button
                     type="button"
                     onClick={() => removeExisting(url)}
@@ -312,6 +306,11 @@ export default function ProductForm() {
               {files.map((file, i) => (
                 <div key={`${file.name}-${i}`} className="relative">
                   <img src={URL.createObjectURL(file)} alt="" className="h-24 w-24 rounded-xl object-cover ring-2 ring-forest" />
+                  {form.images.length === 0 && i === 0 && (
+                    <span className="absolute bottom-1 left-1 rounded bg-forest px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      Main
+                    </span>
+                  )}
                   <button
                     type="button"
                     onClick={() => removeFile(i)}
@@ -326,13 +325,18 @@ export default function ProductForm() {
           )}
           <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-sand bg-cream/40 px-6 py-8 text-center transition hover:border-forest/40">
             <span className="text-sm font-semibold text-forest-800">Click to upload photos</span>
-            <span className="text-xs text-muted">JPG or PNG. New photos are highlighted in green.</span>
+            <span className="text-xs text-muted">
+              Select several at once, or click again to add more. The first photo is the main image. JPG or PNG.
+            </span>
             <input
               type="file"
               accept="image/*"
               multiple
               className="hidden"
-              onChange={(e) => addFiles(e.target.files)}
+              onChange={(e) => {
+                addFiles(e.target.files);
+                e.target.value = ''; // allow re-selecting / adding more
+              }}
             />
           </label>
         </section>
