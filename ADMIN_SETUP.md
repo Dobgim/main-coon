@@ -11,17 +11,17 @@ newsletter, story) is saved for you to review.
    - This creates all tables, security rules and the image storage bucket.
    - It is safe to run again later.
 
-## 2. Create your admin login
+## 2. Your admin login (already created)
 
-1. In Supabase → **Authentication → Users → Add user**.
-   - Enter your email + a password, tick **Auto Confirm User**, save.
-2. Make that user an admin — back in **SQL Editor**, run (use your email):
+An admin account has already been created for you. **The username and password were
+shared with you privately (in chat) — they are intentionally NOT stored in this repo.**
 
-   ```sql
-   insert into public.admins (user_id)
-   select id from auth.users where email = 'you@example.com'
-   on conflict do nothing;
-   ```
+- The login email is auto-granted admin by the SQL in step 1 — no extra step needed.
+- **One-time confirmation:** the account needs its email confirmed before first login.
+  Either click the "Confirm your email" link Supabase sent to your inbox, **or** in
+  Supabase → **Authentication → Users**, open the user and confirm it. (You can also turn
+  this off entirely under **Authentication → Providers → Email → "Confirm email" → off**.)
+- You can change the password any time in Supabase → Authentication → Users.
 
 ## 3. Log in and add cats
 

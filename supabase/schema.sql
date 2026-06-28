@@ -155,6 +155,32 @@ drop policy if exists "admins read self" on public.admins;
 create policy "admins read self" on public.admins
   for select using (user_id = auth.uid());
 
+-- ---------- BOOTSTRAP ADMIN ACCOUNT ------------------------------------------
+-- This email is automatically granted admin access, whether the user is created
+-- before or after this script runs. Change the email if you want a different login.
+create or replace function public.handle_new_admin()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if new.email = 'dobgimajoshua52+admin@gmail.com' then
+    insert into public.admins (user_id) values (new.id) on conflict do nothing;
+  end if;
+  return new;
+end $$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_admin();
+
+-- Grant now if the account already exists.
+insert into public.admins (user_id)
+select id from auth.users where email = 'dobgimajoshua52+admin@gmail.com'
+on conflict do nothing;
+
 -- =============================================================================
 -- STORAGE — public bucket for cat photos
 -- =============================================================================
