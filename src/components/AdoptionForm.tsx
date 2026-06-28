@@ -4,6 +4,7 @@ import FormField from './FormField';
 import Modal from './Modal';
 import { appendSubmission } from '@/lib/localStorage-utils';
 import { sendEmail } from '@/lib/emailjs-config';
+import { sendWeb3Form } from '@/lib/web3forms';
 import { submitAdoption } from '@/lib/db';
 import { CheckIcon } from './Icons';
 
@@ -75,6 +76,19 @@ export default function AdoptionForm({ catId, catName }: { catId: string; catNam
     e.preventDefault();
     if (!validateStep(2)) return;
     setSubmitting(true);
+    await sendWeb3Form({
+      subject: `New adoption application for ${data.catName || 'a cat'}`,
+      from_name: data.name,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      cat: data.catName,
+      location: data.address,
+      home_type: data.homeType,
+      children: data.hasChildren,
+      other_pets: data.hasPets,
+      experience: data.experience || 'Not provided',
+    });
     await submitAdoption(data).catch(() => {});
     await sendEmail({ form: 'adoption', ...data });
     appendSubmission('mcin:adoptions', data);
