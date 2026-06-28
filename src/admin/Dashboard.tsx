@@ -8,6 +8,7 @@ import {
   HeartIcon,
   MailIcon,
   UsersIcon,
+  CartIcon,
   ArrowRightIcon,
 } from '@/components/Icons';
 
@@ -27,28 +28,28 @@ export default function Dashboard() {
 
   useEffect(() => {
     (async () => {
-      const [cats, available, adopted, contacts, adoptions, donations, subscribers, stories] =
+      const [cats, available, adopted, orders, contacts, adoptions, subscribers] =
         await Promise.all([
           count('cats'),
           count('cats', (q) => q.eq('status', 'Available')),
           count('cats', (q) => q.eq('status', 'Adopted')),
+          count('orders'),
           count('contact_messages'),
           count('adoption_applications'),
-          count('donations'),
           count('newsletter_subscribers'),
-          count('stories'),
         ]);
-      setCounts({ cats, available, adopted, contacts, adoptions, donations, subscribers, stories });
+      setCounts({ cats, available, adopted, orders, contacts, adoptions, subscribers });
       setLoading(false);
     })().catch(() => setLoading(false));
   }, []);
 
   const cards = [
+    { label: 'Orders', value: counts.orders, icon: <CartIcon className="h-6 w-6" />, tint: 'bg-ember-100 text-ember-700' },
     { label: 'Total cats', value: counts.cats, icon: <ShoppingBagIcon className="h-6 w-6" />, tint: 'bg-forest-50 text-forest-600' },
     { label: 'Available', value: counts.available, icon: <CheckIcon className="h-6 w-6" />, tint: 'bg-emerald-50 text-emerald-600' },
     { label: 'Adopted', value: counts.adopted, icon: <HeartIcon className="h-6 w-6" filled />, tint: 'bg-sky-50 text-sky-600' },
-    { label: 'Adoption applications', value: counts.adoptions, icon: <ClipboardIcon className="h-6 w-6" />, tint: 'bg-ember-100 text-ember-700' },
-    { label: 'Contact messages', value: counts.contacts, icon: <MailIcon className="h-6 w-6" />, tint: 'bg-amber-50 text-amber-600' },
+    { label: 'Adoption applications', value: counts.adoptions, icon: <ClipboardIcon className="h-6 w-6" />, tint: 'bg-amber-50 text-amber-600' },
+    { label: 'Contact messages', value: counts.contacts, icon: <MailIcon className="h-6 w-6" />, tint: 'bg-sky-50 text-sky-600' },
     { label: 'Newsletter subscribers', value: counts.subscribers, icon: <UsersIcon className="h-6 w-6" />, tint: 'bg-purple-50 text-purple-600' },
   ];
 

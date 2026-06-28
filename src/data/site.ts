@@ -15,6 +15,9 @@ export const site = {
   // --- Placeholder contact details ---
   email: 'info@example-rescue.org',
   phone: '+1 (000) 000-0000',
+  // WhatsApp number in international format, digits only (e.g. 18125551234).
+  // Leave blank to fall back to the contact page.
+  whatsapp: '',
   address: '219 S Grand Ave, Evansville, Indiana 47713',
   responseTime: "We aim to reply within 24 hours.",
 

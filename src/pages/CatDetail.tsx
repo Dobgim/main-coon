@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import AdoptionForm from '@/components/AdoptionForm';
 import Modal from '@/components/Modal';
 import {
-  ArrowRightIcon,
   CheckIcon,
   FemaleIcon,
   MaleIcon,
@@ -14,6 +13,7 @@ import {
   PhoneIcon,
   PawIcon,
 } from '@/components/Icons';
+import PurchasePanel from '@/components/PurchasePanel';
 import { useCat } from '@/hooks/useCats';
 
 export default function CatDetail() {
@@ -159,14 +159,18 @@ export default function CatDetail() {
             ))}
           </dl>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6">
+            <PurchasePanel cat={cat} />
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-3">
             <a
               href="#adopt"
-              className={`btn-accent text-base ${cat.status === 'Adopted' ? 'pointer-events-none opacity-50' : ''}`}
+              className="btn-ghost text-sm"
             >
-              Apply to Adopt {cat.name} <ArrowRightIcon className="h-5 w-5" />
+              Prefer to apply to adopt?
             </a>
-            <button type="button" onClick={share} className="btn-ghost">
+            <button type="button" onClick={share} className="btn-ghost text-sm">
               <ShareIcon className="h-5 w-5" /> Share
             </button>
           </div>

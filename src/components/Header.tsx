@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from './Logo';
-import { HeartIcon } from './Icons';
+import { HeartIcon, CartIcon } from './Icons';
 import { navLinks } from '@/data/site';
+import { useCart } from '@/lib/cart';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { count } = useCart();
 
   // Shrink + add shadow once the user scrolls past the hero edge.
   useEffect(() => {
@@ -77,6 +79,19 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/cart"
+            aria-label={`Cart${count ? ` (${count})` : ''}`}
+            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-50"
+          >
+            <CartIcon className="h-6 w-6" />
+            {count > 0 && (
+              <span className="absolute right-1 top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-ember px-1 text-[11px] font-bold text-white">
+                {count}
+              </span>
+            )}
+          </Link>
+
           <motion.div
             className="hidden sm:block"
             animate={{ scale: [1, 1.04, 1] }}

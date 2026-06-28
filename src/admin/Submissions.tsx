@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
-type Tab = 'applications' | 'messages' | 'donations' | 'subscribers' | 'stories';
+type Tab = 'orders' | 'applications' | 'messages' | 'donations' | 'subscribers' | 'stories';
 
 const tabs: Array<{ key: Tab; label: string; table: string }> = [
+  { key: 'orders', label: 'Orders', table: 'orders' },
   { key: 'applications', label: 'Applications', table: 'adoption_applications' },
   { key: 'messages', label: 'Messages', table: 'contact_messages' },
   { key: 'donations', label: 'Donations', table: 'donations' },
   { key: 'subscribers', label: 'Subscribers', table: 'newsletter_subscribers' },
   { key: 'stories', label: 'Stories', table: 'stories' },
 ];
+
+const fmtMoney = (n: number) =>
+  Number(n).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type Row = Record<string, any>;
@@ -18,7 +22,7 @@ const fmtDate = (iso: string) =>
   new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
 
 export default function Submissions() {
-  const [tab, setTab] = useState<Tab>('applications');
+  const [tab, setTab] = useState<Tab>('orders');
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -93,6 +97,21 @@ export default function Submissions() {
             <div key={row.id} className="card p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
+                  {tab === 'orders' && (
+                    <>
+                      <p className="font-bold text-forest-800">
+                        {row.customer_name} — {fmtMoney(row.total)}
+                      </p>
+                      <p className="mt-1 text-sm text-muted">{row.email} · {row.phone}</p>
+                      <ul className="mt-2 space-y-0.5 text-sm text-ink/80">
+                        {(row.items ?? []).map((it: Row, idx: number) => (
+                          <li key={idx}>• {it.name} — {it.optionLabel} ({fmtMoney(it.price)})</li>
+                        ))}
+                      </ul>
+                      {row.address && <p className="mt-1 text-sm text-ink/70">Deliver to: {row.address}</p>}
+                      {row.notes && <p className="mt-1 text-sm text-ink/70">Notes: {row.notes}</p>}
+                    </>
+                  )}
                   {tab === 'applications' && (
                     <>
                       <p className="font-bold text-forest-800">{row.name} — wants to adopt {row.cat_name || '—'}</p>

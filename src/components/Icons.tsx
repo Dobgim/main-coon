@@ -121,6 +121,35 @@ export const TikTokIcon = (p: IconProps) => (
   </svg>
 );
 
+export const CartIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="9" cy="21" r="1.6" />
+    <circle cx="18" cy="21" r="1.6" />
+    <path d="M2.5 3h2l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21 7H6" />
+  </svg>
+);
+
+export const TrashIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+    <path d="M10 11v6M14 11v6" />
+  </svg>
+);
+
+export const TruckIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M1 3h13v11H1zM14 7h4l3 3v4h-7z" />
+    <circle cx="6" cy="18" r="1.8" />
+    <circle cx="17.5" cy="18" r="1.8" />
+  </svg>
+);
+
+export const WhatsAppIcon = (p: IconProps) => (
+  <svg {...base(p)} fill="currentColor" stroke="none">
+    <path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-2.9.9.9-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.7.8-.8 1-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.3-1.7c-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.5 1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z" />
+  </svg>
+);
+
 export const HomeIcon = (p: IconProps) => (
   <svg {...base(p)}>
     <path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />

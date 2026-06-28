@@ -97,6 +97,19 @@ create table if not exists public.stories (
   created_at  timestamptz not null default now()
 );
 
+create table if not exists public.orders (
+  id             uuid primary key default gen_random_uuid(),
+  customer_name  text not null,
+  email          text not null,
+  phone          text default '',
+  address        text default '',
+  notes          text default '',
+  items          jsonb not null default '[]',
+  total          numeric not null default 0,
+  status         text not null default 'New',
+  created_at     timestamptz not null default now()
+);
+
 -- ---------- ADMINS ALLOWLIST --------------------------------------------------
 -- A user is treated as an admin only if their auth id appears here.
 create table if not exists public.admins (
@@ -122,6 +135,7 @@ alter table public.adoption_applications  enable row level security;
 alter table public.donations              enable row level security;
 alter table public.newsletter_subscribers enable row level security;
 alter table public.stories                enable row level security;
+alter table public.orders                 enable row level security;
 alter table public.admins                 enable row level security;
 
 -- CATS: everyone can read published cats; admins can do everything.
@@ -138,7 +152,7 @@ declare t text;
 begin
   foreach t in array array[
     'contact_messages','adoption_applications','donations',
-    'newsletter_subscribers','stories'
+    'newsletter_subscribers','stories','orders'
   ] loop
     execute format('drop policy if exists "%s insert" on public.%I', t, t);
     execute format('drop policy if exists "%s admin"  on public.%I', t, t);

@@ -265,6 +265,35 @@ export async function importSeedCats(): Promise<number> {
 // FORM SUBMISSIONS (public insert)
 // ---------------------------------------------------------------------------
 
+export interface OrderItemInput {
+  catSlug: string;
+  name: string;
+  optionId: string;
+  optionLabel: string;
+  price: number;
+}
+
+export async function createOrder(o: {
+  customerName: string;
+  email: string;
+  phone: string;
+  address: string;
+  notes: string;
+  items: OrderItemInput[];
+  total: number;
+}): Promise<void> {
+  const { error } = await supabase.from('orders').insert({
+    customer_name: o.customerName,
+    email: o.email,
+    phone: o.phone,
+    address: o.address,
+    notes: o.notes,
+    items: o.items,
+    total: o.total,
+  });
+  if (error) throw error;
+}
+
 export async function submitContact(m: {
   name: string; email: string; phone: string; subject: string; message: string;
 }): Promise<void> {
