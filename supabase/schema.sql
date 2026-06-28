@@ -165,7 +165,7 @@ security definer
 set search_path = public
 as $$
 begin
-  if new.email = 'dobgimajoshua52+admin@gmail.com' then
+  if new.email = 'royalmainecoonkitten159@gmail.com' then
     insert into public.admins (user_id) values (new.id) on conflict do nothing;
   end if;
   return new;
@@ -178,7 +178,7 @@ create trigger on_auth_user_created
 
 -- Grant now if the account already exists.
 insert into public.admins (user_id)
-select id from auth.users where email = 'dobgimajoshua52+admin@gmail.com'
+select id from auth.users where email = 'royalmainecoonkitten159@gmail.com'
 on conflict do nothing;
 
 -- =============================================================================
