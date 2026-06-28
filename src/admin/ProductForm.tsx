@@ -380,22 +380,6 @@ export default function ProductForm() {
           </div>
         </section>
 
-        {/* Coordinator */}
-        <section className="card space-y-4 p-6">
-          <h2 className="text-lg font-extrabold text-forest-800">Coordinator contact</h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <Field label="Name">
-              <input className="input" value={form.coordinatorName} onChange={(e) => set('coordinatorName', e.target.value)} />
-            </Field>
-            <Field label="Email">
-              <input className="input" value={form.coordinatorEmail} onChange={(e) => set('coordinatorEmail', e.target.value)} />
-            </Field>
-            <Field label="Phone">
-              <input className="input" value={form.coordinatorPhone} onChange={(e) => set('coordinatorPhone', e.target.value)} />
-            </Field>
-          </div>
-        </section>
-
         <div className="flex items-center gap-3">
           <button type="submit" disabled={saving} className="btn-primary disabled:opacity-70">
             {saving ? 'Saving…' : editing ? 'Save changes' : 'Publish cat'}

@@ -44,6 +44,10 @@ export default function CatDetail() {
     );
   }
 
+  const hasCoordinator = Boolean(
+    cat.coordinator.name || cat.coordinator.email || cat.coordinator.phone,
+  );
+
   const facts: Array<[string, string]> = [
     ['Age', cat.ageLabel],
     ['Gender', cat.gender],
@@ -209,7 +213,7 @@ export default function CatDetail() {
 
       {/* Requirements + coordinator */}
       <div className="mt-6 grid gap-6 md:grid-cols-3">
-        <div className="card p-6 md:col-span-2">
+        <div className={`card p-6 ${hasCoordinator ? 'md:col-span-2' : 'md:col-span-3'}`}>
           <h2 className="text-lg font-extrabold text-forest-800">Adoption requirements</h2>
           <ul className="mt-4 space-y-2 text-sm text-ink/85">
             <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A friendly home visit before adoption</li>
@@ -218,16 +222,22 @@ export default function CatDetail() {
             <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A commitment to {cat.name}&apos;s wellbeing for life</li>
           </ul>
         </div>
-        <div className="card p-6">
-          <h2 className="text-lg font-extrabold text-forest-800">{cat.name}&apos;s coordinator</h2>
-          <p className="mt-3 font-semibold text-forest-700">{cat.coordinator.name}</p>
-          <a href={`mailto:${cat.coordinator.email}`} className="mt-2 flex items-center gap-2 text-sm link-quiet">
-            <MailIcon className="h-4 w-4" /> {cat.coordinator.email}
-          </a>
-          <a href={`tel:${cat.coordinator.phone.replace(/\s/g, '')}`} className="mt-1 flex items-center gap-2 text-sm link-quiet">
-            <PhoneIcon className="h-4 w-4" /> {cat.coordinator.phone}
-          </a>
-        </div>
+        {hasCoordinator && (
+          <div className="card p-6">
+            <h2 className="text-lg font-extrabold text-forest-800">{cat.name}&apos;s coordinator</h2>
+            {cat.coordinator.name && <p className="mt-3 font-semibold text-forest-700">{cat.coordinator.name}</p>}
+            {cat.coordinator.email && (
+              <a href={`mailto:${cat.coordinator.email}`} className="mt-2 flex items-center gap-2 text-sm link-quiet">
+                <MailIcon className="h-4 w-4" /> {cat.coordinator.email}
+              </a>
+            )}
+            {cat.coordinator.phone && (
+              <a href={`tel:${cat.coordinator.phone.replace(/\s/g, '')}`} className="mt-1 flex items-center gap-2 text-sm link-quiet">
+                <PhoneIcon className="h-4 w-4" /> {cat.coordinator.phone}
+              </a>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Adoption form */}
