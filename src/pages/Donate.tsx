@@ -1,3 +1,4 @@
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import DonationForm from '@/components/DonationForm';
 import SectionHeading from '@/components/SectionHeading';
@@ -8,6 +9,7 @@ const heroImg =
 export default function Donate() {
   return (
     <>
+      <Seo title="Donate" />
       <PageHero
         title="Donate to Help Maine Coons"
         subtitle="Your donations support vet care, nutritious food and safe shelter for every Maine Coon in our care."

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import RehomedCard from '@/components/RehomedCard';
 import Reveal from '@/components/Reveal';
@@ -30,6 +31,7 @@ export default function Rehomed() {
 
   return (
     <>
+      <Seo title="Happy Tails — Rehomed Maine Coons" description="Real families and their Maine Coons. See the happy endings from kittens we've placed in loving homes." />
       <PageHero
         title="Our Rehoming Stories"
         subtitle="Every adoption is a happy ending years in the making. Here are some of our favourites."

@@ -1,3 +1,4 @@
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import { site } from '@/data/site';
 
@@ -43,6 +44,7 @@ const sections: Array<{ h: string; p: string[] }> = [
 export default function Terms() {
   return (
     <>
+      <Seo title="Terms & Conditions" noindex />
       <PageHero title="Terms & Conditions" breadcrumb="Terms" subtitle="The terms covering adoptions and use of this website." />
       <article className="container-page max-w-3xl py-14 md:py-20">
         <p className="text-sm text-muted">Last updated: {new Date().getFullYear()}</p>

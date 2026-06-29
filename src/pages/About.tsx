@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/SectionHeading';
 import TrustBadge from '@/components/TrustBadge';
@@ -47,6 +48,7 @@ const values = [
 export default function About() {
   return (
     <>
+      <Seo title="About Us" description="Meet the team behind our home-raised Maine Coon kittens and learn how we raise healthy, well-socialised gentle giants." />
       <PageHero
         title={`About ${site.name}`}
         subtitle="A dedicated team of volunteers giving Maine Coon cats across the US a second chance at a happy life."

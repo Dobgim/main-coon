@@ -14,7 +14,9 @@ import {
   PawIcon,
 } from '@/components/Icons';
 import PurchasePanel from '@/components/PurchasePanel';
+import Seo from '@/components/Seo';
 import { useCat } from '@/hooks/useCats';
+import { site } from '@/data/site';
 
 export default function CatDetail() {
   const { id } = useParams();
@@ -47,6 +49,27 @@ export default function CatDetail() {
   const hasCoordinator = Boolean(
     cat.coordinator.name || cat.coordinator.email || cat.coordinator.phone,
   );
+
+  const productJsonLd: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `${cat.name} — Maine Coon Kitten`,
+    description: cat.shortDescription || cat.story,
+    image: cat.images,
+    category: 'Maine Coon Kitten',
+    offers: {
+      '@type': 'Offer',
+      price: cat.adoptionFee,
+      priceCurrency: 'USD',
+      url: `${site.url}/cats/${cat.id}`,
+      availability:
+        cat.status === 'Adopted'
+          ? 'https://schema.org/SoldOut'
+          : cat.status === 'Pending'
+            ? 'https://schema.org/LimitedAvailability'
+            : 'https://schema.org/InStock',
+    },
+  };
 
   const facts: Array<[string, string]> = [
     ['Age', cat.ageLabel],
@@ -86,6 +109,12 @@ export default function CatDetail() {
 
   return (
     <div className="container-page py-10 md:py-14">
+      <Seo
+        title={`${cat.name} — Maine Coon Kitten for Sale`}
+        description={cat.shortDescription || `Meet ${cat.name}, a ${cat.color} Maine Coon kitten available now.`}
+        image={cat.images[0]}
+        jsonLd={productJsonLd}
+      />
       <nav className="mb-6 text-sm text-muted" aria-label="Breadcrumb">
         <Link to="/" className="link-quiet">Home</Link> /{' '}
         <Link to="/cats" className="link-quiet">Cats</Link> /{' '}

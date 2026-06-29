@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import CatGrid from '@/components/CatGrid';
 import FilterSidebar, { defaultFilters, type CatFilters } from '@/components/FilterSidebar';
@@ -41,6 +42,10 @@ export default function Cats() {
 
   return (
     <>
+      <Seo
+        title="Maine Coon Kittens for Sale"
+        description="Browse available Maine Coon kittens — vet-checked, vaccinated and home-raised. Reserve your gentle giant today, with nationwide delivery."
+      />
       <PageHero
         title="Cats Available for Adoption"
         subtitle="Meet the Maine Coons currently looking for their forever homes across the US."

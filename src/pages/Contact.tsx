@@ -1,3 +1,4 @@
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import ContactForm from '@/components/ContactForm';
 import {
@@ -16,6 +17,7 @@ const heroImg =
 export default function Contact() {
   return (
     <>
+      <Seo title="Contact" description="Questions about reserving a Maine Coon kitten or delivery? Contact us — we reply within 24 hours." />
       <PageHero
         title="Contact Us"
         subtitle="Questions about adoption, fostering or volunteering? We'd love to hear from you."

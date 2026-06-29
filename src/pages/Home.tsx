@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Seo from '@/components/Seo';
 import Hero from '@/components/Hero';
 import CatSlideshow from '@/components/CatSlideshow';
 import SectionHeading from '@/components/SectionHeading';
@@ -86,6 +87,7 @@ export default function Home() {
 
   return (
     <>
+      <Seo />
       <Hero />
 
       {/* Tagline band */}

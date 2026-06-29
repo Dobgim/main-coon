@@ -12,6 +12,14 @@ export const site = {
   foundedYear: 2010,
   rehomedCount: '500+',
 
+  // --- SEO ---
+  // Your live domain (no trailing slash). Used for canonical URLs & sitemap.
+  url: 'https://royalmainecoonkiten.com',
+  seoDescription:
+    'Healthy, home-raised Maine Coon kittens in Evansville, Indiana. Vet-checked, vaccinated gentle giants — reserve your Maine Coon kitten today, with nationwide delivery available.',
+  keywords:
+    'Maine Coon kittens, Maine Coon kittens for sale, Maine Coon kittens Indiana, Maine Coon kittens Evansville, Maine Coon breeder, buy Maine Coon kitten, reserve Maine Coon kitten',
+
   // --- Placeholder contact details ---
   email: 'info@example-rescue.org',
   phone: '+1 (000) 000-0000',

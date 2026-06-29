@@ -1,3 +1,4 @@
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import { site } from '@/data/site';
 
@@ -46,6 +47,7 @@ const sections: Array<{ h: string; p: string[] }> = [
 export default function Privacy() {
   return (
     <>
+      <Seo title="Privacy Policy" noindex />
       <PageHero title="Privacy Policy" breadcrumb="Privacy" subtitle="How we collect, use and protect your information." />
       <article className="container-page max-w-3xl py-14 md:py-20">
         <p className="text-sm text-muted">Last updated: {new Date().getFullYear()}</p>

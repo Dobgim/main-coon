@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Seo from '@/components/Seo';
 import PageHero from '@/components/PageHero';
 import HelpCard from '@/components/HelpCard';
 import Reveal from '@/components/Reveal';
@@ -11,6 +12,7 @@ const heroImg =
 export default function Help() {
   return (
     <>
+      <Seo title="How to Help" />
       <PageHero
         title="How You Can Help"
         subtitle="There are so many ways to make a difference for Maine Coons in need — find the one that's right for you."
