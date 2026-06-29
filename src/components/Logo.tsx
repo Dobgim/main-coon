@@ -51,10 +51,10 @@ export default function Logo({ className, withText = true, variant = 'dark' }: L
             className="font-heading text-lg font-extrabold tracking-tight"
             style={{ color: titleColor }}
           >
-            Maine Coons
+            Royal Maine Coon
           </span>
           <span className="font-heading text-xs font-semibold tracking-[0.25em] text-ember">
-            IN NEED
+            KITEN
           </span>
         </span>
       )}

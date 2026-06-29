@@ -55,7 +55,7 @@ export default function Header() {
       </a>
 
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" aria-label="Maine Coons in Need — home" className="shrink-0">
+        <Link to="/" aria-label="Royal Maine Coon Kiten — home" className="shrink-0">
           <Logo />
         </Link>
 

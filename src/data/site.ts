@@ -6,8 +6,8 @@
  * verified details before this site is ever deployed for a live charity.
  */
 export const site = {
-  name: 'Maine Coons in Need',
-  tagline: 'US Maine Coon Cat Rescue',
+  name: 'Royal Maine Coon Kiten',
+  tagline: 'Home-raised Maine Coon Kittens',
   shortPitch: 'Gentle giants deserve gentle homes.',
   foundedYear: 2010,
   rehomedCount: '500+',
@@ -61,7 +61,7 @@ export const site = {
     paypalUrl: 'https://www.paypal.com/donate', // replace with real hosted button URL
     amazonWishlist: 'https://www.amazon.com/',
     bank: {
-      accountName: 'Maine Coons in Need (placeholder)',
+      accountName: 'Royal Maine Coon Kiten (placeholder)',
       bankName: 'Example Bank',
       routingNumber: '000000000',
       accountNumber: '000000000',

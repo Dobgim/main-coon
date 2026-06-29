@@ -53,7 +53,7 @@ export default function Hero() {
             variants={fadeUp}
             className="badge inline-flex items-center gap-1.5 bg-ember-100 text-ember-700"
           >
-            <PawIcon className="h-4 w-4" /> US Maine Coon Cat Rescue
+            <PawIcon className="h-4 w-4" /> Home-raised Maine Coon Kittens
           </motion.span>
 
           <motion.h1
