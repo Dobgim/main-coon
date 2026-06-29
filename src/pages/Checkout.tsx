@@ -222,7 +222,7 @@ export default function Checkout() {
           </Field>
           <p className="rounded-2xl bg-forest-50 px-4 py-3 text-xs text-ink/75">
             No payment is taken on this page. After you place the order we&apos;ll contact you to
-            confirm availability and arrange secure payment (card, bank transfer or PayPal).
+            confirm availability and arrange secure payment (Zelle, Cash App, Chime or Apple Pay).
           </p>
         </div>
 

@@ -11,9 +11,9 @@ const img = (id: string, w = 900) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
 
 const coordinators = {
-  jacky: { name: 'Jacky Holmes', email: 'rehoming@example-rescue.org', phone: '+1 (000) 000-0001' },
-  sarah: { name: 'Sarah Doyle', email: 'fostering@example-rescue.org', phone: '+1 (000) 000-0002' },
-  marek: { name: 'Marek Nowak', email: 'north@example-rescue.org', phone: '+1 (000) 000-0003' },
+  jacky: { name: '', email: '', phone: '' },
+  sarah: { name: '', email: '', phone: '' },
+  marek: { name: '', email: '', phone: '' },
 };
 
 export const cats: Cat[] = [

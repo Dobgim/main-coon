@@ -21,8 +21,8 @@ export const site = {
     'Maine Coon kittens, Maine Coon kittens for sale, Maine Coon kittens Indiana, Maine Coon kittens Evansville, Maine Coon breeder, buy Maine Coon kitten, reserve Maine Coon kitten',
 
   // --- Placeholder contact details ---
-  email: 'info@example-rescue.org',
-  phone: '+1 (000) 000-0000',
+  email: 'royalmainecoonkitten159@gmail.com',
+  phone: '(205) 678-1282',
   // WhatsApp number in international format, digits only (e.g. 18125551234).
   // Leave blank to fall back to the contact page.
   whatsapp: '',
@@ -42,16 +42,10 @@ export const site = {
   // --- Payment details shown to buyers at checkout so they can pay you. ---
   // Fill in the methods you use; any left blank are hidden automatically.
   payment: {
-    paypal: '' as string, // paypal.me link or PayPal email
     zelle: '' as string, // Zelle email or phone number
     cashApp: '' as string, // $cashtag (with or without the $)
-    venmo: '' as string, // @handle
-    bank: {
-      accountName: '' as string,
-      bankName: '' as string,
-      routingNumber: '' as string,
-      accountNumber: '' as string,
-    },
+    chime: '' as string, // $ChimeSign, or the email/phone linked to Chime
+    applePay: '' as string, // phone number or email linked to Apple Pay / Apple Cash
     instructions:
       'Please include your order reference in the payment note. Once paid, reply to your confirmation email or message us on WhatsApp with a screenshot and we will confirm your kitten. Kittens are held for 48 hours.' as string,
   },

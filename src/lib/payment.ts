@@ -11,28 +11,16 @@ export function getPaymentMethods(): PaymentMethod[] {
   const p = site.payment;
   const methods: PaymentMethod[] = [];
 
-  if (p.paypal.trim()) {
-    methods.push({
-      label: 'PayPal',
-      value: p.paypal,
-      href: p.paypal.startsWith('http') ? p.paypal : `https://paypal.me/${p.paypal}`,
-    });
-  }
   if (p.zelle.trim()) methods.push({ label: 'Zelle', value: p.zelle });
   if (p.cashApp.trim()) {
     const tag = p.cashApp.replace(/^\$/, '');
     methods.push({ label: 'Cash App', value: `$${tag}`, href: `https://cash.app/$${tag}` });
   }
-  if (p.venmo.trim()) {
-    const handle = p.venmo.replace(/^@/, '');
-    methods.push({ label: 'Venmo', value: `@${handle}`, href: `https://venmo.com/${handle}` });
+  if (p.chime.trim()) {
+    const tag = p.chime.replace(/^\$/, '');
+    methods.push({ label: 'Chime', value: p.chime.startsWith('$') ? `$${tag}` : p.chime });
   }
-  if (p.bank.accountNumber.trim()) {
-    methods.push({
-      label: 'Bank transfer',
-      value: `${p.bank.accountName} — ${p.bank.bankName}, Routing ${p.bank.routingNumber}, Acct ${p.bank.accountNumber}`,
-    });
-  }
+  if (p.applePay.trim()) methods.push({ label: 'Apple Pay', value: p.applePay });
   return methods;
 }
 
