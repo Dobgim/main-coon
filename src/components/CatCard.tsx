@@ -84,13 +84,13 @@ export default function CatCard({ cat }: { cat: Cat }) {
             View Details
           </Link>
           <Link
-            to={`/cats/${cat.id}#adopt`}
+            to={`/cats/${cat.id}`}
             className={`btn-accent flex-1 px-4 py-2.5 text-sm ${
               cat.status === 'Adopted' ? 'pointer-events-none opacity-50' : ''
             }`}
             aria-disabled={cat.status === 'Adopted'}
           >
-            Adopt <ArrowRightIcon className="h-4 w-4" />
+            Reserve <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
       </div>

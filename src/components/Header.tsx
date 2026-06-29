@@ -55,7 +55,7 @@ export default function Header() {
       </a>
 
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" aria-label="Royal Maine Coon Kiten — home" className="shrink-0">
+        <Link to="/" aria-label="Royal Maine Coon Kittens — home" className="shrink-0">
           <Logo />
         </Link>
 
@@ -98,11 +98,11 @@ export default function Header() {
             transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           >
             <Link
-              to="/donate"
+              to="/cats"
               className="btn-accent inline-flex items-center gap-2 shadow-glow"
-              aria-label="Donate now"
+              aria-label="Reserve a kitten"
             >
-              <HeartIcon className="h-4 w-4" filled /> Donate Now
+              <HeartIcon className="h-4 w-4" filled /> Reserve a Kitten
             </Link>
           </motion.div>
 
@@ -177,8 +177,8 @@ export default function Header() {
                 ))}
               </nav>
 
-              <Link to="/donate" className="btn-accent mt-6 inline-flex w-full items-center justify-center gap-2">
-                <HeartIcon className="h-4 w-4" filled /> Donate Now
+              <Link to="/cats" className="btn-accent mt-6 inline-flex w-full items-center justify-center gap-2">
+                <HeartIcon className="h-4 w-4" filled /> Reserve a Kitten
               </Link>
             </motion.div>
           </>

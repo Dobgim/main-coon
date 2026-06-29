@@ -16,7 +16,6 @@ import {
   SearchIcon,
   ClipboardIcon,
   CheckIcon,
-  UsersIcon,
 } from '@/components/Icons';
 import { useCats } from '@/hooks/useCats';
 import { rehomedStories } from '@/data/rehomed';
@@ -24,23 +23,23 @@ import { rehomedStories } from '@/data/rehomed';
 const services = [
   {
     icon: <HeartIcon className="h-7 w-7" />,
-    title: 'Compassionate Care',
-    text: 'Every cat is vet-checked, vaccinated and loved while they wait for their forever home.',
+    title: 'Healthy & Vaccinated',
+    text: 'Every kitten is vet-checked, vaccinated and comes with a written health guarantee.',
   },
   {
     icon: <PawIcon className="h-7 w-7" />,
-    title: 'Dedicated Rescue',
-    text: 'We step in for Maine Coons in crisis, wherever they are in the US.',
+    title: 'Home-Raised',
+    text: 'Our kittens are raised underfoot in our home and beautifully socialised from birth.',
   },
   {
     icon: <HomeIcon className="h-7 w-7" />,
-    title: 'Forever Homes',
-    text: 'Careful matching means cats and families thrive together for life.',
+    title: 'Perfect Match',
+    text: 'We help you choose the kitten whose personality fits your family best.',
   },
   {
     icon: <ShieldIcon className="h-7 w-7" />,
     title: 'Lifelong Support',
-    text: 'Our team is here for advice and guidance long after adoption day.',
+    text: 'We are here for advice and guidance long after your kitten goes home.',
   },
 ];
 
@@ -48,26 +47,26 @@ const adoptionSteps = [
   {
     step: '01',
     icon: <SearchIcon className="h-6 w-6" />,
-    title: 'Browse our cats',
-    text: 'Explore our available Maine Coons. Filter by age, location and lifestyle to find your perfect match.',
+    title: 'Browse our kittens',
+    text: 'Explore our available Maine Coon kittens and find the one whose look and personality you love.',
   },
   {
     step: '02',
     icon: <ClipboardIcon className="h-6 w-6" />,
-    title: 'Submit an application',
-    text: 'Fill in our simple adoption form telling us about your home, lifestyle and experience with cats.',
+    title: 'Reserve with a deposit',
+    text: 'Place a deposit to hold your kitten. We keep you updated with photos and videos as they grow.',
   },
   {
     step: '03',
-    icon: <HomeIcon className="h-6 w-6" />,
-    title: 'Home check',
-    text: 'A friendly volunteer visits to ensure your home is a safe and loving environment for your new companion.',
+    icon: <ShieldIcon className="h-6 w-6" />,
+    title: 'Health check & vaccines',
+    text: 'Your kitten is vet-checked, vaccinated and litter-trained, ready to go home at 12+ weeks.',
   },
   {
     step: '04',
     icon: <HeartIcon className="h-6 w-6" />,
-    title: 'Welcome home',
-    text: 'Collect your new companion and start your journey together. We are here every step of the way.',
+    title: 'Pickup or delivery',
+    text: 'Collect your kitten in Evansville, IN, or we arrange safe nationwide delivery to your door.',
   },
 ];
 
@@ -98,12 +97,12 @@ export default function Home() {
               Gentle Giants, Lovable Companions
             </h2>
             <p className="mt-2 max-w-2xl text-cream/80">
-              Maine Coons are affectionate, sociable and devoted — and when life takes a turn,
-              they need a rescue that truly understands them. That&apos;s where we come in.
+              Maine Coons are affectionate, sociable and devoted — and we raise ours with love
+              from day one, so they settle into your family with ease.
             </p>
           </div>
           <Link to="/cats" className="btn-accent shrink-0 text-base">
-            Meet our cats <ArrowRightIcon className="h-5 w-5" />
+            View available kittens <ArrowRightIcon className="h-5 w-5" />
           </Link>
         </div>
       </section>
@@ -114,9 +113,9 @@ export default function Home() {
       {/* Why we exist — service cards */}
       <section className="container-page py-16 md:py-24">
         <SectionHeading
-          eyebrow="Why we exist"
-          title="Giving Maine Coons the second chance they deserve"
-          description="From rescue to rehabilitation to a loving forever home, we are with each cat every step of the way."
+          eyebrow="Why families choose us"
+          title="Healthy, happy kittens raised the right way"
+          description="From birth to the day they go home, we give every kitten the care, socialisation and health checks they deserve."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => (
@@ -169,7 +168,7 @@ export default function Home() {
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             >
               <p className="text-2xl font-extrabold leading-none">500+</p>
-              <p className="mt-1 text-xs text-cream/80">cats rehomed since 2010</p>
+              <p className="mt-1 text-xs text-cream/80">kittens placed since 2010</p>
             </motion.div>
           </motion.div>
 
@@ -178,25 +177,25 @@ export default function Home() {
             <SectionHeading
               align="left"
               eyebrow="About us"
-              title="A rescue built on love for gentle giants"
+              title="A cattery built on love for gentle giants"
               className="!mx-0"
             />
             <p className="mt-5 leading-relaxed text-ink/85">
-              Founded in 2010 by a group of Maine Coon lovers, we stepped in because these
-              beautiful cats were ending up in shelters not equipped for their specialist needs.
-              Today we are a US-wide network of volunteers, foster carers and vet partners.
+              Founded in 2010 by a family of Maine Coon lovers, we raise our kittens underfoot in
+              our home — never in cages — so they grow up confident, affectionate and ready to bond
+              with you.
             </p>
             <p className="mt-4 leading-relaxed text-ink/85">
-              Every Maine Coon in our care is fully health-checked, vaccinated and micro-chipped
-              before being carefully matched with a loving family. We stay in touch long after
-              adoption day — because a forever home really does mean forever.
+              Every kitten is fully health-checked, vaccinated and micro-chipped before going home,
+              and comes with a health guarantee. We stay in touch long after pickup — because our
+              families are part of ours.
             </p>
 
             <div className="mt-7 grid grid-cols-3 gap-4 border-t border-forest-100 pt-6">
               {[
-                { n: '500+', l: 'Cats rehomed' },
-                { n: '14', l: 'Years rescuing' },
-                { n: '100%', l: 'To cat care' },
+                { n: '500+', l: 'Kittens placed' },
+                { n: '14', l: 'Years breeding' },
+                { n: '100%', l: 'Health guaranteed' },
               ].map((s) => (
                 <div key={s.l}>
                   <p className="text-3xl font-extrabold text-forest">{s.n}</p>
@@ -210,7 +209,7 @@ export default function Home() {
                 Our story <ArrowRightIcon className="h-5 w-5" />
               </Link>
               <Link to="/cats" className="btn-ghost">
-                Meet the cats
+                View kittens
               </Link>
             </div>
           </Reveal>
@@ -223,12 +222,12 @@ export default function Home() {
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <SectionHeading
               align="left"
-              eyebrow="Looking for love"
-              title="Cats ready for adoption"
+              eyebrow="Looking for a home"
+              title="Kittens ready for their new homes"
               className="!mx-0"
             />
             <Link to="/cats" className="btn-ghost shrink-0">
-              View all cats <ArrowRightIcon className="h-4 w-4" />
+              View all kittens <ArrowRightIcon className="h-4 w-4" />
             </Link>
           </div>
           <div className="mt-10">
@@ -243,11 +242,11 @@ export default function Home() {
           <SectionHeading
             eyebrow="Simple process"
             title={
-              <span className="text-white">How adoption works</span>
+              <span className="text-white">How to reserve your kitten</span>
             }
             description={
               <span className="text-cream/80">
-                Adopting a Maine Coon through us is straightforward, transparent and supported
+                Reserving a Maine Coon kitten with us is straightforward, transparent and supported
                 every step of the way.
               </span>
             }
@@ -278,7 +277,7 @@ export default function Home() {
           </div>
           <div className="mt-12 text-center">
             <Link to="/cats" className="btn-accent text-base">
-              Start browsing cats <ArrowRightIcon className="h-5 w-5" />
+              Browse available kittens <ArrowRightIcon className="h-5 w-5" />
             </Link>
           </div>
         </div>
@@ -288,8 +287,8 @@ export default function Home() {
       <section className="container-page py-16 md:py-24">
         <SectionHeading
           eyebrow="Happy endings"
-          title="Rehoming stories that warm the heart"
-          description="Hundreds of Maine Coons have found their forever families through our rescue."
+          title="Happy families & their kittens"
+          description="Hundreds of Maine Coon kittens have joined loving families through our cattery."
         />
         <Reveal stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
           {topStories.map((s) => (
@@ -307,9 +306,9 @@ export default function Home() {
       <section className="bg-sand/40 py-16 md:py-20">
         <div className="container-page">
           <SectionHeading
-            eyebrow="Get involved"
-            title="More ways to make a difference"
-            description="You don't have to adopt to help. Every volunteer and foster carer is a lifeline for a cat in need."
+            eyebrow="Why buy from us"
+            title="More than just a kitten"
+            description="Every family gets a healthy, well-socialised companion — plus our guidance and support for life."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             <motion.div
@@ -320,22 +319,22 @@ export default function Home() {
               className="relative overflow-hidden rounded-3xl bg-forest p-8 text-white"
             >
               <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15">
-                <UsersIcon className="h-7 w-7 text-white" />
+                <ShieldIcon className="h-7 w-7 text-white" />
               </div>
-              <h3 className="text-2xl font-extrabold text-white">Volunteer with us</h3>
+              <h3 className="text-2xl font-extrabold text-white">Health guarantee</h3>
               <p className="mt-3 leading-relaxed text-cream/80">
-                Help with transport, home checks, grooming days, fundraising events and admin.
-                Our volunteers are the backbone of what we do — and every hour matters.
+                Every kitten leaves us healthy and protected. You receive full records and a written
+                health guarantee for total peace of mind.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-cream/80">
-                {['Transport assistance', 'Home visits', 'Events & fundraising', 'Social media support'].map((item) => (
+                {['Vet-checked & vaccinated', 'Dewormed & litter-trained', 'Microchipped', 'Written health guarantee'].map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <CheckIcon className="h-4 w-4 text-ember-200" /> {item}
                   </li>
                 ))}
               </ul>
-              <Link to="/contact" className="btn-accent mt-7 inline-flex">
-                Get involved <ArrowRightIcon className="h-5 w-5" />
+              <Link to="/cats" className="btn-accent mt-7 inline-flex">
+                View kittens <ArrowRightIcon className="h-5 w-5" />
               </Link>
             </motion.div>
 
@@ -349,20 +348,20 @@ export default function Home() {
               <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15">
                 <HomeIcon className="h-7 w-7 text-white" />
               </div>
-              <h3 className="text-2xl font-extrabold text-white">Foster a cat</h3>
+              <h3 className="text-2xl font-extrabold text-white">Pickup &amp; delivery</h3>
               <p className="mt-3 leading-relaxed text-white/85">
-                Open your home temporarily and give a rescued Maine Coon the time and care
-                they need to heal, grow and thrive before finding their forever family.
+                Collect your kitten in person or let us bring them safely to you. We arrange
+                careful, stress-free transport anywhere in the US.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-white/85">
-                {['Full vet care provided', 'Food & supplies included', 'Full training & support', 'No long-term commitment'].map((item) => (
+                {['Pickup in Evansville, IN', 'Safe nationwide delivery', 'Photo & video updates', 'Support before & after'].map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <CheckIcon className="h-4 w-4 text-white/70" /> {item}
                   </li>
                 ))}
               </ul>
               <Link to="/contact" className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-ember-700 transition hover:bg-cream">
-                Become a foster <ArrowRightIcon className="h-5 w-5" />
+                Ask about delivery <ArrowRightIcon className="h-5 w-5" />
               </Link>
             </motion.div>
           </div>
@@ -380,18 +379,18 @@ export default function Home() {
             transition={{ duration: 0.7 }}
           >
             <h2 className="mx-auto max-w-2xl text-3xl font-extrabold text-white sm:text-4xl">
-              Your kindness keeps gentle giants safe
+              Ready to welcome a Maine Coon kitten?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-cream/80">
-              100% of donations go directly to vet care, food and shelter. Will you help a
-              Maine Coon in need today?
+              Reserve your kitten today and we&apos;ll guide you through every step — from deposit
+              to delivery. Your new best friend is waiting.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link to="/donate" className="btn-accent inline-flex items-center gap-2 text-base shadow-glow">
-                <HeartIcon className="h-5 w-5" filled /> Donate Now
+              <Link to="/cats" className="btn-accent inline-flex items-center gap-2 text-base shadow-glow">
+                <HeartIcon className="h-5 w-5" filled /> View available kittens
               </Link>
-              <Link to="/help" className="btn-outline-white text-base">
-                Other ways to help
+              <Link to="/contact" className="btn-outline-white text-base">
+                Contact us
               </Link>
             </div>
           </motion.div>

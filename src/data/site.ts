@@ -6,7 +6,7 @@
  * verified details before this site is ever deployed for a live charity.
  */
 export const site = {
-  name: 'Royal Maine Coon Kiten',
+  name: 'Royal Maine Coon Kittens',
   tagline: 'Home-raised Maine Coon Kittens',
   shortPitch: 'Gentle giants deserve gentle homes.',
   foundedYear: 2010,
@@ -34,7 +34,7 @@ export const site = {
 
   // --- Placeholder social links ---
   social: {
-    facebook: 'https://facebook.com/',
+    facebook: 'https://www.facebook.com/share/1BbohnNhPm/?mibextid=wwXIfr',
     instagram: 'https://instagram.com/',
     tiktok: 'https://www.tiktok.com/@royalcoonkittens?_r=1&_t=ZT-97aIEINMEaT',
   },
@@ -61,7 +61,7 @@ export const site = {
     paypalUrl: 'https://www.paypal.com/donate', // replace with real hosted button URL
     amazonWishlist: 'https://www.amazon.com/',
     bank: {
-      accountName: 'Royal Maine Coon Kiten (placeholder)',
+      accountName: 'Royal Maine Coon Kittens (placeholder)',
       bankName: 'Example Bank',
       routingNumber: '000000000',
       accountNumber: '000000000',
@@ -73,8 +73,7 @@ export const site = {
 export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
-  { label: 'Cats for Adoption', to: '/cats' },
-  { label: 'Rehomed Cats', to: '/rehomed' },
-  { label: 'How to Help', to: '/help' },
+  { label: 'Available Kittens', to: '/cats' },
+  { label: 'Happy Families', to: '/rehomed' },
   { label: 'Contact', to: '/contact' },
 ] as const;

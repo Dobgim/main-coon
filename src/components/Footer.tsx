@@ -17,10 +17,8 @@ import { site } from '@/data/site';
 const quickLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
-  { label: 'Cats for Adoption', to: '/cats' },
-  { label: 'Rehomed Cats', to: '/rehomed' },
-  { label: 'How to Help', to: '/help' },
-  { label: 'Donate', to: '/donate' },
+  { label: 'Available Kittens', to: '/cats' },
+  { label: 'Happy Families', to: '/rehomed' },
   { label: 'Contact', to: '/contact' },
 ];
 
@@ -90,13 +88,13 @@ export default function Footer() {
           <NewsletterSignup />
           <div className="mt-6 flex flex-wrap gap-2">
             <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
-              <ShieldIcon className="h-4 w-4 text-ember-200" /> Registered Charity
+              <ShieldIcon className="h-4 w-4 text-ember-200" /> Health Guarantee
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
-              <StarIcon className="h-3.5 w-3.5 text-ember-200" /> 5-Star Rescue
+              <StarIcon className="h-3.5 w-3.5 text-ember-200" /> 5-Star Breeder
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
-              <LockIcon className="h-3.5 w-3.5 text-ember-200" /> Secure Donation
+              <LockIcon className="h-3.5 w-3.5 text-ember-200" /> Secure Checkout
             </span>
           </div>
         </div>
@@ -104,10 +102,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-cream/60 sm:flex-row">
-          <p>
-            © {new Date().getFullYear()} {site.name}. All rights reserved. Charity no.{' '}
-            {site.charityNumber}.
-          </p>
+          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link to="/privacy" className="hover:text-ember-200">
               Privacy Policy

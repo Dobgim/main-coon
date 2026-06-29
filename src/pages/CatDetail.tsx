@@ -201,7 +201,7 @@ export default function CatDetail() {
               href="#adopt"
               className="btn-ghost text-sm"
             >
-              Prefer to apply to adopt?
+              Have a question? Send an inquiry
             </a>
             <button type="button" onClick={share} className="btn-ghost text-sm">
               <ShareIcon className="h-5 w-5" /> Share
@@ -243,12 +243,12 @@ export default function CatDetail() {
       {/* Requirements + coordinator */}
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         <div className={`card p-6 ${hasCoordinator ? 'md:col-span-2' : 'md:col-span-3'}`}>
-          <h2 className="text-lg font-extrabold text-forest-800">Adoption requirements</h2>
+          <h2 className="text-lg font-extrabold text-forest-800">Reservation &amp; pickup</h2>
           <ul className="mt-4 space-y-2 text-sm text-ink/85">
-            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A friendly home visit before adoption</li>
-            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A reference check (vet or personal)</li>
-            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> An adoption fee of ${cat.adoptionFee} towards care costs</li>
-            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A commitment to {cat.name}&apos;s wellbeing for life</li>
+            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> A deposit reserves your kitten until pickup</li>
+            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> Full health records, vaccinations &amp; a health guarantee</li>
+            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> Litter-trained and ready to go home at 12+ weeks</li>
+            <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 text-forest" /> Pickup in Evansville, IN — or nationwide delivery</li>
           </ul>
         </div>
         {hasCoordinator && (
@@ -271,9 +271,9 @@ export default function CatDetail() {
 
       {/* Adoption form */}
       <div id="adopt" className="mt-14 scroll-mt-24">
-        <h2 className="text-2xl font-extrabold text-forest-800">Apply to adopt {cat.name}</h2>
+        <h2 className="text-2xl font-extrabold text-forest-800">Inquire about {cat.name}</h2>
         <p className="mt-2 max-w-2xl text-muted">
-          Fill in the short form below and our rehoming team will be in touch within 24 hours.
+          Fill in the short form below and we&apos;ll be in touch within 24 hours to arrange your reservation.
         </p>
         <div className="mt-6 max-w-3xl">
           <AdoptionForm catId={cat.id} catName={cat.name} />

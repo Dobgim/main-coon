@@ -63,8 +63,8 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-4 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
           >
-            Helping Maine Coons{' '}
-            <span className="text-forest">find their forever homes</span>
+            Healthy Maine Coon kittens{' '}
+            <span className="text-forest">raised with love</span>
           </motion.h1>
 
           <motion.p
@@ -74,8 +74,9 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-5 max-w-xl text-lg leading-relaxed text-muted"
           >
-            We rescue, rehabilitate and rehome gentle giants across the US. Every cat
-            deserves warmth, safety and a family to call their own — help us give them one.
+            We raise happy, healthy, well-socialised Maine Coon kittens — vet-checked,
+            vaccinated and ready to join your family. Reserve yours today, with nationwide
+            delivery available.
           </motion.p>
 
           <motion.div
@@ -86,14 +87,14 @@ export default function Hero() {
             className="mt-8 flex flex-wrap gap-3"
           >
             <Link to="/cats" className="btn-primary text-base">
-              View Cats for Adoption <ArrowRightIcon className="h-5 w-5" />
+              View Available Kittens <ArrowRightIcon className="h-5 w-5" />
             </Link>
             <motion.div
               animate={{ scale: [1, 1.04, 1] }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <Link to="/donate" className="btn-accent inline-flex items-center gap-2 text-base shadow-glow">
-                <HeartIcon className="h-5 w-5" filled /> Donate Now
+              <Link to="/contact" className="btn-accent inline-flex items-center gap-2 text-base shadow-glow">
+                <HeartIcon className="h-5 w-5" filled /> Reserve a Kitten
               </Link>
             </motion.div>
           </motion.div>
@@ -106,9 +107,9 @@ export default function Hero() {
             className="mt-10 grid max-w-md grid-cols-3 gap-4"
           >
             {[
-              { n: '500+', l: 'Cats rehomed' },
-              { n: '14', l: 'Years rescuing' },
-              { n: '100%', l: 'To cat care' },
+              { n: '500+', l: 'Kittens placed' },
+              { n: '14', l: 'Years breeding' },
+              { n: '100%', l: 'Health guaranteed' },
             ].map((s) => (
               <div key={s.l}>
                 <dt className="text-2xl font-extrabold text-forest">{s.n}</dt>
@@ -165,9 +166,9 @@ export default function Hero() {
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           >
             <p className="flex items-center gap-1.5 text-sm font-bold text-forest-800">
-              <PawIcon className="h-4 w-4 text-forest-600" /> Adopt, don&apos;t shop
+              <PawIcon className="h-4 w-4 text-forest-600" /> Home-raised with love
             </p>
-            <p className="text-xs text-muted">Gentle giants need you</p>
+            <p className="text-xs text-muted">Vet-checked &amp; vaccinated</p>
           </motion.div>
         </motion.div>
       </div>

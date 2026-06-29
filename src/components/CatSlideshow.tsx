@@ -9,8 +9,8 @@ const slides = [
     image:
       'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1600&q=75',
     eyebrow: 'Meet Oliver',
-    heading: 'Every cat deserves a place to call home',
-    sub: 'A 4-year-old gentle giant waiting patiently for his forever family.',
+    heading: 'Meet your new best friend',
+    sub: 'A playful, affectionate Maine Coon kitten ready to join your family.',
     location: 'Seattle, WA',
     catId: 'oliver',
   },
@@ -29,8 +29,8 @@ const slides = [
     image:
       'https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?auto=format&fit=crop&w=1600&q=75',
     eyebrow: 'Meet Finn',
-    heading: 'Gentle giants need gentle hearts',
-    sub: 'Rescued from difficult circumstances, Finn is now ready to shower you with love.',
+    heading: 'Gentle giants, raised with love',
+    sub: 'Home-raised and beautifully socialised, Finn is ready to come home with you.',
     location: 'Austin, TX',
     catId: 'finn',
   },
@@ -125,7 +125,7 @@ export default function CatSlideshow() {
                   View {slides[current].eyebrow.replace('Meet ', '')} <ArrowRightIcon className="h-5 w-5" />
                 </Link>
                 <Link to="/cats" className="btn-outline-white">
-                  All cats
+                  All kittens
                 </Link>
               </motion.div>
             </div>

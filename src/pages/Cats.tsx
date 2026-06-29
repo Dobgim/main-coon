@@ -47,8 +47,8 @@ export default function Cats() {
         description="Browse available Maine Coon kittens — vet-checked, vaccinated and home-raised. Reserve your gentle giant today, with nationwide delivery."
       />
       <PageHero
-        title="Cats Available for Adoption"
-        subtitle="Meet the Maine Coons currently looking for their forever homes across the US."
+        title="Available Maine Coon Kittens"
+        subtitle="Browse our available Maine Coon kittens — vet-checked, vaccinated and ready for their new homes. Nationwide delivery available."
         image={heroImg}
       />
 

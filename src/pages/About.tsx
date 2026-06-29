@@ -51,7 +51,7 @@ export default function About() {
       <Seo title="About Us" description="Meet the team behind our home-raised Maine Coon kittens and learn how we raise healthy, well-socialised gentle giants." />
       <PageHero
         title={`About ${site.name}`}
-        subtitle="A dedicated team of volunteers giving Maine Coon cats across the US a second chance at a happy life."
+        subtitle="A small, passionate cattery raising healthy, well-socialised Maine Coon kittens for families across the US."
         image={heroImg}
         breadcrumb="About Us"
       />
@@ -71,24 +71,25 @@ export default function About() {
             <SectionHeading
               align="left"
               eyebrow="Our story"
-              title="Founded in 2010 to rescue gentle giants"
+              title="Raising exceptional Maine Coon kittens since 2010"
               className="!mx-0"
             />
             <p className="mt-5 leading-relaxed text-ink/85">
-              {site.name} began when a small group of Maine Coon lovers realised how many of these
-              beautiful cats were ending up in shelters that weren&apos;t equipped for their special
-              grooming and companionship needs. We set out to change that.
+              {site.name} began with a simple love for this magnificent breed. Our kittens are
+              raised underfoot in our home — not in cages — so they grow up confident, affectionate
+              and beautifully socialised with people and other pets.
             </p>
             <p className="mt-4 leading-relaxed text-ink/85">
-              Since then we&apos;ve grown into a US-wide network of volunteers, foster carers and vet
-              partners. Together we&apos;ve rehomed{' '}
-              <strong className="text-forest-700">{site.rehomedCount} cats</strong> — and counting.
+              Every kitten is health-checked, vaccinated and comes with a health guarantee. Over the
+              years we&apos;ve placed{' '}
+              <strong className="text-forest-700">{site.rehomedCount} kittens</strong> with happy
+              families — and counting.
             </p>
             <div className="mt-6 rounded-2xl bg-forest-50 p-5">
-              <p className="font-bold text-forest-800">Our mission</p>
+              <p className="font-bold text-forest-800">Our promise</p>
               <p className="mt-1 text-sm text-ink/80">
-                To rescue, rehabilitate and rehome Maine Coon cats across the US — and to support
-                their families for life.
+                To raise healthy, happy, well-socialised Maine Coon kittens and match them with
+                loving families — with support for life.
               </p>
             </div>
           </div>
@@ -98,10 +99,10 @@ export default function About() {
       {/* Trust */}
       <section className="bg-sand/60 py-14">
         <div className="container-page grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <TrustBadge icon={<ShieldIcon />} title="Registered Charity" subtitle={`No. ${site.charityNumber}`} />
-          <TrustBadge icon={<HeartIcon />} title="500+ Rehomed" subtitle="Since 2010" />
-          <TrustBadge icon={<PawIcon />} title="US-Wide Network" subtitle="Volunteers & foster carers" />
-          <TrustBadge icon={<StarIcon />} title="5-Star Rescue" subtitle="Trusted by adopters" />
+          <TrustBadge icon={<ShieldIcon />} title="Health Guarantee" subtitle="Vet-checked & vaccinated" />
+          <TrustBadge icon={<HeartIcon />} title="500+ Kittens Placed" subtitle="Since 2010" />
+          <TrustBadge icon={<PawIcon />} title="Nationwide Delivery" subtitle="Safe door-to-door transport" />
+          <TrustBadge icon={<StarIcon />} title="5-Star Breeder" subtitle="Trusted by families" />
         </div>
       </section>
 
@@ -110,7 +111,7 @@ export default function About() {
         <SectionHeading
           eyebrow="What we stand for"
           title="Our values"
-          description="The principles that guide every rescue, every match and every forever home."
+          description="The principles that guide how we raise our kittens and care for every family."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {values.map((v, i) => (
@@ -179,20 +180,19 @@ export default function About() {
           </div>
           <div className="lg:order-1">
             <span className="badge inline-flex items-center gap-1.5 bg-white/15 text-white"><PawIcon className="h-3.5 w-3.5" /> The breed</span>
-            <h2 className="mt-3 text-3xl font-extrabold text-white">Why Maine Coons need us</h2>
+            <h2 className="mt-3 text-3xl font-extrabold text-white">Why families love Maine Coons</h2>
             <p className="mt-4 leading-relaxed text-cream/85">
               Maine Coons are one of the largest and most affectionate cat breeds — gentle,
-              sociable and devoted to their people. Their luxurious coats need regular grooming,
-              and their size and sensitivity mean they don&apos;t always thrive in busy general
-              shelters.
+              sociable and devoted to their people. Their playful, dog-like personalities and
+              luxurious coats make them a wonderful addition to any home.
             </p>
             <ul className="mt-5 space-y-2 text-cream/85">
               <li>• Friendly, dog-like personalities that crave companionship</li>
-              <li>• Specialist grooming and dietary needs</li>
-              <li>• Often surrendered through no fault of their own</li>
+              <li>• Great with children and other pets</li>
+              <li>• Raised in our home and beautifully socialised</li>
             </ul>
             <Link to="/cats" className="btn-accent mt-7">
-              See cats for adoption <ArrowRightIcon className="h-5 w-5" />
+              View available kittens <ArrowRightIcon className="h-5 w-5" />
             </Link>
           </div>
         </div>
