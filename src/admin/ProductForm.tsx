@@ -78,6 +78,20 @@ function readError(e: unknown): string {
   return 'Save failed. Please try again.';
 }
 
+/** Reject if a promise doesn't settle in time, so a stalled upload or DB
+ *  write surfaces a clear error instead of hanging on "Saving…" forever. */
+function withTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    p,
+    new Promise<T>((_, reject) =>
+      setTimeout(
+        () => reject(new Error(`${label} timed out after ${Math.round(ms / 1000)}s. Check your internet connection, or try a smaller file.`)),
+        ms,
+      ),
+    ),
+  ]);
+}
+
 export default function ProductForm() {
   const { rowId } = useParams();
   const navigate = useNavigate();
@@ -187,11 +201,11 @@ export default function ProductForm() {
       const slug = (form.slug || slugify(form.name)).trim();
       const uploaded: string[] = [];
       for (const file of files) {
-        uploaded.push(await uploadCatImage(file, slug));
+        uploaded.push(await withTimeout(uploadCatImage(file, slug), 120000, 'Photo upload'));
       }
       const uploadedVideos: string[] = [];
       for (const file of videoFiles) {
-        uploadedVideos.push(await uploadCatVideo(file, slug));
+        uploadedVideos.push(await withTimeout(uploadCatVideo(file, slug), 300000, 'Video upload'));
       }
       const payload: CatInput = {
         ...form,
@@ -200,8 +214,8 @@ export default function ProductForm() {
         images: [...form.images, ...uploaded],
         videos: [...form.videos, ...uploadedVideos],
       };
-      if (rowId) await updateCat(rowId, payload);
-      else await createCat(payload);
+      if (rowId) await withTimeout(updateCat(rowId, payload), 30000, 'Saving to database');
+      else await withTimeout(createCat(payload), 30000, 'Saving to database');
       navigate('/admin/products');
     } catch (e) {
       setSaving(false);
