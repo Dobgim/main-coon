@@ -210,6 +210,25 @@ export default function CatDetail() {
         </div>
       </div>
 
+      {/* Videos */}
+      {cat.videos && cat.videos.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-extrabold text-forest-800">Watch {cat.name}</h2>
+          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            {cat.videos.map((url) => (
+              <video
+                key={url}
+                src={url}
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full rounded-3xl bg-ink/5 shadow-soft ring-1 ring-black/5"
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Health + compatibility */}
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         <div className="card p-6">

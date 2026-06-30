@@ -29,6 +29,7 @@ export interface Cat {
   shortDescription: string;
   story: string;
   images: string[];
+  videos?: string[];
 }
 
 export interface RehomedStory {

@@ -51,6 +51,9 @@ alter table public.cats add column if not exists reserve_price  numeric not null
 alter table public.cats add column if not exists breeding_price numeric not null default 0;
 alter table public.cats add column if not exists warranty_price numeric not null default 0;
 
+-- Per-kitten videos (added later; safe to re-run).
+alter table public.cats add column if not exists videos text[] not null default '{}';
+
 -- ---------- FORM SUBMISSIONS --------------------------------------------------
 create table if not exists public.contact_messages (
   id          uuid primary key default gen_random_uuid(),
@@ -203,9 +206,13 @@ on conflict do nothing;
 -- =============================================================================
 -- STORAGE — public bucket for cat photos
 -- =============================================================================
-insert into storage.buckets (id, name, public)
-values ('cat-images', 'cat-images', true)
-on conflict (id) do update set public = true;
+-- The bucket holds both photos and videos. Raise the per-file size limit to
+-- 200MB so phone videos fit (NOTE: this cannot exceed your project's global
+-- limit under Storage -> Settings -> "Upload file size limit" — raise that too
+-- if your clips are larger). allowed_mime_types = null means all types allowed.
+insert into storage.buckets (id, name, public, file_size_limit)
+values ('cat-images', 'cat-images', true, 209715200)
+on conflict (id) do update set public = true, file_size_limit = 209715200;
 
 drop policy if exists "cat images public read"   on storage.objects;
 drop policy if exists "cat images admin write"    on storage.objects;

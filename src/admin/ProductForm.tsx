@@ -5,6 +5,7 @@ import {
   updateCat,
   fetchCatByRowId,
   uploadCatImage,
+  uploadCatVideo,
   slugify,
   type CatInput,
 } from '@/lib/db';
@@ -40,6 +41,7 @@ const empty: CatInput = {
   shortDescription: '',
   story: '',
   images: [],
+  videos: [],
   published: true,
 };
 
@@ -66,6 +68,7 @@ export default function ProductForm() {
   const [form, setForm] = useState<CatInput>(empty);
   const [personalityText, setPersonalityText] = useState('');
   const [files, setFiles] = useState<File[]>([]);
+  const [videoFiles, setVideoFiles] = useState<File[]>([]);
   const [slugTouched, setSlugTouched] = useState(false);
   const [loading, setLoading] = useState(editing);
   const [saving, setSaving] = useState(false);
@@ -108,6 +111,7 @@ export default function ProductForm() {
           shortDescription: cat.shortDescription,
           story: cat.story,
           images: cat.images,
+          videos: cat.videos ?? [],
           published: cat.published,
         });
         setPersonalityText(cat.personality.join(', '));
@@ -134,6 +138,17 @@ export default function ProductForm() {
 
   const removeFile = (idx: number) => setFiles((prev) => prev.filter((_, i) => i !== idx));
 
+  const addVideoFiles = (picked: File[]) => {
+    if (picked.length === 0) return;
+    setVideoFiles((prev) => [...prev, ...picked]);
+  };
+
+  const removeExistingVideo = (url: string) =>
+    setForm((f) => ({ ...f, videos: f.videos.filter((v) => v !== url) }));
+
+  const removeVideoFile = (idx: number) =>
+    setVideoFiles((prev) => prev.filter((_, i) => i !== idx));
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
@@ -156,11 +171,16 @@ export default function ProductForm() {
       for (const file of files) {
         uploaded.push(await uploadCatImage(file, slug));
       }
+      const uploadedVideos: string[] = [];
+      for (const file of videoFiles) {
+        uploadedVideos.push(await uploadCatVideo(file, slug));
+      }
       const payload: CatInput = {
         ...form,
         slug,
         personality: personalityText.split(',').map((s) => s.trim()).filter(Boolean),
         images: [...form.images, ...uploaded],
+        videos: [...form.videos, ...uploadedVideos],
       };
       if (rowId) await updateCat(rowId, payload);
       else await createCat(payload);
@@ -343,6 +363,77 @@ export default function ProductForm() {
                 const picked = e.target.files ? Array.from(e.target.files) : [];
                 e.target.value = ''; // allow re-selecting / adding more
                 addFiles(picked);
+              }}
+            />
+          </label>
+        </section>
+
+        {/* Videos */}
+        <section className="card space-y-4 p-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-extrabold text-forest-800">Videos</h2>
+            <span className="text-sm text-muted">
+              {form.videos.length + videoFiles.length} video{form.videos.length + videoFiles.length === 1 ? '' : 's'}
+            </span>
+          </div>
+          {(form.videos.length > 0 || videoFiles.length > 0) && (
+            <div className="flex flex-wrap gap-3">
+              {form.videos.map((url) => (
+                <div key={url} className="relative">
+                  <video
+                    src={url}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="h-32 w-44 rounded-xl bg-ink/5 object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeExistingVideo(url)}
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white"
+                    aria-label="Remove video"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              {videoFiles.map((file, i) => (
+                <div key={`${file.name}-${i}`} className="relative">
+                  <video
+                    src={URL.createObjectURL(file)}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="h-32 w-44 rounded-xl bg-ink/5 object-cover ring-2 ring-forest"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeVideoFile(i)}
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white"
+                    aria-label="Remove video"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-sand bg-cream/40 px-6 py-8 text-center transition hover:border-forest/40">
+            <span className="text-sm font-semibold text-forest-800">Tap to upload or record a video</span>
+            <span className="text-xs text-muted">
+              From your phone you can pick a clip or record a new one. MP4 or MOV. Keep clips short (under ~100MB) so they load fast.
+            </span>
+            <input
+              type="file"
+              accept="video/*"
+              multiple
+              className="hidden"
+              onChange={(e) => {
+                // Capture the files BEFORE clearing the input, otherwise the
+                // selection is wiped before React reads it.
+                const picked = e.target.files ? Array.from(e.target.files) : [];
+                e.target.value = ''; // allow re-selecting / adding more
+                addVideoFiles(picked);
               }}
             />
           </label>

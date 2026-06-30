@@ -33,6 +33,7 @@ export interface CatRow {
   short_description: string;
   story: string;
   images: string[];
+  videos: string[];
   published: boolean;
   created_at: string;
 }
@@ -68,6 +69,7 @@ export interface CatInput {
   shortDescription: string;
   story: string;
   images: string[];
+  videos: string[];
   published: boolean;
 }
 
@@ -110,6 +112,7 @@ const rowToAdminCat = (r: CatRow): AdminCat => ({
   shortDescription: r.short_description,
   story: r.story,
   images: r.images ?? [],
+  videos: r.videos ?? [],
   published: r.published,
   createdAt: r.created_at,
 });
@@ -143,6 +146,7 @@ const inputToRow = (c: CatInput) => ({
   short_description: c.shortDescription,
   story: c.story,
   images: c.images,
+  videos: c.videos,
   published: c.published,
 });
 
@@ -230,9 +234,9 @@ export async function setCatPublished(rowId: string, published: boolean): Promis
   if (error) throw error;
 }
 
-/** Upload one image file to storage and return its public URL. */
-export async function uploadCatImage(file: File, slug: string): Promise<string> {
-  const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+/** Upload one file (photo or video) to storage and return its public URL. */
+async function uploadCatFile(file: File, slug: string, fallbackExt: string): Promise<string> {
+  const ext = file.name.split('.').pop()?.toLowerCase() || fallbackExt;
   const path = `${slug || 'cat'}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const { error } = await supabase.storage
     .from(CAT_IMAGES_BUCKET)
@@ -241,6 +245,12 @@ export async function uploadCatImage(file: File, slug: string): Promise<string> 
   const { data } = supabase.storage.from(CAT_IMAGES_BUCKET).getPublicUrl(path);
   return data.publicUrl;
 }
+
+/** Upload one image file to storage and return its public URL. */
+export const uploadCatImage = (file: File, slug: string) => uploadCatFile(file, slug, 'jpg');
+
+/** Upload one video file to storage and return its public URL. */
+export const uploadCatVideo = (file: File, slug: string) => uploadCatFile(file, slug, 'mp4');
 
 /** One-time helper: import the bundled demo cats into an empty table. */
 export async function importSeedCats(): Promise<number> {
