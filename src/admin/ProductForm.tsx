@@ -60,6 +60,24 @@ const boolFields: Array<[keyof CatInput, string]> = [
   ['indoorOnly', 'Indoor only'],
 ];
 
+/**
+ * Build a readable message from whatever a failed save throws. Supabase returns
+ * a plain object ({ message, code, details, hint }) rather than an Error, so the
+ * old `e instanceof Error` check always fell through to a vague message and hid
+ * the real cause. This surfaces the actual reason on the page.
+ */
+function readError(e: unknown): string {
+  if (typeof e === 'string') return e;
+  if (e && typeof e === 'object') {
+    const o = e as { message?: unknown; details?: unknown; hint?: unknown; code?: unknown };
+    const parts = [o.message, o.details, o.hint]
+      .filter((p): p is string => typeof p === 'string' && p.trim().length > 0);
+    const text = parts.join(' — ');
+    if (text) return o.code ? `${text} (code ${String(o.code)})` : text;
+  }
+  return 'Save failed. Please try again.';
+}
+
 export default function ProductForm() {
   const { rowId } = useParams();
   const navigate = useNavigate();
@@ -187,7 +205,7 @@ export default function ProductForm() {
       navigate('/admin/products');
     } catch (e) {
       setSaving(false);
-      fail(e instanceof Error ? e.message : 'Save failed. Please try again.');
+      fail(readError(e));
     }
   };
 
