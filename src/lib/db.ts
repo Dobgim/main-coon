@@ -213,19 +213,6 @@ export async function fetchCatByRowId(rowId: string): Promise<AdminCat | null> {
   return data ? rowToAdminCat(data as CatRow) : null;
 }
 
-/**
- * True when a write was rejected only because the `videos` column hasn't been
- * added to the database yet (migration not run, or PostgREST schema cache is
- * stale). Lets us fall back to saving everything except the video URLs.
- */
-function isMissingVideosColumn(
-  error: { code?: string; message?: string } | null,
-): boolean {
-  if (!error) return false;
-  const msg = (error.message ?? '').toLowerCase();
-  return (error.code === '42703' || error.code === 'PGRST204') && msg.includes('video');
-}
-
 /** Copy of a cats row with the `videos` key removed (pre-migration fallback). */
 function withoutVideos(row: ReturnType<typeof inputToRow>): Record<string, unknown> {
   const rest: Record<string, unknown> = { ...row };
@@ -235,8 +222,13 @@ function withoutVideos(row: ReturnType<typeof inputToRow>): Record<string, unkno
 
 export async function createCat(input: CatInput): Promise<void> {
   const row = inputToRow(input);
-  let { error } = await supabase.from('cats').insert(row);
-  if (isMissingVideosColumn(error)) {
+  const hasVideos = input.videos.length > 0;
+  // Only reference the `videos` column when there's actually a video to save.
+  // This keeps photo-only posts working even if the column doesn't exist yet.
+  let { error } = await supabase.from('cats').insert(hasVideos ? row : withoutVideos(row));
+  if (error && hasVideos) {
+    // The videos column may not exist yet — save everything else so the post
+    // still succeeds (the videos can be added after running the migration).
     ({ error } = await supabase.from('cats').insert(withoutVideos(row)));
   }
   if (error) throw error;
@@ -244,8 +236,12 @@ export async function createCat(input: CatInput): Promise<void> {
 
 export async function updateCat(rowId: string, input: CatInput): Promise<void> {
   const row = inputToRow(input);
-  let { error } = await supabase.from('cats').update(row).eq('id', rowId);
-  if (isMissingVideosColumn(error)) {
+  const hasVideos = input.videos.length > 0;
+  let { error } = await supabase
+    .from('cats')
+    .update(hasVideos ? row : withoutVideos(row))
+    .eq('id', rowId);
+  if (error && hasVideos) {
     ({ error } = await supabase.from('cats').update(withoutVideos(row)).eq('id', rowId));
   }
   if (error) throw error;
