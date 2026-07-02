@@ -10,7 +10,7 @@ interface SeoProps {
   /** Set true on pages that should not be indexed (privacy, terms, admin). */
   noindex?: boolean;
   /** Optional schema.org structured data for this page. */
-  jsonLd?: Record<string, unknown> | null;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[] | null;
 }
 
 const DEFAULT_IMAGE = `${site.url}/logo.svg`;

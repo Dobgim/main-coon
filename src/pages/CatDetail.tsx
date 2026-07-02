@@ -17,6 +17,7 @@ import PurchasePanel from '@/components/PurchasePanel';
 import Seo from '@/components/Seo';
 import { useCat } from '@/hooks/useCats';
 import { site } from '@/data/site';
+import { catFaqs } from '@/data/catFaqs';
 
 export default function CatDetail() {
   const { id } = useParams();
@@ -53,7 +54,7 @@ export default function CatDetail() {
   const productJsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: `${cat.name} — Maine Coon Kitten`,
+    name: `${cat.name} — ${cat.color} Maine Coon Cat`,
     description: cat.shortDescription || cat.story,
     image: cat.images,
     category: 'Maine Coon Kitten',
@@ -70,6 +71,22 @@ export default function CatDetail() {
             : 'https://schema.org/InStock',
     },
   };
+
+  const faqs = catFaqs[cat.id] || [];
+  const faqJsonLd = faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': faqs.map(f => ({
+      '@type': 'Question',
+      'name': f.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': f.answer
+      }
+    }))
+  } : null;
+
+  const jsonLdData = faqJsonLd ? [productJsonLd, faqJsonLd] : productJsonLd;
 
   const facts: Array<[string, string]> = [
     ['Age', cat.ageLabel],
@@ -110,10 +127,10 @@ export default function CatDetail() {
   return (
     <div className="container-page py-10 md:py-14">
       <Seo
-        title={`${cat.name} — Maine Coon Kitten for Sale`}
+        title={`${cat.name} — ${cat.color} Maine Coon Kitten`}
         description={cat.shortDescription || `Meet ${cat.name}, a ${cat.color} Maine Coon kitten available now.`}
         image={cat.images[0]}
-        jsonLd={productJsonLd}
+        jsonLd={jsonLdData}
       />
       <nav className="mb-6 text-sm text-muted" aria-label="Breadcrumb">
         <Link to="/" className="link-quiet">Home</Link> /{' '}
@@ -287,6 +304,21 @@ export default function CatDetail() {
           </div>
         )}
       </div>
+
+      {/* Frequently Asked Questions */}
+      {faqs.length > 0 && (
+        <div className="mt-16 border-t border-forest-100 pt-12">
+          <h2 className="text-2xl font-extrabold text-forest-800">Frequently Asked Questions about {cat.name}</h2>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="card p-6">
+                <h3 className="text-base font-extrabold text-forest-700">{faq.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink/80">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Adoption form */}
       <div id="adopt" className="mt-14 scroll-mt-24">

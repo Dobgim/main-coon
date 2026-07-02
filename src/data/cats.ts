@@ -39,9 +39,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.jacky,
     personality: ['Affectionate', 'Playful', 'Talkative'],
     shortDescription:
-      'A big-hearted lad who follows you room to room and chirrups for attention.',
+      'A gentle 2-year-old male Brown Classic Tabby Maine Coon cat in Denver, Colorado. Oliver is fully vet-checked, microchipped, and loves warm laps.',
     story:
-      'Oliver came into our care when his previous owner could no longer manage his grooming needs. After a few weeks of patient brushing and gentle handling he has blossomed into a confident, loving companion. He adores window-watching, feather toys, and a warm lap at the end of the day.',
+      'Are you looking to add a gentle giant to your Colorado home? Meet Oliver, a stunning 2-year-old male Brown Classic Tabby Maine Coon cat available for adoption in Denver. Oliver is the definition of a loyal companion — he loves nothing more than following you from room to room, offering soft chirrups to check on your day, and curling up in your lap for an evening cuddle. Oliver is fully socialized and raised in a cage-free home environment. He is excellent with children and other cats, making him a perfect fit for active households. He comes vet-checked, fully vaccinated, neutered, microchipped and backed by our 100% health guarantee. If you want a confident, affectionate family member who will bond deeply with you, Oliver is ready to meet you.',
     images: [img('1514888286974-6c03e2ca1dba'), img('1533738363-b7f9aef128ce')],
   },
   {
@@ -65,9 +65,10 @@ export const cats: Cat[] = [
     adoptionFee: 110,
     coordinator: coordinators.marek,
     personality: ['Curious', 'Bouncy', 'Gentle'],
-    shortDescription: 'A playful young girl looking for a home with plenty of enrichment.',
+    shortDescription:
+      'A playful and curious 8-month-old female Silver Tabby Maine Coon kitten in Seattle, WA. Fully vaccinated, socialized, and great with children.',
     story:
-      'Luna is a bright, bouncy kitten who never tires of chasing toys and exploring boxes. She would thrive in an active household that can keep her busy, and she loves the company of other friendly cats.',
+      'Introduce a burst of playful energy into your home with Luna! This gorgeous 8-month-old female Silver Tabby Maine Coon kitten is available for adoption in Seattle, Washington. Luna is extremely curious and loves exploring her surroundings, chasing feather wands, and popping in and out of boxes. As a young kitten, Luna is highly adaptable and has been raised underfoot to guarantee she is exceptionally socialized. She is great with children, friendly cats, and cat-friendly dogs. Luna is indoor-only, vet-checked, fully vaccinated, spayed, and microchipped. She comes with our standard health guarantee and transition pack. If you want a lively, sweet, and beautiful kitten, Luna is the perfect fit.',
     images: [img('1518791841217-8f162f1e1131'), img('1561948955-570b270e7c36')],
   },
   {
@@ -91,9 +92,10 @@ export const cats: Cat[] = [
     adoptionFee: 90,
     coordinator: coordinators.jacky,
     personality: ['Calm', 'Loyal', 'Independent'],
-    shortDescription: 'A laid-back gentleman who would love to be your only cat.',
+    shortDescription:
+      'A dignified 5-year-old Red Mackerel Tabby Maine Coon cat in Boulder, CO. Calm, loyal, and seeking a quiet, single-pet household.',
     story:
-      'Max is a steady, easy-going boy who prefers a quieter home where he can be the centre of attention. He enjoys a good brush and a sunny windowsill, and bonds deeply with his people.',
+      'Meet Max, a majestic 5-year-old male Red Mackerel Tabby Maine Coon cat residing in Boulder, Colorado. Max is a quiet, independent gentleman with a striking ginger coat and classic ear tufts. He is extremely loyal to his primary caregiver and enjoys lounging on a sunny windowsill or receiving a relaxing grooming session. Because Max prefers a peaceful environment, he is looking for a home where he can be the only pet — no other cats or dogs. He is excellent with older, respectful children. Max is fully vet-checked, neutered, microchipped, and vaccinated. If you are looking for a calm, low-maintenance, and devoted companion, Max will fill your home with warmth.',
     images: [img('1574158622682-e40e69881006'), img('1543852786-1cf6624b9987')],
   },
   {
@@ -117,9 +119,10 @@ export const cats: Cat[] = [
     adoptionFee: 95,
     coordinator: coordinators.sarah,
     personality: ['Sweet', 'Shy at first', 'Devoted'],
-    shortDescription: 'A sensitive soul who blossoms with patience and gentle routine.',
+    shortDescription:
+      'A beautiful, quiet 3-year-old female Tortoiseshell Maine Coon cat in San Diego, CA. Best suited for a peaceful, adult-only indoor home.',
     story:
-      'Willow is a little shy when she first meets you, but give her time and she becomes the most devoted shadow. She would suit a calm adult home where she can settle at her own pace.',
+      'Are you looking for a unique, gorgeous companion? Meet Willow, a beautiful 3-year-old female Tortoiseshell Maine Coon cat available for adoption in San Diego, California. Willow features a rich, colorful tortoiseshell coat and has a sweet, gentle soul. While she is shy at first, she blossoms into a devoted shadow once she trusts you. Willow thrives in calm, quiet environments. For this reason, she is best suited for an adult-only home without dogs — she gets along great with other friendly cats. She is an indoor-only cat, vet-checked, fully vaccinated, spayed, and microchipped. If you have the patience to let her settle in at her own pace, Willow will reward you with lifelong devotion.',
     images: [img('1592194996308-7b43878e84a6'), img('1606214174585-fe31582dc6ee')],
   },
   {
@@ -143,9 +146,10 @@ export const cats: Cat[] = [
     adoptionFee: 100,
     coordinator: coordinators.marek,
     personality: ['Friendly', 'Outgoing', 'Adventurous'],
-    shortDescription: 'A sociable young chap who gets on with absolutely everyone.',
+    shortDescription:
+      'An adventurous, highly social 1-year-old male Black Smoke Maine Coon cat in Boston, MA. Great with kids, other cats, and friendly dogs.',
     story:
-      'Finn is the definition of a friendly Maine Coon. He greets visitors at the door, loves a fuss, and would happily share his home with children, cats and cat-savvy dogs.',
+      'Say hello to Finn, an incredibly handsome 1-year-old male Black Smoke Maine Coon cat available for adoption in Boston, Massachusetts. Finn has a rare, stunning "black smoke" coat that looks solid black at rest but reveals a bright silver undercoat when he moves — he is the ultimate social butterfly. Finn greets visitors at the door, loves active play, and gets along with absolutely everyone — including children, other cats, and cat-friendly dogs. He is vet-checked, vaccinated, neutered, microchipped, and comes with a complete health guarantee. If you want a playful, large, and striking Maine Coon to join your family, Finn is ready for his new home.',
     images: [img('1573865526739-10659fec78a5'), img('1514888286974-6c03e2ca1dba')],
   },
   {
@@ -169,9 +173,10 @@ export const cats: Cat[] = [
     adoptionFee: 60,
     coordinator: coordinators.jacky,
     personality: ['Cuddly', 'Mellow', 'Lap-loving'],
-    shortDescription: 'A gentle senior lady seeking a quiet retirement lap to call her own.',
+    shortDescription:
+      'A mellow, lap-loving 9-year-old female Blue Tabby Maine Coon cat in Fort Collins, CO. Enjoys quiet environments, soft beds, and gentle strokes.',
     story:
-      'Maisie is a wonderful older girl who asks for very little: a soft bed, regular meals, and a warm lap to nap on. Senior cats like Maisie make the most rewarding companions.',
+      'Looking for a calm companion who asks for nothing but love? Meet Maisie, a mellow 9-year-old female Blue Tabby (grey) Maine Coon cat available for adoption in Fort Collins, Colorado. Senior cats like Maisie make the most rewarding companions — she is quiet, sweet, and perfectly content spending her day napping in a warm lap. Maisie is strictly indoor-only, vet-checked, fully vaccinated, spayed, and microchipped. To ensure her comfort, she would prefer a peaceful home as the only pet. If you are looking to open your heart to a gorgeous grey senior Maine Coon who is already house-trained and loves cuddles, Maisie is waiting for you.',
     images: [img('1596854407944-bf87f6fdd49e'), img('1592194996308-7b43878e84a6')],
   },
   {
@@ -195,9 +200,10 @@ export const cats: Cat[] = [
     adoptionFee: 90,
     coordinator: coordinators.sarah,
     personality: ['Goofy', 'Food-motivated', 'Soft'],
-    shortDescription: 'A lovable goofball who will do anything for a treat.',
+    shortDescription:
+      'A goofy, lovable 4-year-old male Brown Tabby & White Maine Coon cat in Austin, TX. Food-motivated, loves family play, and gets along with other cats.',
     story:
-      'Rocco is a big, soft character with a playful streak and a serious love of mealtimes. He enjoys puzzle feeders, gentle play and a thorough chin scratch.',
+      'Add some laughter to your home with Rocco! This goofy and lovable 4-year-old male Brown Tabby & White Maine Coon cat is available for adoption in Austin, Texas. Rocco is a big, soft character who is highly food-motivated and will happily perform tricks or follow you around if there is a treat involved. Rocco is extremely socialized and loves the company of children and other friendly cats — no dogs, please. He enjoys puzzle feeders, active playtime, and a thorough chin scratch. Rocco is fully vet-checked, vaccinated, neutered, microchipped, and ready for his forever home. If you want a playful cattery giant with a heart of gold, Rocco is your boy.',
     images: [img('1543852786-1cf6624b9987'), img('1573865526739-10659fec78a5')],
   },
   {
@@ -221,9 +227,10 @@ export const cats: Cat[] = [
     adoptionFee: 110,
     coordinator: coordinators.marek,
     personality: ['Playful', 'Affectionate', 'Brave'],
-    shortDescription: 'A confident little kitten — now happily settled in her forever home!',
+    shortDescription:
+      'A brave and affectionate female Cream Tabby Maine Coon kitten adopted in Tacoma, WA. See her success story and view our available list.',
     story:
-      'Poppy was one of our bottle-fed kittens and has grown into a fearless, affectionate girl. She has recently been adopted into a loving family — a true rescue success story.',
+      'Success Story: Poppy has found her forever home! This confident, brave, and affectionate female Cream Tabby Maine Coon kitten was hand-raised in our cattery in Tacoma, Washington. As a bottle-fed rescue kitten, Poppy developed a deep bond with humans and was quickly adopted by a loving family. While Poppy is no longer available, she represents our cattery\'s commitment to breeding and raising healthy, well-socialized Maine Coon kittens. If you are looking for a cream tabby or other premium Maine Coon kittens in Washington, we invite you to view our active listings page or join our waitlist today.',
     images: [img('1561948955-570b270e7c36'), img('1518791841217-8f162f1e1131')],
   },
   {
@@ -247,9 +254,10 @@ export const cats: Cat[] = [
     adoptionFee: 70,
     coordinator: coordinators.jacky,
     personality: ['Dignified', 'Quiet', 'Affectionate'],
-    shortDescription: 'A dignified older gentleman who enjoys calm company and slow strokes.',
+    shortDescription:
+      'A dignified, quiet 7-year-old male Brown Classic Tabby Maine Coon cat in Dallas, TX. Enjoys a calm, peaceful home environment and gentle strokes.',
     story:
-      'Bramble is a handsome senior with beautiful markings and a gentle nature. He would love a peaceful home where he can enjoy his golden years in comfort.',
+      'Meet Bramble, a dignified and handsome 7-year-old male Brown Classic Tabby Maine Coon cat looking for a quiet retirement home in Dallas, Texas. Bramble has striking classic tabby swirls and a calm, sweet temperament. He is a gentle soul who asks for nothing more than slow strokes, soft beds, and peaceful company. Bramble would thrive in a quiet household without dogs or young children, though he gets along well with other calm cats. He is vet-checked, fully vaccinated, neutered, and microchipped. If you want a mature companion who will add a peaceful presence to your home, Bramble is ready to bond with you.',
     images: [img('1606214174585-fe31582dc6ee'), img('1574158622682-e40e69881006')],
   },
   {
@@ -273,9 +281,10 @@ export const cats: Cat[] = [
     adoptionFee: 100,
     coordinator: coordinators.sarah,
     personality: ['Elegant', 'Affectionate', 'Chatty'],
-    shortDescription: 'An elegant young lady with a chatty, loving personality.',
+    shortDescription:
+      'An elegant, talkative 2-year-old female Silver Shaded Maine Coon cat in New York, NY. Fully vaccinated, microchipped, and loves interactive play.',
     story:
-      'Nala loves a conversation and will happily tell you all about her day. She enjoys interactive play and a cosy blanket, and would suit a home that enjoys her companionship.',
+      'Add an air of elegance to your home with Nala! This stunning 2-year-old female Silver Shaded Maine Coon cat is available for adoption in New York City. Nala has a breathtaking, shimmering silver shaded coat and a chatty, outgoing personality — she loves to hold full "conversations" with her owners and tell you all about her day. Nala is highly interactive, loving playtime with feather toys and settling down on a cozy blanket near you. She gets along great with children and other friendly cats — no dogs, please. Nala is strictly indoor-only, vet-checked, microchipped, and fully vaccinated. If you want a beautiful, conversational companion in New York, Nala is ready to move in.',
     images: [img('1495360010541-f48722b34f7d'), img('1596854407944-bf87f6fdd49e')],
   },
 ];
