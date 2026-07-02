@@ -64,6 +64,32 @@ export const site = {
   },
 } as const;
 
+export const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'PetStore',
+  name: site.name,
+  description: site.seoDescription,
+  url: site.url,
+  telephone: site.phone,
+  email: site.email,
+  image: 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
+  priceRange: '$$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '219 S Grand Ave',
+    addressLocality: 'Evansville',
+    addressRegion: 'IN',
+    postalCode: '47713',
+    addressCountry: 'US',
+  },
+  sameAs: [
+    site.social.facebook,
+    site.social.instagram,
+    site.social.tiktok,
+  ].filter(Boolean),
+};
+
+
 export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },

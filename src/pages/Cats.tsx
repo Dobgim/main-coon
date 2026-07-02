@@ -43,8 +43,8 @@ export default function Cats() {
   return (
     <>
       <Seo
-        title="Maine Coon Kittens for Sale"
-        description="Browse available Maine Coon kittens — vet-checked, vaccinated and home-raised. Reserve your gentle giant today, with nationwide delivery."
+        title="Available Maine Coon Kittens for Sale in Indiana"
+        description="Browse available Maine Coon kittens — vet-checked, vaccinated and home-raised in Indiana. Reserve your gentle giant today, with nationwide delivery."
       />
       <PageHero
         title="Available Maine Coon Kittens"

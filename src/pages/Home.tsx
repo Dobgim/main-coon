@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Seo from '@/components/Seo';
 import Hero from '@/components/Hero';
+import { localBusinessSchema } from '@/data/site';
 import CatSlideshow from '@/components/CatSlideshow';
 import SectionHeading from '@/components/SectionHeading';
 import CatGrid from '@/components/CatGrid';
@@ -86,7 +87,11 @@ export default function Home() {
 
   return (
     <>
-      <Seo />
+      <Seo
+        title="Maine Coon Kittens for Sale in Evansville, Indiana"
+        description="Healthy, home-raised Maine Coon kittens for sale in Evansville, Indiana. Vet-checked, vaccinated gentle giants — reserve your Maine Coon kitten today, with nationwide delivery available."
+        jsonLd={localBusinessSchema}
+      />
       <Hero />
 
       {/* Tagline band */}

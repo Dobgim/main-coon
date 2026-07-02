@@ -17,7 +17,10 @@ const heroImg =
 export default function Contact() {
   return (
     <>
-      <Seo title="Contact" description="Questions about reserving a Maine Coon kitten or delivery? Contact us — we reply within 24 hours." />
+      <Seo
+        title="Contact Us — Royal Maine Coon Kittens Indiana"
+        description="Get in touch with Royal Maine Coon Kittens in Evansville, Indiana. Have questions about reserving a kitten, prices, or shipping options? Contact us today."
+      />
       <PageHero
         title="Contact Us"
         subtitle="Questions about adoption, fostering or volunteering? We'd love to hear from you."

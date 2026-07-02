@@ -48,7 +48,10 @@ const values = [
 export default function About() {
   return (
     <>
-      <Seo title="About Us" description="Meet the team behind our home-raised Maine Coon kittens and learn how we raise healthy, well-socialised gentle giants." />
+      <Seo
+        title="About Us — Maine Coon Breeder in Indiana"
+        description="Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee."
+      />
       <PageHero
         title={`About ${site.name}`}
         subtitle="A small, passionate cattery raising healthy, well-socialised Maine Coon kittens for families across the US."
