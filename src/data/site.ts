@@ -25,7 +25,7 @@ export const site = {
   phone: '(317) 225-7139',
   // WhatsApp number in international format, digits only (e.g. 18125551234).
   // Leave blank to fall back to the contact page.
-  whatsapp: '',
+  whatsapp: '13172257139',
   address: '219 S Grand Ave, Evansville, Indiana 47713',
   responseTime: "We aim to reply within 24 hours.",
 
