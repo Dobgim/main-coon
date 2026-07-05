@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { RehomedStory } from '@/types';
+import { getOptimizedImageUrl } from '@/lib/image-utils';
 
 /** Success-story card with a before → after image toggle and testimonial. */
 export default function RehomedCard({ story }: { story: RehomedStory }) {
@@ -14,7 +15,7 @@ export default function RehomedCard({ story }: { story: RehomedStory }) {
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
-          src={showAfter ? story.afterImage : story.beforeImage}
+          src={getOptimizedImageUrl(showAfter ? story.afterImage : story.beforeImage, 500, 70)}
           alt={`${story.catName} ${showAfter ? 'in their new home' : 'when first rescued'}`}
           loading="lazy"
           className="h-full w-full object-cover transition-opacity duration-300"

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { Cat } from '@/types';
+import { getOptimizedImageUrl } from '@/lib/image-utils';
 import {
   HeartIcon,
   MaleIcon,
@@ -35,7 +36,7 @@ export default function CatCard({ cat }: { cat: Cat }) {
       <div className="relative aspect-[4/3] overflow-hidden">
         <Link to={`/cats/${cat.id}`} aria-label={`View ${cat.name}`}>
           <img
-            src={cat.images[0]}
+            src={getOptimizedImageUrl(cat.images[0], 500, 70)}
             alt={`${cat.name}, a ${cat.color} Maine Coon`}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"

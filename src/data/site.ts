@@ -22,7 +22,7 @@ export const site = {
 
   // --- Placeholder contact details ---
   email: 'royalmainecoonkitten159@gmail.com',
-  phone: '(205) 678-1282',
+  phone: '(317) 225-7139',
   // WhatsApp number in international format, digits only (e.g. 18125551234).
   // Leave blank to fall back to the contact page.
   whatsapp: '',

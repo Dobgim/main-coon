@@ -18,6 +18,7 @@ import Seo from '@/components/Seo';
 import { useCat } from '@/hooks/useCats';
 import { site } from '@/data/site';
 import { catFaqs } from '@/data/catFaqs';
+import { getOptimizedImageUrl } from '@/lib/image-utils';
 
 export default function CatDetail() {
   const { id } = useParams();
@@ -86,7 +87,34 @@ export default function CatDetail() {
     }))
   } : null;
 
-  const jsonLdData = faqJsonLd ? [productJsonLd, faqJsonLd] : productJsonLd;
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': site.url
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Available Kittens',
+        'item': `${site.url}/cats`
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': cat.name,
+        'item': `${site.url}/cats/${cat.id}`
+      }
+    ]
+  };
+
+  const jsonLdData = faqJsonLd
+    ? [productJsonLd, breadcrumbJsonLd, faqJsonLd]
+    : [productJsonLd, breadcrumbJsonLd];
 
   const facts: Array<[string, string]> = [
     ['Age', cat.ageLabel],
@@ -149,7 +177,7 @@ export default function CatDetail() {
             className="overflow-hidden rounded-3xl shadow-soft ring-1 ring-black/5"
           >
             <img
-              src={cat.images[active]}
+              src={getOptimizedImageUrl(cat.images[active], 800, 80)}
               alt={`${cat.name}, a ${cat.color} Maine Coon`}
               className="aspect-[4/3] w-full object-cover"
             />
@@ -166,7 +194,7 @@ export default function CatDetail() {
                   }`}
                   aria-label={`View photo ${i + 1}`}
                 >
-                  <img src={src} alt="" className="h-20 w-24 object-cover" />
+                  <img src={getOptimizedImageUrl(src, 150, 60)} alt="" className="h-20 w-24 object-cover" />
                 </button>
               ))}
             </div>
