@@ -26,7 +26,8 @@ export const site = {
   // WhatsApp number in international format, digits only (e.g. 18125551234).
   // Leave blank to fall back to the contact page.
   whatsapp: '13172257139',
-  address: '219 S Grand Ave, Evansville, Indiana 47713',
+  // Left blank on purpose — no physical address is shown on the site.
+  address: '',
   responseTime: "We aim to reply within 24 hours.",
 
   // --- Placeholder registration / trust info ---
@@ -74,14 +75,6 @@ export const localBusinessSchema = {
   email: site.email,
   image: 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
   priceRange: '$$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '219 S Grand Ave',
-    addressLocality: 'Evansville',
-    addressRegion: 'IN',
-    postalCode: '47713',
-    addressCountry: 'US',
-  },
   sameAs: [
     site.social.facebook,
     site.social.instagram,

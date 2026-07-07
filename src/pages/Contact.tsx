@@ -61,13 +61,15 @@ export default function Contact() {
                     </a>
                   </div>
                 </li>
-                <li className="flex items-start gap-3">
-                  <PinIcon className="mt-0.5 h-5 w-5 text-forest-600" />
-                  <div>
-                    <p className="font-semibold text-forest-800">Location</p>
-                    <p className="text-muted">{site.address}</p>
-                  </div>
-                </li>
+                {site.address && (
+                  <li className="flex items-start gap-3">
+                    <PinIcon className="mt-0.5 h-5 w-5 text-forest-600" />
+                    <div>
+                      <p className="font-semibold text-forest-800">Location</p>
+                      <p className="text-muted">{site.address}</p>
+                    </div>
+                  </li>
+                )}
               </ul>
 
               <div className="mt-6">
