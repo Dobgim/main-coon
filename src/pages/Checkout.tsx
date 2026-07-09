@@ -8,6 +8,7 @@ import { getPaymentMethods, paymentInstructions, paymentMethodsText } from '@/li
 import PaymentBadges from '@/components/PaymentBadges';
 import { CartIcon, CheckIcon, WhatsAppIcon, ArrowRightIcon } from '@/components/Icons';
 import { site } from '@/data/site';
+import Seo from '@/components/Seo';
 
 const makeRef = () => `RMK-${Date.now().toString().slice(-6)}`;
 
@@ -106,6 +107,7 @@ export default function Checkout() {
       : '/contact';
     return (
       <div className="container-page max-w-2xl py-12 md:py-16">
+        <Seo title="Order Confirmation" noindex />
         <div className="flex flex-col items-center text-center">
           <span className="flex h-16 w-16 items-center justify-center rounded-full bg-forest-100 text-forest-700">
             <CheckIcon className="h-8 w-8" />
@@ -185,6 +187,7 @@ export default function Checkout() {
   if (count === 0) {
     return (
       <div className="container-page flex min-h-[60vh] flex-col items-center justify-center gap-4 py-16 text-center">
+        <Seo title="Checkout" noindex />
         <CartIcon className="h-14 w-14 text-forest-300" />
         <h1 className="text-3xl font-extrabold text-forest-800">Your cart is empty</h1>
         <Link to="/cats" className="btn-primary">Browse kittens</Link>
@@ -196,6 +199,7 @@ export default function Checkout() {
 
   return (
     <div className="container-page py-12 md:py-16">
+      <Seo title="Checkout" noindex />
       <h1 className="text-3xl font-extrabold text-forest-800">Checkout</h1>
       <p className="mt-1 text-muted">Reserve your kitten — we&apos;ll confirm and arrange secure payment.</p>
 

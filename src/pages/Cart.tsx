@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useCart, formatPrice } from '@/lib/cart';
 import PaymentBadges from '@/components/PaymentBadges';
 import { CartIcon, TrashIcon, ArrowRightIcon } from '@/components/Icons';
+import Seo from '@/components/Seo';
 
 export default function Cart() {
   const { items, remove, total, count } = useCart();
@@ -9,6 +10,7 @@ export default function Cart() {
   if (count === 0) {
     return (
       <div className="container-page flex min-h-[60vh] flex-col items-center justify-center gap-4 py-16 text-center">
+        <Seo title="Your Cart" noindex />
         <CartIcon className="h-14 w-14 text-forest-300" />
         <h1 className="text-3xl font-extrabold text-forest-800">Your cart is empty</h1>
         <p className="max-w-md text-muted">
@@ -23,6 +25,7 @@ export default function Cart() {
 
   return (
     <div className="container-page py-12 md:py-16">
+      <Seo title="Your Cart" noindex />
       <h1 className="text-3xl font-extrabold text-forest-800">Your Cart</h1>
       <p className="mt-1 text-muted">{count} {count === 1 ? 'kitten' : 'kittens'} reserved for you</p>
 

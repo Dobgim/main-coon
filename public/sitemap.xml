@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://royalmainecoonkiten.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/about</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://royalmainecoonkiten.com/cats</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://royalmainecoonkiten.com/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://royalmainecoonkiten.com/rehomed</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://royalmainecoonkiten.com/help</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://royalmainecoonkiten.com/donate</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://royalmainecoonkiten.com/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/contact</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/help</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/donate</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/albie</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/nimbus</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/prince</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/pale</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/phoenix</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/zhozef</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/frosty</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/maple</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/maxi</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/rami</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/bowie</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/ash</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/milo</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/hunter</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/avalanche</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/elvis</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/elvin</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/stelsea</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/bruno</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/casper</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/chewie</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/smokey</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/carl</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/oliver</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/jammy</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/frost</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/winston</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/john</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/zephyr</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/jasper</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/hazel</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/hhhj</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/gandalf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/marmalade</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/finnick</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/sylvester</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/rusty</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/sterling</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/clover</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/obsidian</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/barnaby</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/luni</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/misty</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/nova</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/luna</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/biscuit</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/loki</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://royalmainecoonkiten.com/cats/tabby</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
