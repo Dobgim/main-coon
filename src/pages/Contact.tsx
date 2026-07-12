@@ -15,11 +15,46 @@ const heroImg =
   'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1400&q=70';
 
 export default function Contact() {
+  const contactPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: `Contact Us | ${site.name}`,
+    description: 'Get in touch with Royal Maine Coon Kittens in Evansville, Indiana. Have questions about reserving a kitten, prices, or shipping options? Contact us today.',
+    url: `${site.url}/contact`,
+    mainEntity: {
+      '@type': 'PetStore',
+      name: site.name,
+      url: site.url,
+      telephone: site.phone,
+      email: site.email,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: site.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Contact',
+        item: `${site.url}/contact`,
+      },
+    ],
+  };
+
   return (
     <>
       <Seo
         title="Contact Us — Royal Maine Coon Kittens Indiana"
         description="Get in touch with Royal Maine Coon Kittens in Evansville, Indiana. Have questions about reserving a kitten, prices, or shipping options? Contact us today."
+        jsonLd={[contactPageSchema, breadcrumbJsonLd]}
       />
       <PageHero
         title="Contact Us"

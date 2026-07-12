@@ -1,4 +1,5 @@
 import Seo from '@/components/Seo';
+import { site } from '@/data/site';
 import PageHero from '@/components/PageHero';
 import DonationForm from '@/components/DonationForm';
 import SectionHeading from '@/components/SectionHeading';
@@ -7,9 +8,28 @@ const heroImg =
   'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=1400&q=70';
 
 export default function Donate() {
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: site.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Donate',
+        item: `${site.url}/donate`,
+      },
+    ],
+  };
+
   return (
     <>
-      <Seo title="Donate" />
+      <Seo title="Donate" jsonLd={breadcrumbJsonLd} />
       <PageHero
         title="Donate to Help Maine Coons"
         subtitle="Your donations support vet care, nutritious food and safe shelter for every Maine Coon in our care."

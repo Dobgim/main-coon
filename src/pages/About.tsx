@@ -46,11 +46,45 @@ const values = [
 ];
 
 export default function About() {
+  const aboutPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: `About Us | ${site.name}`,
+    description: 'Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee.',
+    url: `${site.url}/about`,
+    mainEntity: {
+      '@type': 'PetStore',
+      name: site.name,
+      url: site.url,
+      image: 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: site.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About Us',
+        item: `${site.url}/about`,
+      },
+    ],
+  };
+
   return (
     <>
       <Seo
         title="About Us — Maine Coon Breeder in Indiana"
         description="Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee."
+        jsonLd={[aboutPageSchema, breadcrumbJsonLd]}
       />
       <PageHero
         title={`About ${site.name}`}

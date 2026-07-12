@@ -163,6 +163,53 @@ async function run() {
   const siteKeywords = 'Maine Coon kittens, Maine Coon kittens for sale, Maine Coon kittens Indiana, Maine Coon kittens Evansville, Maine Coon breeder, buy Maine Coon kitten, reserve Maine Coon kitten';
   const defaultImage = `${siteUrl}/logo.svg`;
 
+  const reviews = [
+    {
+      adopter: 'Sarah & James',
+      quote: 'Oscar settled in within days and now rules the house with the gentlest paw. We cannot imagine life without him — thank you for trusting us with him.',
+      rating: 5
+    },
+    {
+      adopter: 'The Patel family',
+      quote: 'We adopted Bella at nine years old and she has brought so much calm and joy to our home. Adopting a senior was the best decision we ever made.',
+      rating: 5
+    },
+    {
+      adopter: 'Hannah',
+      quote: 'Teddy and my older cat became inseparable almost immediately. The matching advice from the team was spot on. He is the most affectionate boy.',
+      rating: 5
+    },
+    {
+      adopter: 'David & Lin',
+      quote: 'Misty needed time to trust us, and the foster team prepared us perfectly. A year on she sleeps on our bed every night. Truly a transformation.',
+      rating: 5
+    },
+    {
+      adopter: 'The Okoro family',
+      quote: 'Leo is endlessly patient with our two children and follows them around like a dog. He is the heart of our family now.',
+      rating: 5
+    },
+    {
+      adopter: 'Megan',
+      quote: 'Cleo was overlooked for months because she was shy. Now she greets every guest and naps in the sunniest spot in the house. So grateful.',
+      rating: 5
+    }
+  ];
+
+  const schemaReviews = reviews.map(r => ({
+    '@type': 'Review',
+    'reviewRating': {
+      '@type': 'Rating',
+      'ratingValue': r.rating,
+      'bestRating': '5'
+    },
+    'author': {
+      '@type': 'Person',
+      'name': r.adopter
+    },
+    'reviewBody': r.quote
+  }));
+
   // Define metadata for static routes
   const routes = [
     {
@@ -181,7 +228,18 @@ async function run() {
         'telephone': '(317) 225-7139',
         'email': 'royalmainecoonkitten159@gmail.com',
         'image': 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
-        'priceRange': '$$$'
+        'priceRange': '$$$',
+        'sameAs': [
+          'https://www.facebook.com/share/1BbohnNhPm/?mibextid=wwXIfr',
+          'https://instagram.com/',
+          'https://www.tiktok.com/@royalcoonkittens?_r=1&_t=ZT-97aIEINMEaT'
+        ].filter(Boolean),
+        'aggregateRating': {
+          '@type': 'AggregateRating',
+          'ratingValue': '5',
+          'reviewCount': reviews.length.toString()
+        },
+        'review': schemaReviews
       }
     },
     {
@@ -190,7 +248,40 @@ async function run() {
       description: 'Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee.',
       keywords: siteKeywords,
       robots: 'index,follow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          'name': 'About Us — Royal Maine Coon Kittens',
+          'description': 'Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee.',
+          'url': `${siteUrl}/about`,
+          'mainEntity': {
+            '@type': 'PetStore',
+            'name': 'Royal Maine Coon Kittens',
+            'url': siteUrl,
+            'image': 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70'
+          }
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': 'Home',
+              'item': siteUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': 'About Us',
+              'item': `${siteUrl}/about`
+            }
+          ]
+        }
+      ]
     },
     {
       path: 'cats',
@@ -198,7 +289,38 @@ async function run() {
       description: 'Browse available Maine Coon kittens — vet-checked, vaccinated and home-raised in Indiana. Reserve your gentle giant today, with nationwide delivery.',
       keywords: siteKeywords,
       robots: 'index,follow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          'itemListElement': catsList.map((cat, index) => ({
+            '@type': 'ListItem',
+            'position': index + 1,
+            'url': `${siteUrl}/cats/${cat.slug}`,
+            'name': cat.name,
+            'image': cat.images[0] || defaultImage
+          }))
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': 'Home',
+              'item': siteUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': 'Available Kittens',
+              'item': `${siteUrl}/cats`
+            }
+          ]
+        }
+      ]
     },
     {
       path: 'rehomed',
@@ -206,7 +328,25 @@ async function run() {
       description: "Real families and their Maine Coons. See the happy endings from kittens we've placed in loving homes.",
       keywords: siteKeywords,
       robots: 'index,follow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': siteUrl
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Happy Families',
+            'item': `${siteUrl}/rehomed`
+          }
+        ]
+      }
     },
     {
       path: 'contact',
@@ -214,7 +354,40 @@ async function run() {
       description: 'Get in touch with Royal Maine Coon Kittens in Evansville, Indiana. Have questions about reserving a kitten, prices, or shipping options? Contact us today.',
       keywords: siteKeywords,
       robots: 'index,follow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          'name': 'Contact Us — Royal Maine Coon Kittens',
+          'description': 'Get in touch with Royal Maine Coon Kittens in Evansville, Indiana.',
+          'url': `${siteUrl}/contact`,
+          'mainEntity': {
+            '@type': 'PetStore',
+            'name': 'Royal Maine Coon Kittens',
+            'telephone': '(317) 225-7139',
+            'email': 'royalmainecoonkitten159@gmail.com'
+          }
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': 'Home',
+              'item': siteUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': 'Contact',
+              'item': `${siteUrl}/contact`
+            }
+          ]
+        }
+      ]
     },
     {
       path: 'help',
@@ -222,7 +395,25 @@ async function run() {
       description: 'Get involved and support our mission. Learn about fostering, volunteering, and other ways to help.',
       keywords: siteKeywords,
       robots: 'index,follow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': siteUrl
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'How to Help',
+            'item': `${siteUrl}/help`
+          }
+        ]
+      }
     },
     {
       path: 'donate',
@@ -230,7 +421,25 @@ async function run() {
       description: 'Support our cattery or help Maine Coon kittens in need. Make a donation, view our Amazon wishlist, or read our payment details.',
       keywords: siteKeywords,
       robots: 'index,follow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': siteUrl
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Donate',
+            'item': `${siteUrl}/donate`
+          }
+        ]
+      }
     },
     {
       path: 'privacy',
@@ -238,7 +447,25 @@ async function run() {
       description: 'Privacy Policy for Royal Maine Coon Kittens cattery.',
       keywords: siteKeywords,
       robots: 'noindex,nofollow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': siteUrl
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Privacy Policy',
+            'item': `${siteUrl}/privacy`
+          }
+        ]
+      }
     },
     {
       path: 'terms',
@@ -246,7 +473,25 @@ async function run() {
       description: 'Terms and conditions for adopting or purchasing Maine Coon kittens.',
       keywords: siteKeywords,
       robots: 'noindex,nofollow',
-      imageUrl: defaultImage
+      imageUrl: defaultImage,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': siteUrl
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Terms & Conditions',
+            'item': `${siteUrl}/terms`
+          }
+        ]
+      }
     }
   ];
 
@@ -273,6 +518,31 @@ async function run() {
       }
     };
 
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        {
+          '@type': 'ListItem',
+          'position': 1,
+          'name': 'Home',
+          'item': siteUrl
+        },
+        {
+          '@type': 'ListItem',
+          'position': 2,
+          'name': 'Available Kittens',
+          'item': `${siteUrl}/cats`
+        },
+        {
+          '@type': 'ListItem',
+          'position': 3,
+          'name': cat.name,
+          'item': `${siteUrl}/cats/${cat.slug}`
+        }
+      ]
+    };
+
     const faqs = faqsMap[cat.slug] || [];
     const faqSchema = faqs.length > 0 ? {
       '@context': 'https://schema.org',
@@ -287,7 +557,7 @@ async function run() {
       }))
     } : null;
 
-    const jsonLd = faqSchema ? [productSchema, faqSchema] : productSchema;
+    const jsonLd = faqSchema ? [productSchema, breadcrumbSchema, faqSchema] : [productSchema, breadcrumbSchema];
 
     routes.push({
       path: `cats/${cat.slug}`,

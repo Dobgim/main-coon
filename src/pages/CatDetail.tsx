@@ -194,7 +194,7 @@ export default function CatDetail() {
                   }`}
                   aria-label={`View photo ${i + 1}`}
                 >
-                  <img src={getOptimizedImageUrl(src, 150, 60)} alt="" className="h-20 w-24 object-cover" />
+                  <img src={getOptimizedImageUrl(src, 150, 60)} alt={`${cat.name} photo thumbnail ${i + 1}`} className="h-20 w-24 object-cover" />
                 </button>
               ))}
             </div>

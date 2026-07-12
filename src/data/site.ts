@@ -1,3 +1,5 @@
+import { rehomedStories } from './rehomed';
+
 /**
  * Central site configuration.
  *
@@ -80,6 +82,24 @@ export const localBusinessSchema = {
     site.social.instagram,
     site.social.tiktok,
   ].filter(Boolean),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: rehomedStories.length.toString(),
+  },
+  review: rehomedStories.map((story) => ({
+    '@type': 'Review',
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: story.rating,
+      bestRating: '5',
+    },
+    author: {
+      '@type': 'Person',
+      name: story.adopter,
+    },
+    reviewBody: story.quote,
+  })),
 };
 
 
