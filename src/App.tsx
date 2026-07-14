@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import PageLoader from './components/PageLoader';
+import LiveChat from './components/LiveChat';
 import { CartProvider } from './lib/cart';
 
 // Admin dashboard is fully isolated (its own chrome, no public header/footer).
@@ -61,6 +62,7 @@ export default function App() {
           </Suspense>
         </main>
         <Footer />
+        <LiveChat />
       </div>
     </CartProvider>
   );
