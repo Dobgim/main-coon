@@ -106,6 +106,32 @@ function parseSeedCats() {
   }
 }
 
+// Simple parser for src/data/blog.ts
+function parseBlogPosts() {
+  try {
+    const blogPath = path.resolve(projectRoot, 'src/data/blog.ts');
+    if (!fs.existsSync(blogPath)) return [];
+    const text = fs.readFileSync(blogPath, 'utf8');
+    const posts = [];
+    const postRegex = /slug:\s*['"`]([^'"`]+)['"`][\s\S]*?title:\s*['"`]([^'"`]+)['"`][\s\S]*?date:\s*['"`]([^'"`]+)['"`][\s\S]*?author:\s*['"`]([^'"`]+)['"`][\s\S]*?excerpt:\s*['"`]([^'"`]+)['"`][\s\S]*?image:\s*['"`]([^'"`]+)['"`]/g;
+    let match;
+    while ((match = postRegex.exec(text)) !== null) {
+      posts.push({
+        slug: match[1],
+        title: match[2],
+        date: match[3],
+        author: match[4],
+        excerpt: match[5],
+        image: match[6]
+      });
+    }
+    return posts;
+  } catch (err) {
+    console.error('[prerender] Error parsing blog posts:', err.message);
+    return [];
+  }
+}
+
 // Fetch cats from Supabase, fallback to seed cats
 async function getCats(env) {
   const { supabaseUrl, supabaseAnonKey } = env;
@@ -158,6 +184,7 @@ async function run() {
   // Parse cattery data
   const catsList = await getCats(env);
   const faqsMap = parseCatFaqs();
+  const blogPosts = parseBlogPosts();
 
   const siteUrl = 'https://royalmainecoonkiten.com';
   const siteKeywords = 'Maine Coon kittens, Maine Coon kittens for sale, Maine Coon kittens Indiana, Maine Coon kittens Evansville, Maine Coon breeder, buy Maine Coon kitten, reserve Maine Coon kitten';
@@ -492,8 +519,66 @@ async function run() {
           }
         ]
       }
+    },
+    {
+      path: 'blog',
+      title: 'Blog — Maine Coon Care & Tips | Royal Maine Coon Kittens',
+      description: 'Read the latest articles about Maine Coon cats, grooming tips, and cattery news.',
+      keywords: `${siteKeywords}, blog, cat care`,
+      robots: 'index,follow',
+      imageUrl: defaultImage,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        'name': 'Blog | Royal Maine Coon Kittens',
+        'description': 'Read the latest articles about Maine Coon cats, grooming tips, and cattery news.',
+        'url': `${siteUrl}/blog`,
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'Royal Maine Coon Kittens',
+          'logo': {
+            '@type': 'ImageObject',
+            'url': `${siteUrl}/logo.svg`
+          }
+        }
+      }
     }
   ];
+
+  for (const post of blogPosts) {
+    routes.push({
+      path: `blog/${post.slug}`,
+      title: `${post.title} | Royal Maine Coon Kittens`,
+      description: post.excerpt,
+      keywords: `${siteKeywords}, ${post.title}`,
+      robots: 'index,follow',
+      imageUrl: post.image,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        'mainEntityOfPage': {
+          '@type': 'WebPage',
+          '@id': `${siteUrl}/blog/${post.slug}`
+        },
+        'headline': post.title,
+        'description': post.excerpt,
+        'image': post.image,
+        'author': {
+          '@type': 'Organization',
+          'name': post.author
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'Royal Maine Coon Kittens',
+          'logo': {
+            '@type': 'ImageObject',
+            'url': `${siteUrl}/logo.svg`
+          }
+        },
+        'datePublished': post.date
+      }
+    });
+  }
 
   // Add dynamic cat pages to routes
   for (const cat of catsList) {
@@ -508,6 +593,11 @@ async function run() {
       'description': cat.short_description || cat.story,
       'image': cat.images,
       'category': 'Maine Coon Kitten',
+      'sku': cat.slug,
+      'brand': {
+        '@type': 'Brand',
+        'name': 'Royal Maine Coon Kittens'
+      },
       'offers': {
         '@type': 'Offer',
         'price': cat.adoption_fee,
@@ -643,6 +733,12 @@ async function run() {
     } else if (r.path.startsWith('cats/')) {
       changefreq = 'weekly';
       priority = '0.8';
+    } else if (r.path === 'blog') {
+      changefreq = 'weekly';
+      priority = '0.8';
+    } else if (r.path.startsWith('blog/')) {
+      changefreq = 'monthly';
+      priority = '0.7';
     } else if (r.path === 'about' || r.path === 'contact') {
       priority = '0.7';
     }

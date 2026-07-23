@@ -108,5 +108,6 @@ export const navLinks = [
   { label: 'About Us', to: '/about' },
   { label: 'Available Kittens', to: '/cats' },
   { label: 'Happy Families', to: '/rehomed' },
+  { label: 'Blog', to: '/blog' },
   { label: 'Contact', to: '/contact' },
 ] as const;
