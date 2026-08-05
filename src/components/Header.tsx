@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from './Logo';
@@ -39,152 +40,169 @@ export default function Header() {
     ].join(' ');
 
   return (
-    <header
-      className={[
-        'sticky top-0 z-50 w-full transition-all duration-300',
-        scrolled
-          ? 'bg-cream/90 shadow-soft backdrop-blur supports-[backdrop-filter]:bg-cream/75'
-          : 'bg-cream/60 backdrop-blur',
-      ].join(' ')}
-    >
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-forest focus:px-4 focus:py-2 focus:text-white"
+    <>
+      <header
+        className={[
+          'sticky top-0 z-40 w-full transition-all duration-300',
+          scrolled
+            ? 'bg-cream/90 shadow-soft backdrop-blur supports-[backdrop-filter]:bg-cream/75'
+            : 'bg-cream/60 backdrop-blur',
+        ].join(' ')}
       >
-        Skip to content
-      </a>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-forest focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to content
+        </a>
 
-      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" aria-label="Royal Maine Coon Kittens — home" className="shrink-0">
-          <Logo />
-        </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {navLinks.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.to === '/'} className={navItemClass}>
-              {({ isActive }) => (
-                <>
-                  {link.label}
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-ember"
-                    />
-                  )}
-                </>
-              )}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <Link
-            to="/cart"
-            aria-label={`Cart${count ? ` (${count})` : ''}`}
-            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-50"
-          >
-            <CartIcon className="h-6 w-6" />
-            {count > 0 && (
-              <span className="absolute right-1 top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-ember px-1 text-[11px] font-bold text-white">
-                {count}
-              </span>
-            )}
+        <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
+          <Link to="/" aria-label="Royal Maine Coon Kittens — home" className="shrink-0">
+            <Logo />
           </Link>
 
-          <motion.div
-            className="hidden sm:block"
-            animate={{ scale: [1, 1.04, 1] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          >
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+            {navLinks.map((link) => (
+              <NavLink key={link.to} to={link.to} end={link.to === '/'} className={navItemClass}>
+                {({ isActive }) => (
+                  <>
+                    {link.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-ember"
+                      />
+                    )}
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2">
             <Link
-              to="/cats"
-              className="btn-accent inline-flex items-center gap-2 shadow-glow"
-              aria-label="Reserve a kitten"
+              to="/cart"
+              aria-label={`Cart${count ? ` (${count})` : ''}`}
+              className="relative inline-flex h-11 w-11 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-50"
             >
-              <HeartIcon className="h-4 w-4" filled /> Reserve a Kitten
+              <CartIcon className="h-6 w-6" />
+              {count > 0 && (
+                <span className="absolute right-1 top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-ember px-1 text-[11px] font-bold text-white">
+                  {count}
+                </span>
+              )}
             </Link>
-          </motion.div>
 
-          {/* Hamburger */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-forest-800 hover:bg-forest-50 lg:hidden"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-          >
-            <Burger open={menuOpen} />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <>
             <motion.div
-              className="fixed inset-0 z-40 bg-ink/40 lg:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMenuOpen(false)}
-            />
-            <motion.div
-              id="mobile-menu"
-              className="fixed right-0 top-0 z-50 flex h-full w-[82%] max-w-sm flex-col bg-cream p-6 shadow-lift lg:hidden"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+              className="hidden sm:block"
+              animate={{ scale: [1, 1.04, 1] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <div className="mb-8 flex items-center justify-between">
-                <Logo />
-                <button
-                  type="button"
-                  onClick={() => setMenuOpen(false)}
-                  aria-label="Close menu"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full hover:bg-forest-50"
-                >
-                  <Burger open />
-                </button>
-              </div>
-
-              <nav className="flex flex-col gap-1" aria-label="Mobile">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.to}
-                    initial={{ opacity: 0, x: 24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 * i + 0.1 }}
-                  >
-                    <NavLink
-                      to={link.to}
-                      end={link.to === '/'}
-                      className={({ isActive }) =>
-                        [
-                          'block rounded-2xl px-4 py-3 text-base font-semibold transition',
-                          isActive
-                            ? 'bg-forest-50 text-ember'
-                            : 'text-forest-800 hover:bg-forest-50',
-                        ].join(' ')
-                      }
-                    >
-                      {link.label}
-                    </NavLink>
-                  </motion.div>
-                ))}
-              </nav>
-
-              <Link to="/cats" className="btn-accent mt-6 inline-flex w-full items-center justify-center gap-2">
+              <Link
+                to="/cats"
+                className="btn-accent inline-flex items-center gap-2 shadow-glow"
+                aria-label="Reserve a kitten"
+              >
                 <HeartIcon className="h-4 w-4" filled /> Reserve a Kitten
               </Link>
             </motion.div>
-          </>
+
+            {/* Hamburger */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-forest-800 hover:bg-forest-50 lg:hidden"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+            >
+              <Burger open={menuOpen} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile menu Portal */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {menuOpen && (
+              <div className="lg:hidden">
+                {/* Backdrop */}
+                <motion.div
+                  className="fixed inset-0 z-[9998] bg-ink/60 backdrop-blur-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setMenuOpen(false)}
+                />
+
+                {/* Mobile Menu Drawer */}
+                <motion.div
+                  id="mobile-menu"
+                  className="fixed right-0 top-0 bottom-0 z-[9999] flex h-full w-[85%] max-w-sm flex-col justify-between bg-cream p-6 shadow-2xl overflow-y-auto border-l border-sand/40"
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 32 }}
+                >
+                  <div>
+                    <div className="mb-8 flex items-center justify-between border-b border-sand/60 pb-4">
+                      <Logo />
+                      <button
+                        type="button"
+                        onClick={() => setMenuOpen(false)}
+                        aria-label="Close menu"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-100"
+                      >
+                        <Burger open />
+                      </button>
+                    </div>
+
+                    <nav className="flex flex-col gap-2" aria-label="Mobile">
+                      {navLinks.map((link, i) => (
+                        <motion.div
+                          key={link.to}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.04 * i + 0.05 }}
+                        >
+                          <NavLink
+                            to={link.to}
+                            end={link.to === '/'}
+                            className={({ isActive }) =>
+                              [
+                                'flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold transition-all duration-200',
+                                isActive
+                                  ? 'bg-forest-100/80 text-ember shadow-sm'
+                                  : 'text-forest-900 hover:bg-forest-50 hover:text-ember',
+                              ].join(' ')
+                            }
+                          >
+                            <span>{link.label}</span>
+                            <span className="text-forest-400">→</span>
+                          </NavLink>
+                        </motion.div>
+                      ))}
+                    </nav>
+                  </div>
+
+                  <div className="mt-8 border-t border-sand/60 pt-6">
+                    <Link
+                      to="/cats"
+                      className="btn-accent flex w-full items-center justify-center gap-2 py-3.5 text-base font-semibold shadow-glow"
+                    >
+                      <HeartIcon className="h-5 w-5" filled /> Reserve a Kitten
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
-    </header>
+    </>
   );
 }
 
