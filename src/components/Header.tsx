@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -8,12 +8,17 @@ import { navLinks } from '@/data/site';
 import { useCart } from '@/lib/cart';
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const [mounted,  setMounted]    = useState(false);
   const location = useLocation();
   const { count } = useCart();
+  const closeRef = useRef<HTMLButtonElement>(null);
 
-  // Shrink + add shadow once the user scrolls past the hero edge.
+  // Only render portal after client-side hydration to avoid SSR mismatch.
+  useEffect(() => { setMounted(true); }, []);
+
+  // Shrink + shadow on scroll.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
@@ -21,15 +26,20 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close the mobile menu whenever the route changes.
-  useEffect(() => setMenuOpen(false), [location.pathname]);
+  // Close menu on navigation.
+  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
-  // Lock body scroll while the mobile menu is open.
+  // Lock body scroll while menu is open.
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  // Focus the close button when the menu opens for accessibility.
+  useEffect(() => {
+    if (menuOpen) {
+      setTimeout(() => closeRef.current?.focus(), 50);
+    }
   }, [menuOpen]);
 
   const navItemClass = ({ isActive }: { isActive: boolean }) =>
@@ -45,8 +55,8 @@ export default function Header() {
         className={[
           'sticky top-0 z-40 w-full transition-all duration-300',
           scrolled
-            ? 'bg-cream/90 shadow-soft backdrop-blur supports-[backdrop-filter]:bg-cream/75'
-            : 'bg-cream/60 backdrop-blur',
+            ? 'bg-cream shadow-soft md:bg-cream/90 md:backdrop-blur md:supports-[backdrop-filter]:bg-cream/75'
+            : 'bg-cream md:bg-cream/80 md:backdrop-blur',
         ].join(' ')}
       >
         <a
@@ -57,11 +67,10 @@ export default function Header() {
         </a>
 
         <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-          <Link to="/" aria-label="Royal Maine Coon Kittens — home" className="shrink-0">
+          <Link to="/" aria-label="Royal Maine Coon Kittens home" className="shrink-0">
             <Logo />
           </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
             {navLinks.map((link) => (
               <NavLink key={link.to} to={link.to} end={link.to === '/'} className={navItemClass}>
@@ -108,14 +117,13 @@ export default function Header() {
               </Link>
             </motion.div>
 
-            {/* Hamburger */}
             <button
               type="button"
               onClick={() => setMenuOpen((v) => !v)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-forest-800 hover:bg-forest-50 lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-50 lg:hidden"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
+              aria-controls="mobile-nav"
             >
               <Burger open={menuOpen} />
             </button>
@@ -123,81 +131,104 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile menu Portal */}
-      {typeof document !== 'undefined' &&
+      {mounted &&
         createPortal(
           <AnimatePresence>
             {menuOpen && (
-              <div className="lg:hidden">
-                {/* Backdrop */}
+              <>
                 <motion.div
-                  className="fixed inset-0 z-[9998] bg-ink/60 backdrop-blur-sm"
+                  key="mobile-backdrop"
+                  className="fixed inset-0"
+                  style={{ zIndex: 9990, backgroundColor: 'rgba(43,42,40,0.55)' }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  transition={{ duration: 0.22 }}
                   onClick={() => setMenuOpen(false)}
+                  aria-hidden="true"
                 />
 
-                {/* Mobile Menu Drawer */}
                 <motion.div
-                  id="mobile-menu"
-                  className="fixed right-0 top-0 bottom-0 z-[9999] flex h-full w-[85%] max-w-sm flex-col justify-between bg-cream p-6 shadow-2xl overflow-y-auto border-l border-sand/40"
+                  key="mobile-drawer"
+                  id="mobile-nav"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Navigation menu"
+                  className="fixed bottom-0 right-0 top-0 flex flex-col overflow-y-auto"
+                  style={{
+                    zIndex: 9999,
+                    width: '82%',
+                    maxWidth: '360px',
+                    backgroundColor: '#faf7f1',
+                    boxShadow: '-8px 0 40px rgba(43,42,40,0.2)',
+                    borderLeft: '1px solid #f3ece0',
+                  }}
                   initial={{ x: '100%' }}
                   animate={{ x: 0 }}
                   exit={{ x: '100%' }}
-                  transition={{ type: 'spring', stiffness: 350, damping: 32 }}
+                  transition={{ type: 'spring', stiffness: 340, damping: 34 }}
                 >
-                  <div>
-                    <div className="mb-8 flex items-center justify-between border-b border-sand/60 pb-4">
+                  <div
+                    className="flex items-center justify-between px-5 py-4"
+                    style={{ borderBottom: '1px solid #f3ece0' }}
+                  >
+                    <Link to="/" onClick={() => setMenuOpen(false)}>
                       <Logo />
-                      <button
-                        type="button"
-                        onClick={() => setMenuOpen(false)}
-                        aria-label="Close menu"
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-100"
-                      >
-                        <Burger open />
-                      </button>
-                    </div>
-
-                    <nav className="flex flex-col gap-2" aria-label="Mobile">
-                      {navLinks.map((link, i) => (
-                        <motion.div
-                          key={link.to}
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.04 * i + 0.05 }}
-                        >
-                          <NavLink
-                            to={link.to}
-                            end={link.to === '/'}
-                            className={({ isActive }) =>
-                              [
-                                'flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold transition-all duration-200',
-                                isActive
-                                  ? 'bg-forest-100/80 text-ember shadow-sm'
-                                  : 'text-forest-900 hover:bg-forest-50 hover:text-ember',
-                              ].join(' ')
-                            }
-                          >
-                            <span>{link.label}</span>
-                            <span className="text-forest-400">→</span>
-                          </NavLink>
-                        </motion.div>
-                      ))}
-                    </nav>
+                    </Link>
+                    <button
+                      ref={closeRef}
+                      type="button"
+                      onClick={() => setMenuOpen(false)}
+                      aria-label="Close menu"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-100"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </button>
                   </div>
 
-                  <div className="mt-8 border-t border-sand/60 pt-6">
+                  <nav className="flex flex-1 flex-col gap-1 px-4 py-5" aria-label="Mobile">
+                    {navLinks.map((link, i) => (
+                      <motion.div
+                        key={link.to}
+                        initial={{ opacity: 0, x: 18 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.04 * i + 0.06, duration: 0.22 }}
+                      >
+                        <NavLink
+                          to={link.to}
+                          end={link.to === '/'}
+                          onClick={() => setMenuOpen(false)}
+                          className={({ isActive }) =>
+                            [
+                              'flex items-center justify-between rounded-2xl px-4 py-3.5 text-[15px] font-semibold transition-all duration-150',
+                              isActive
+                                ? 'bg-forest-100 text-ember'
+                                : 'text-forest-900 hover:bg-forest-50 hover:text-ember',
+                            ].join(' ')
+                          }
+                        >
+                          <span>{link.label}</span>
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </NavLink>
+                      </motion.div>
+                    ))}
+                  </nav>
+
+                  <div className="px-5 py-5" style={{ borderTop: '1px solid #f3ece0' }}>
                     <Link
                       to="/cats"
-                      className="btn-accent flex w-full items-center justify-center gap-2 py-3.5 text-base font-semibold shadow-glow"
+                      onClick={() => setMenuOpen(false)}
+                      className="btn-accent flex w-full items-center justify-center gap-2 py-4 text-base font-bold shadow-glow"
                     >
                       <HeartIcon className="h-5 w-5" filled /> Reserve a Kitten
                     </Link>
                   </div>
                 </motion.div>
-              </div>
+              </>
             )}
           </AnimatePresence>,
           document.body
@@ -208,7 +239,7 @@ export default function Header() {
 
 function Burger({ open }: { open: boolean }) {
   return (
-    <div className="relative h-5 w-6">
+    <div className="relative h-5 w-6" aria-hidden="true">
       <span
         className={`absolute left-0 h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${
           open ? 'top-2 rotate-45' : 'top-0'
@@ -216,7 +247,7 @@ function Burger({ open }: { open: boolean }) {
       />
       <span
         className={`absolute left-0 top-2 h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${
-          open ? 'opacity-0' : 'opacity-100'
+          open ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
         }`}
       />
       <span
