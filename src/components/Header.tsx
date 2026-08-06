@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Logo from './Logo';
 import { HeartIcon, CartIcon } from './Icons';
 import { navLinks } from '@/data/site';
@@ -131,106 +131,122 @@ export default function Header() {
         </div>
       </header>
 
+      {/*
+        The mobile drawer deliberately avoids framer-motion and Tailwind for every
+        property that affects legibility (background, text colour, borders, z-index).
+        Those are inline styles so that no purge step, no missing animation chunk and
+        no half-finished transition can ever leave the panel see-through — which is
+        exactly how this menu broke before.
+      */}
       {mounted &&
         createPortal(
-          <AnimatePresence>
-            {menuOpen && (
-              <>
-                <motion.div
-                  key="mobile-backdrop"
-                  className="fixed inset-0"
-                  style={{ zIndex: 9990, backgroundColor: 'rgba(43,42,40,0.55)' }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.22 }}
+          <div
+            aria-hidden={!menuOpen}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 9990,
+              visibility: menuOpen ? 'visible' : 'hidden',
+              pointerEvents: menuOpen ? 'auto' : 'none',
+            }}
+          >
+            <div
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundColor: 'rgba(43,42,40,0.6)',
+                opacity: menuOpen ? 1 : 0,
+                transition: 'opacity 220ms ease',
+              }}
+            />
+
+            <div
+              id="mobile-nav"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
+              style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                right: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                overflowY: 'auto',
+                width: '84%',
+                maxWidth: '360px',
+                backgroundColor: '#faf7f1',
+                backgroundImage: 'none',
+                boxShadow: '-8px 0 40px rgba(43,42,40,0.28)',
+                borderLeft: '1px solid #e7ddcb',
+                transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
+                transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
+              }}
+            >
+              <div
+                className="flex items-center justify-between px-5 py-4"
+                style={{ borderBottom: '1px solid #e7ddcb', backgroundColor: '#faf7f1' }}
+              >
+                <Link to="/" onClick={() => setMenuOpen(false)}>
+                  <Logo />
+                </Link>
+                <button
+                  ref={closeRef}
+                  type="button"
                   onClick={() => setMenuOpen(false)}
-                  aria-hidden="true"
-                />
-
-                <motion.div
-                  key="mobile-drawer"
-                  id="mobile-nav"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-label="Navigation menu"
-                  className="fixed bottom-0 right-0 top-0 flex flex-col overflow-y-auto"
-                  style={{
-                    zIndex: 9999,
-                    width: '82%',
-                    maxWidth: '360px',
-                    backgroundColor: '#faf7f1',
-                    boxShadow: '-8px 0 40px rgba(43,42,40,0.2)',
-                    borderLeft: '1px solid #f3ece0',
-                  }}
-                  initial={{ x: '100%' }}
-                  animate={{ x: 0 }}
-                  exit={{ x: '100%' }}
-                  transition={{ type: 'spring', stiffness: 340, damping: 34 }}
+                  aria-label="Close menu"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-forest-100"
+                  style={{ color: '#1b3a2b' }}
                 >
-                  <div
-                    className="flex items-center justify-between px-5 py-4"
-                    style={{ borderBottom: '1px solid #f3ece0' }}
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </div>
+
+              <nav
+                className="flex flex-1 flex-col gap-1 px-4 py-5"
+                aria-label="Mobile"
+                style={{ backgroundColor: '#faf7f1' }}
+              >
+                {navLinks.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end={link.to === '/'}
+                    onClick={() => setMenuOpen(false)}
+                    tabIndex={menuOpen ? 0 : -1}
+                    className="flex items-center justify-between rounded-2xl px-4 py-3.5 text-[15px] font-semibold"
+                    style={({ isActive }) => ({
+                      color: isActive ? '#e2620f' : '#14331f',
+                      backgroundColor: isActive ? '#e8f0e8' : 'transparent',
+                    })}
                   >
-                    <Link to="/" onClick={() => setMenuOpen(false)}>
-                      <Logo />
-                    </Link>
-                    <button
-                      ref={closeRef}
-                      type="button"
-                      onClick={() => setMenuOpen(false)}
-                      aria-label="Close menu"
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full text-forest-800 transition hover:bg-forest-100"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                      </svg>
-                    </button>
-                  </div>
+                    <span>{link.label}</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </NavLink>
+                ))}
+              </nav>
 
-                  <nav className="flex flex-1 flex-col gap-1 px-4 py-5" aria-label="Mobile">
-                    {navLinks.map((link, i) => (
-                      <motion.div
-                        key={link.to}
-                        initial={{ opacity: 0, x: 18 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.04 * i + 0.06, duration: 0.22 }}
-                      >
-                        <NavLink
-                          to={link.to}
-                          end={link.to === '/'}
-                          onClick={() => setMenuOpen(false)}
-                          className={({ isActive }) =>
-                            [
-                              'flex items-center justify-between rounded-2xl px-4 py-3.5 text-[15px] font-semibold transition-all duration-150',
-                              isActive
-                                ? 'bg-forest-100 text-ember'
-                                : 'text-forest-900 hover:bg-forest-50 hover:text-ember',
-                            ].join(' ')
-                          }
-                        >
-                          <span>{link.label}</span>
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                            <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </NavLink>
-                      </motion.div>
-                    ))}
-                  </nav>
-
-                  <div className="px-5 py-5" style={{ borderTop: '1px solid #f3ece0' }}>
-                    <Link
-                      to="/cats"
-                      onClick={() => setMenuOpen(false)}
-                      className="btn-accent flex w-full items-center justify-center gap-2 py-4 text-base font-bold shadow-glow"
-                    >
-                      <HeartIcon className="h-5 w-5" filled /> Reserve a Kitten
-                    </Link>
-                  </div>
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>,
+              <div
+                className="px-5 py-5"
+                style={{ borderTop: '1px solid #e7ddcb', backgroundColor: '#faf7f1' }}
+              >
+                <Link
+                  to="/cats"
+                  onClick={() => setMenuOpen(false)}
+                  tabIndex={menuOpen ? 0 : -1}
+                  className="btn-accent flex w-full items-center justify-center gap-2 py-4 text-base font-bold shadow-glow"
+                >
+                  <HeartIcon className="h-5 w-5" filled /> Reserve a Kitten
+                </Link>
+              </div>
+            </div>
+          </div>,
           document.body
         )}
     </>
