@@ -188,54 +188,18 @@ async function run() {
 
   const siteUrl = 'https://royalmainecoonkiten.com';
   const siteKeywords = 'Maine Coon kittens, Maine Coon kittens for sale, Maine Coon kittens Indiana, Maine Coon kittens Evansville, Maine Coon breeder, buy Maine Coon kitten, reserve Maine Coon kitten';
-  const defaultImage = `${siteUrl}/logo.svg`;
+  // Social platforms (WhatsApp, Facebook, X, LinkedIn) do NOT render SVG in link
+  // previews, so an .svg logo here produces a blank share card. Use the first real
+  // published kitten photo — a raster image of actual stock — and only fall back to
+  // the logo if the cattery has no photos at all.
+  const firstCatPhoto = catsList.find((c) => c.images && c.images[0])?.images[0];
+  const defaultImage = firstCatPhoto || `${siteUrl}/logo.svg`;
 
-  const reviews = [
-    {
-      adopter: 'Sarah & James',
-      quote: 'Oscar settled in within days and now rules the house with the gentlest paw. We cannot imagine life without him — thank you for trusting us with him.',
-      rating: 5
-    },
-    {
-      adopter: 'The Patel family',
-      quote: 'We adopted Bella at nine years old and she has brought so much calm and joy to our home. Adopting a senior was the best decision we ever made.',
-      rating: 5
-    },
-    {
-      adopter: 'Hannah',
-      quote: 'Teddy and my older cat became inseparable almost immediately. The matching advice from the team was spot on. He is the most affectionate boy.',
-      rating: 5
-    },
-    {
-      adopter: 'David & Lin',
-      quote: 'Misty needed time to trust us, and the foster team prepared us perfectly. A year on she sleeps on our bed every night. Truly a transformation.',
-      rating: 5
-    },
-    {
-      adopter: 'The Okoro family',
-      quote: 'Leo is endlessly patient with our two children and follows them around like a dog. He is the heart of our family now.',
-      rating: 5
-    },
-    {
-      adopter: 'Megan',
-      quote: 'Cleo was overlooked for months because she was shy. Now she greets every guest and naps in the sunniest spot in the house. So grateful.',
-      rating: 5
-    }
-  ];
-
-  const schemaReviews = reviews.map(r => ({
-    '@type': 'Review',
-    'reviewRating': {
-      '@type': 'Rating',
-      'ratingValue': r.rating,
-      'bestRating': '5'
-    },
-    'author': {
-      '@type': 'Person',
-      'name': r.adopter
-    },
-    'reviewBody': r.quote
-  }));
+  // NOTE: Fabricated placeholder reviews were removed from here.
+  // Google's review-snippet policy requires ratings to come from genuine,
+  // verifiable customers, and inventing them risks a manual action that
+  // removes this site from rich results entirely. Re-add review/aggregateRating
+  // markup ONLY once you have real, attributable customer reviews.
 
   // Define metadata for static routes
   const routes = [
@@ -260,13 +224,12 @@ async function run() {
           'https://www.facebook.com/share/1BbohnNhPm/?mibextid=wwXIfr',
           'https://instagram.com/',
           'https://www.tiktok.com/@royalcoonkittens?_r=1&_t=ZT-97aIEINMEaT'
-        ].filter(Boolean),
-        'aggregateRating': {
-          '@type': 'AggregateRating',
-          'ratingValue': '5',
-          'reviewCount': reviews.length.toString()
-        },
-        'review': schemaReviews
+        ].filter((u) => Boolean(u && u.trim() && u !== 'https://instagram.com/')),
+        'areaServed': [
+          { '@type': 'City', 'name': 'Evansville' },
+          { '@type': 'State', 'name': 'Indiana' },
+          { '@type': 'Country', 'name': 'United States' }
+        ]
       }
     },
     {

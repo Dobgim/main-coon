@@ -132,6 +132,10 @@ function SocialLink({
   label: string;
   children: React.ReactNode;
 }) {
+  // A blank href means the profile has not been set up yet — render nothing
+  // rather than a dead link that drops visitors on a 404.
+  if (!href || !href.trim()) return null;
+
   return (
     <a
       href={href}

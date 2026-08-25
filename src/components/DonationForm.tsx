@@ -172,8 +172,10 @@ export default function DonationForm() {
         />
         <TrustBadge icon={<PawIcon />} title="100% to cat care"
           subtitle="Vet bills, food, shelter & transport" />
-        <TrustBadge icon={<StarIcon />} title="Verified charity"
-          subtitle={`Registered no. ${site.charityNumber}`} />
+        {site.charityNumber.trim() && (
+          <TrustBadge icon={<StarIcon />} title="Verified charity"
+            subtitle={`Registered no. ${site.charityNumber}`} />
+        )}
       </div>
 
       <Modal open={success} onClose={() => setSuccess(false)} title="Thank you!">

@@ -1,4 +1,3 @@
-import { rehomedStories } from './rehomed';
 
 /**
  * Central site configuration.
@@ -33,12 +32,12 @@ export const site = {
   responseTime: "We aim to reply within 24 hours.",
 
   // --- Placeholder registration / trust info ---
-  charityNumber: '0000000 (placeholder)',
+  charityNumber: '', // blank = the registration line is hidden
 
   // --- Placeholder social links ---
   social: {
     facebook: 'https://www.facebook.com/share/1BbohnNhPm/?mibextid=wwXIfr',
-    instagram: 'https://instagram.com/',
+    instagram: '', // add your real profile URL to show the Instagram link
     tiktok: 'https://www.tiktok.com/@royalcoonkittens?_r=1&_t=ZT-97aIEINMEaT',
   },
 
@@ -81,25 +80,15 @@ export const localBusinessSchema = {
     site.social.facebook,
     site.social.instagram,
     site.social.tiktok,
-  ].filter(Boolean),
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    reviewCount: rehomedStories.length.toString(),
-  },
-  review: rehomedStories.map((story) => ({
-    '@type': 'Review',
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue: story.rating,
-      bestRating: '5',
-    },
-    author: {
-      '@type': 'Person',
-      name: story.adopter,
-    },
-    reviewBody: story.quote,
-  })),
+  ].filter((u) => Boolean(u && u.trim())),
+  areaServed: [
+    { '@type': 'City',  name: 'Evansville' },
+    { '@type': 'State', name: 'Indiana' },
+    { '@type': 'Country', name: 'United States' },
+  ],
+  // NOTE: aggregateRating / review markup intentionally omitted.
+  // Google's review-snippet policy requires ratings to come from genuine,
+  // verifiable customers. Re-add this ONLY with real reviews you have collected.
 };
 
 
