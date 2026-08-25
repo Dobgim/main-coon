@@ -31,7 +31,7 @@ const values = [
   {
     icon: <HeartIcon className="h-7 w-7" />,
     title: 'Compassion first',
-    text: 'Every cat is treated with patience, dignity and love — from the day we rescue them to the day they go home.',
+    text: 'Every kitten is raised underfoot in our home with patience and affection — from the day they are born to the day they go home.',
   },
   {
     icon: <ShieldIcon className="h-7 w-7" />,
@@ -176,8 +176,8 @@ export default function About() {
         <div className="container-page">
           <SectionHeading
             eyebrow="Meet the team"
-            title="The volunteers behind the rescue"
-            description="A small but mighty group of people who give their time so cats can find homes."
+            title="The family behind the cattery"
+            description="A small team who raise, socialise and care for every kitten before it goes home."
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m, i) => (

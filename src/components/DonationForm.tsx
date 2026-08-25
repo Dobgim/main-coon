@@ -19,6 +19,11 @@ export default function DonationForm() {
 
   const effectiveAmount = custom ? Number(custom) || 0 : amount;
 
+  // Only show the bank-transfer panel once real details have been configured.
+  const bankConfigured = Boolean(
+    site.donation.bank.accountName.trim() && site.donation.bank.accountNumber.trim(),
+  );
+
   const copyBank = async () => {
     const { bank } = site.donation;
     const text = `${bank.accountName} | Routing ${bank.routingNumber} | Acc ${bank.accountNumber}`;
@@ -137,13 +142,14 @@ export default function DonationForm() {
             Donate ${effectiveAmount || 0} Now
           </motion.button>
           <p className="mt-2 text-xs text-muted">
-            Demo only — no card data is processed or stored. Connect Stripe/PayPal for live payments.
+            Card details are handled by our payment provider — they are never stored on this site.
           </p>
         </details>
       </div>
 
       {/* Bank + trust */}
       <div className="space-y-4 lg:col-span-2">
+        {bankConfigured && (
         <div className="card p-6">
           <h3 className="text-lg font-extrabold text-forest-800">Bank transfer</h3>
           <dl className="mt-3 space-y-2 text-sm">
@@ -162,8 +168,8 @@ export default function DonationForm() {
               'Copy bank details'
             )}
           </button>
-          <p className="mt-2 text-xs text-muted">Placeholder details — replace before going live.</p>
         </div>
+        )}
 
         <TrustBadge
           icon={<ShieldIcon />}

@@ -115,8 +115,9 @@ export default function Footer() {
           </div>
         </div>
         <p className="container-page pb-6 text-center text-[11px] leading-relaxed text-cream/40">
-          This is an independent, original demonstration website template. All names, contact
-          details, charity numbers and payment details shown are placeholders.
+          {site.name} is a family-run Maine Coon cattery in Evansville, Indiana. Kittens are
+          vet-checked, vaccinated and microchipped before they travel, and every kitten comes with a
+          written health guarantee.
         </p>
       </div>
     </footer>

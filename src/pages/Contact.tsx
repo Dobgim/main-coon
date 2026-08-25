@@ -130,13 +130,14 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Map placeholder (no third-party embed in this template) */}
+            {/* We do not publish a street address; visits are by appointment only. */}
             <div className="card overflow-hidden">
-              <div className="flex aspect-video items-center justify-center bg-forest-50 text-center text-sm text-muted">
-                <span className="px-6">
-                  Map embed goes here — add a Google Maps iframe with the rescue&apos;s real
-                  location.
-                </span>
+              <div className="flex aspect-video flex-col items-center justify-center gap-2 bg-forest-50 px-6 text-center">
+                <p className="text-base font-bold text-forest-800">Evansville, Indiana</p>
+                <p className="text-sm text-muted">
+                  We are a home cattery, so we keep our address private. Viewings are welcome by
+                  appointment — message us and we will arrange a time and share directions.
+                </p>
               </div>
             </div>
           </aside>

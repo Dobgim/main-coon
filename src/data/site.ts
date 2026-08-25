@@ -57,10 +57,12 @@ export const site = {
     paypalUrl: 'https://www.paypal.com/donate', // replace with real hosted button URL
     amazonWishlist: 'https://www.amazon.com/',
     bank: {
-      accountName: 'Royal Maine Coon Kittens (placeholder)',
-      bankName: 'Example Bank',
-      routingNumber: '000000000',
-      accountNumber: '000000000',
+      // Leave blank to hide the bank-transfer panel entirely. Never ship
+      // stand-in account numbers on a live site — they read as fraudulent.
+      accountName: '',
+      bankName: '',
+      routingNumber: '',
+      accountNumber: '',
       reference: 'Your name',
     },
   },
