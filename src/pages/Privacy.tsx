@@ -4,7 +4,7 @@ import { site } from '@/data/site';
 
 /**
  * Privacy policy describing what this site ACTUALLY does:
- * Supabase stores form submissions, Google Analytics 4 and Smartsupp live chat
+ * Supabase stores form submissions, Google Analytics 4 and Tawk.to live chat
  * both set cookies. Keep this in sync if those integrations change.
  *
  * This is written to be accurate, not to be legal advice — have a solicitor or
@@ -43,7 +43,7 @@ const sections: Array<{ h: string; p: string[] }> = [
     h: 'Cookies and analytics',
     p: [
       'We use Google Analytics 4 to understand how visitors find and use the site. It sets cookies and processes a truncated version of your IP address. This helps us see which pages are useful; we do not use it to identify you personally.',
-      'We also use Smartsupp live chat so you can message us directly. Smartsupp sets cookies to keep your chat session open between pages.',
+      'We also use Tawk.to live chat so you can message us directly. Tawk.to sets cookies to keep your chat session open as you move between pages, and stores the messages you send us so we can reply.',
       'You can block or delete cookies in your browser settings. The site will still work, though live chat may not keep your conversation.',
     ],
   },
