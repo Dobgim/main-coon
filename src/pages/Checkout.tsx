@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useCart, formatPrice } from '@/lib/cart';
 import { createOrder } from '@/lib/db';
+import { createInvoice, invoiceUrl as buildInvoiceUrl } from '@/lib/invoice';
 import { sendWeb3Form } from '@/lib/web3forms';
 import { getPaymentMethods, paymentInstructions, paymentMethodsText } from '@/lib/payment';
 import PaymentBadges from '@/components/PaymentBadges';
 import { CartIcon, CheckIcon, WhatsAppIcon, ArrowRightIcon } from '@/components/Icons';
+import AdoptionContract from '@/components/AdoptionContract';
 import { site } from '@/data/site';
 import Seo from '@/components/Seo';
 
@@ -32,6 +34,9 @@ export default function Checkout() {
   const [done, setDone] = useState(false);
   const [ref, setRef] = useState('');
   const [placedTotal, setPlacedTotal] = useState(0);
+  const [placedItems, setPlacedItems] = useState<typeof items>([]);
+  const [invoiceId, setInvoiceId] = useState<string | null>(null);
+  const [invoiceNumber, setInvoiceNumber] = useState<string | null>(null);
 
   const update = (key: keyof Buyer, value: string) => {
     setData((d) => ({ ...d, [key]: value }));
@@ -66,7 +71,11 @@ export default function Checkout() {
       price: i.price,
     }));
 
-    await createOrder({
+    // Keep items for on-screen contract display
+    setPlacedItems([...items]);
+
+    // 1. Create the order in Supabase
+    const orderId = await createOrder({
       customerName: data.name,
       email: data.email,
       phone: data.phone,
@@ -74,11 +83,38 @@ export default function Checkout() {
       notes: `Ref ${orderRef}${data.notes ? ` — ${data.notes}` : ''}`,
       items: orderItems,
       total,
-    }).catch(() => {});
+    }).catch(() => null as string | null);
 
+    // 2. Create the invoice in Supabase
+    let invId = '';
+    let invNum = `INV-${orderRef.replace('RMK-', '')}`;
+    try {
+      const invoice = await createInvoice({
+        orderId,
+        customerName: data.name,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+        items: orderItems,
+        total,
+        notes: `Ref ${orderRef}${data.notes ? ` — ${data.notes}` : ''}`,
+      });
+      if (invoice) {
+        invId = invoice.id;
+        invNum = invoice.invoiceNumber;
+      }
+    } catch {
+      // Graceful fallback
+    }
+
+    // 3. Build invoice URL
+    const invUrl = invId ? buildInvoiceUrl(invId) : '';
+
+    // 4. Email the owner & trigger Web3Forms submission with full customer and invoice details
     await sendWeb3Form({
-      subject: `New kitten order ${orderRef} — ${formatPrice(total)} from ${data.name}`,
+      subject: `New Kitten Order ${orderRef} — ${formatPrice(total)} from ${data.name}`,
       from_name: data.name,
+      replyto: data.email,
       order_reference: orderRef,
       name: data.name,
       email: data.email,
@@ -88,54 +124,118 @@ export default function Checkout() {
       total: formatPrice(total),
       notes: data.notes || 'None',
       payment_details_for_buyer: paymentMethodsText(),
+      invoice_number: invNum,
+      invoice_link: invUrl || `Generated on checkout for ref: ${orderRef}`,
+      contract_status: 'Official Reservation & Health Agreement Issued',
+      action_required:
+        '➡ Contact client at ' + data.email + ' / ' + data.phone + ' with payment instructions.',
     });
 
+    // 5. Save state and show confirmation
     setRef(orderRef);
     setPlacedTotal(total);
+    setInvoiceId(invId || null);
+    setInvoiceNumber(invNum);
     setSubmitting(false);
     setDone(true);
     clear();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Confirmation + payment screen
+  // Confirmation + Payment + Official Contract Screen
   if (done) {
     const methods = getPaymentMethods();
+    const invoiceLink = invoiceId ? `/invoice/${invoiceId}` : null;
+    const invoiceFullUrl = invoiceId ? buildInvoiceUrl(invoiceId) : '';
+
+    const waText = [
+      `Hi! I placed order ${ref} (${data.name}).`,
+      `Total ${formatPrice(placedTotal)}.`,
+      invoiceFullUrl ? `Invoice: ${invoiceFullUrl}` : '',
+      `I would like to complete my payment and confirm my kitten reservation.`,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
     const waHref = site.whatsapp
-      ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-          `Hi! I placed order ${ref} (${data.name}). Total ${formatPrice(placedTotal)}. I'd like to pay.`,
-        )}`
+      ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(waText)}`
       : '/contact';
+
     return (
-      <div className="container-page max-w-2xl py-12 md:py-16">
-        <Seo title="Order Confirmation" noindex />
-        <div className="flex flex-col items-center text-center">
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-forest-100 text-forest-700">
+      <div className="container-page max-w-4xl py-10 md:py-16">
+        <Seo title="Order Confirmation & Contract" noindex />
+        
+        {/* Header confirmation */}
+        <div className="flex flex-col items-center text-center print:hidden">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-forest-100 text-forest-700 shadow-inner">
             <CheckIcon className="h-8 w-8" />
           </span>
-          <h1 className="mt-4 text-3xl font-extrabold text-forest-800">Order received!</h1>
-          <p className="mt-2 max-w-lg text-muted">
-            Thank you, {data.name}. Your reservation has been sent to us and a copy emailed to our team.
-            Complete payment below to secure your kitten.
+          <h1 className="mt-4 text-3xl font-black text-forest-800 tracking-tight sm:text-4xl">
+            Order & Reservation Received!
+          </h1>
+          <p className="mt-2 max-w-xl text-muted text-sm sm:text-base">
+            Thank you, <strong className="text-forest-900">{data.name}</strong>. Your reservation has been recorded and an official invoice & agreement has been prepared.
           </p>
         </div>
 
-        <div className="card mt-8 p-6 sm:p-8">
+        {/* Invoice banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mt-8 overflow-hidden rounded-3xl bg-gradient-to-r from-forest-900 via-forest-800 to-forest-700 p-6 text-white shadow-xl sm:p-8 print:hidden"
+        >
+          <div className="flex flex-col items-center gap-5 sm:flex-row sm:justify-between text-center sm:text-left">
+            <div>
+              <span className="inline-block rounded-full bg-forest-600/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-forest-100">
+                Official Digital Invoice
+              </span>
+              <p className="mt-1 text-2xl font-black">{invoiceNumber || `INV-${ref}`}</p>
+              <p className="mt-0.5 text-xs text-forest-200">
+                Amount Due: <strong className="text-amber-300 font-extrabold text-sm">{formatPrice(placedTotal)}</strong> · Status: <span className="text-amber-300 font-bold">Pending Payment</span>
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2.5 justify-center">
+              {invoiceLink && (
+                <Link
+                  to={invoiceLink}
+                  className="rounded-full bg-white px-5 py-2.5 text-sm font-bold text-forest-900 transition hover:bg-forest-50 shadow"
+                >
+                  View Full Invoice →
+                </Link>
+              )}
+              {invoiceFullUrl && (
+                <CopyButton text={invoiceFullUrl} label="Copy Invoice Link" copiedLabel="✓ Copied Link!" />
+              )}
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="rounded-full bg-forest-700/80 px-4 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 transition hover:bg-forest-600"
+              >
+                Print / Save
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Payment details card */}
+        <div className="card mt-8 p-6 sm:p-8 print:hidden">
           <div className="flex items-center justify-between border-b border-sand pb-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">Order reference</p>
-              <p className="text-lg font-extrabold text-forest-800">{ref}</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-muted">Order Reference</p>
+              <p className="text-xl font-black text-forest-900">{ref}</p>
             </div>
             <div className="text-right">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">Amount due</p>
-              <p className="text-2xl font-extrabold text-ember">{formatPrice(placedTotal)}</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-muted">Total Due</p>
+              <p className="text-2xl font-black text-ember">{formatPrice(placedTotal)}</p>
             </div>
           </div>
 
-          <h2 className="mt-6 text-lg font-extrabold text-forest-800">How to pay</h2>
+          <h2 className="mt-6 text-lg font-extrabold text-forest-800">How to Complete Payment</h2>
           {methods.length > 0 ? (
             <ul className="mt-4 space-y-3">
               {methods.map((m) => (
-                <li key={m.label} className="rounded-2xl bg-sand/40 p-4">
+                <li key={m.label} className="rounded-2xl bg-sand/40 p-4 border border-sand/60">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="text-sm font-bold text-forest-800">{m.label}</p>
@@ -173,13 +273,29 @@ export default function Checkout() {
               href={waHref}
               target={site.whatsapp ? '_blank' : undefined}
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition hover:brightness-95"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white transition hover:brightness-95 shadow"
             >
               <WhatsAppIcon className="h-5 w-5" /> Send payment proof on WhatsApp
             </a>
             <Link to="/cats" className="btn-ghost">Browse more kittens</Link>
           </div>
         </div>
+
+        {/* OFFICIAL RESERVATION & ADOPTION CONTRACT */}
+        <AdoptionContract
+          contractNumber={invoiceNumber || ref}
+          customerName={data.name}
+          email={data.email}
+          phone={data.phone}
+          address={data.address}
+          items={placedItems.map((i) => ({
+            name: i.name,
+            optionLabel: i.optionLabel,
+            price: i.price,
+          }))}
+          total={placedTotal}
+          notes={data.notes}
+        />
       </div>
     );
   }
@@ -262,7 +378,15 @@ export default function Checkout() {
   );
 }
 
-function CopyButton({ text }: { text: string }) {
+function CopyButton({
+  text,
+  label = 'Copy',
+  copiedLabel = 'Copied!',
+}: {
+  text: string;
+  label?: string;
+  copiedLabel?: string;
+}) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -279,7 +403,7 @@ function CopyButton({ text }: { text: string }) {
       onClick={copy}
       className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-forest-700 ring-1 ring-black/10 transition hover:bg-forest-50"
     >
-      {copied ? 'Copied!' : 'Copy'}
+      {copied ? copiedLabel : label}
     </button>
   );
 }

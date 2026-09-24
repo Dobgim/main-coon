@@ -6,6 +6,7 @@ import Dashboard from './Dashboard';
 import ProductsAdmin from './ProductsAdmin';
 import ProductForm from './ProductForm';
 import Submissions from './Submissions';
+import Invoices from './Invoices';
 
 export default function AdminApp() {
   return (
@@ -18,6 +19,7 @@ export default function AdminApp() {
           <Route path="products/new" element={<ProductForm />} />
           <Route path="products/:rowId" element={<ProductForm />} />
           <Route path="submissions" element={<Submissions />} />
+          <Route path="invoices" element={<Invoices />} />
         </Route>
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

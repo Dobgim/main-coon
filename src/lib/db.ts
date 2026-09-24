@@ -336,8 +336,8 @@ export async function createOrder(o: {
   notes: string;
   items: OrderItemInput[];
   total: number;
-}): Promise<void> {
-  const { error } = await supabase.from('orders').insert({
+}): Promise<string> {
+  const { data, error } = await supabase.from('orders').insert({
     customer_name: o.customerName,
     email: o.email,
     phone: o.phone,
@@ -345,8 +345,9 @@ export async function createOrder(o: {
     notes: o.notes,
     items: o.items,
     total: o.total,
-  });
+  }).select('id').single();
   if (error) throw error;
+  return data.id;
 }
 
 export async function submitContact(m: {
