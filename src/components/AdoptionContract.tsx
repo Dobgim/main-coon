@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { site } from '@/data/site';
 import { PawIcon } from './Icons';
 import { fmtMoney, fmtDate } from '@/lib/invoice';
+import ContractSeal from './ContractSeal';
+import SignaturePad, { type SignatureResult } from './SignaturePad';
 
 export interface AdoptionContractProps {
   contractNumber: string;
@@ -17,7 +19,12 @@ export interface AdoptionContractProps {
   total: number;
   date?: string;
   notes?: string;
+  /** Called once the buyer signs, so the order record can note it. */
+  onSigned?: (result: SignatureResult) => void;
 }
+
+/** Display host for the contract, derived from config so it can never drift. */
+const siteHost = site.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
 export default function AdoptionContract({
   contractNumber,
@@ -29,16 +36,23 @@ export default function AdoptionContract({
   total,
   date = new Date().toISOString(),
   notes,
+  onSigned,
 }: AdoptionContractProps) {
   const [copied, setCopied] = useState(false);
+  const [signature, setSignature] = useState<SignatureResult | null>(null);
   const formattedDate = fmtDate(date);
+
+  const handleSign = (result: SignatureResult) => {
+    setSignature(result);
+    onSigned?.(result);
+  };
 
   const handlePrint = () => {
     window.print();
   };
 
   const handleCopy = () => {
-    const text = `Royal Maine Coon Kittens - Adoption Contract #${contractNumber} for ${customerName}\nTotal: ${fmtMoney(total)}\nWebsite: https://royalmainecoonkitten.com`;
+    const text = `Royal Maine Coon Kittens - Adoption Contract #${contractNumber} for ${customerName}\nTotal: ${fmtMoney(total)}\nWebsite: ${site.url}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -96,10 +110,10 @@ export default function AdoptionContract({
             </h2>
           </div>
           <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-ember">
-            Certified Ethical Maine Coon Cattery & Health Registry
+            Home-Raised Maine Coon Cattery · Evansville, Indiana
           </p>
           <p className="mt-0.5 text-xs text-muted">
-            Website: <span className="font-semibold text-forest-700">royalmainecoonkitten.com</span> · Email: {site.email}
+            Website: <span className="font-semibold text-forest-700">{siteHost}</span> · Email: {site.email}
           </p>
 
           <div className="mt-4 inline-block rounded-full bg-forest-50 px-5 py-1.5 border border-forest-200">
@@ -122,7 +136,7 @@ export default function AdoptionContract({
           <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-forest-700">1. Breeder / Cattery (Party A)</p>
             <p className="mt-1 text-sm font-extrabold text-forest-900">{site.name}</p>
-            <p className="text-xs text-muted mt-0.5">Verified Registered Maine Coon Breeder</p>
+            <p className="text-xs text-muted mt-0.5">Home-raised Maine Coon cattery</p>
             <p className="text-xs text-muted">Email: {site.email}</p>
             {site.phone && <p className="text-xs text-muted">Phone: {site.phone}</p>}
           </div>
@@ -197,53 +211,92 @@ export default function AdoptionContract({
           </div>
         )}
 
-        {/* Seal & Signatures Section */}
+        {/* Signature capture — shown until the buyer signs, then replaced by the mark. */}
+        {!signature && (
+          <div className="mt-8">
+            <SignaturePad name={customerName} onSign={handleSign} />
+          </div>
+        )}
+
+        {/* Seal & Signatures */}
         <div className="mt-8 border-t-2 border-forest-100 pt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-            {/* Breeder Signature */}
+          <div className="grid grid-cols-1 items-end gap-8 sm:grid-cols-3">
+            {/* Breeder */}
             <div className="text-center sm:text-left">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-muted">Party A — Authorized Breeder Signature</p>
-              <div className="my-2 border-b border-forest-300 pb-1">
-                <span className="font-serif italic text-lg font-bold text-forest-800 tracking-wide">
-                  Royal Maine Coon Cattery Director
+              <div className="flex h-[70px] items-end justify-center sm:justify-start">
+                <span className="pb-1 font-serif text-2xl italic text-[#1b2f4b]">
+                  {site.name}
                 </span>
               </div>
-              <p className="text-[11px] font-semibold text-forest-700">{site.name}</p>
-              <p className="text-[10px] text-muted">Certified Health & Quality Registry</p>
-            </div>
-
-            {/* Official Gold Seal Graphic */}
-            <div className="flex justify-center">
-              <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full border-2 border-amber-500 bg-gradient-to-tr from-amber-100 to-amber-50 p-2 text-center shadow-inner">
-                <span className="text-[9px] font-black uppercase tracking-tighter text-amber-900 leading-tight">
-                  ROYAL COON
-                </span>
-                <span className="text-xs">👑</span>
-                <span className="text-[8px] font-bold text-amber-800 uppercase tracking-tight">
-                  OFFICIAL SEAL
-                </span>
-                <span className="text-[7px] text-amber-700 font-semibold">100% CERTIFIED</span>
-              </div>
-            </div>
-
-            {/* Buyer Acknowledgment */}
-            <div className="text-center sm:text-right">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-muted">Party B — Buyer Acceptance & Acknowledgment</p>
-              <div className="my-2 border-b border-forest-300 pb-1">
-                <span className="font-serif italic text-base font-bold text-forest-800">
-                  {customerName}
-                </span>
-              </div>
-              <p className="text-[11px] font-semibold text-forest-700">Digital Confirmation Acknowledged</p>
+              <div className="border-b border-forest-300" />
+              <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-muted">
+                Party A — For the cattery
+              </p>
+              <p className="text-[11px] font-semibold text-forest-700">Authorised signatory</p>
               <p className="text-[10px] text-muted">{formattedDate}</p>
             </div>
+
+            {/* Seal */}
+            <div className="flex flex-col items-center justify-center">
+              <ContractSeal
+                reference={contractNumber}
+                date={formattedDate}
+                className="h-32 w-32 sm:h-36 sm:w-36"
+              />
+            </div>
+
+            {/* Buyer */}
+            <div className="text-center sm:text-right">
+              <div className="flex h-[70px] items-end justify-center sm:justify-end">
+                {signature ? (
+                  <img
+                    src={signature.dataUrl}
+                    alt={`Signature of ${customerName}`}
+                    className="max-h-[70px] w-auto max-w-full object-contain"
+                  />
+                ) : (
+                  <span className="pb-2 text-xs italic text-muted">Awaiting signature</span>
+                )}
+              </div>
+              <div className="border-b border-forest-300" />
+              <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-muted">
+                Party B — Buyer
+              </p>
+              <p className="text-[11px] font-semibold text-forest-700">{customerName}</p>
+              {signature ? (
+                <p className="text-[10px] text-muted">
+                  Signed electronically ({signature.method}) ·{' '}
+                  {new Date(signature.signedAt).toLocaleString('en-US', {
+                    dateStyle: 'medium',
+                    timeStyle: 'short',
+                  })}
+                </p>
+              ) : (
+                <p className="text-[10px] text-muted">Not yet signed</p>
+              )}
+            </div>
           </div>
+
+          {signature && (
+            <p className="mt-6 rounded-xl bg-forest-50/60 px-4 py-2.5 text-center text-[10px] leading-relaxed text-forest-800">
+              Electronically signed by <strong>{customerName}</strong> on{' '}
+              {new Date(signature.signedAt).toLocaleString('en-US', {
+                dateStyle: 'long',
+                timeStyle: 'short',
+              })}
+              , against agreement reference <strong>{contractNumber}</strong>.
+            </p>
+          )}
         </div>
 
         {/* Footer Note */}
         <div className="mt-6 border-t border-sand/60 pt-4 text-center text-[10px] text-muted">
           <p>
-            {site.name} · Official Website: <a href="https://royalmainecoonkitten.com" className="text-forest-700 underline">royalmainecoonkitten.com</a> · Support: {site.email}
+            {site.name} · Official Website:{' '}
+            <a href={site.url} className="text-forest-700 underline">
+              {siteHost}
+            </a>{' '}
+            · Support: {site.email}
           </p>
           <p className="mt-0.5">
             This agreement is generated in good faith upon checkout reservation and binds both parties to ethical cattery adoption standards.

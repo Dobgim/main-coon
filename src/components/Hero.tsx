@@ -18,124 +18,57 @@ const heroImages = [
   },
 ];
 
-const SLIDE_INTERVAL = 3000;
+const SLIDE_INTERVAL = 4500;
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.12 * i, duration: 0.6, ease: 'easeOut' },
+    transition: { delay: 0.1 * i, duration: 0.55, ease: 'easeOut' },
   }),
 };
+
+const stats = [
+  { n: '500+', l: 'Kittens placed' },
+  { n: '14', l: 'Years breeding' },
+  { n: '100%', l: 'Health guaranteed' },
+];
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(
-      () => setIndex((i) => (i + 1) % heroImages.length),
-      SLIDE_INTERVAL,
-    );
+    const id = setInterval(() => setIndex((i) => (i + 1) % heroImages.length), SLIDE_INTERVAL);
     return () => clearInterval(id);
   }, []);
 
   return (
     <section className="relative overflow-hidden bg-cream">
       <div className="absolute inset-0 bg-paw-pattern opacity-70" aria-hidden />
-      <div className="container-page relative grid items-center gap-10 py-16 md:py-24 lg:grid-cols-2 lg:gap-12">
-        {/* Copy */}
-        <div>
-          <motion.span
-            custom={0}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="badge inline-flex items-center gap-1.5 bg-ember-100 text-ember-700"
-          >
-            <PawIcon className="h-4 w-4" /> Home-raised Maine Coon Kittens
-          </motion.span>
 
-          <motion.h1
-            custom={1}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="mt-4 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
-          >
-            Healthy Maine Coon kittens{' '}
-            <span className="text-forest">raised with love</span>
-          </motion.h1>
-
-          <motion.p
-            custom={2}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="mt-5 max-w-xl text-lg leading-relaxed text-muted"
-          >
-            We raise happy, healthy, well-socialised Maine Coon kittens — vet-checked,
-            vaccinated and ready to join your family. Reserve yours today, with nationwide
-            delivery available.
-          </motion.p>
-
-          <motion.div
-            custom={3}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="mt-8 flex flex-wrap gap-3"
-          >
-            <Link to="/cats" className="btn-primary text-base">
-              View Available Kittens <ArrowRightIcon className="h-5 w-5" />
-            </Link>
-            <motion.div
-              animate={{ scale: [1, 1.04, 1] }}
-              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <Link to="/contact" className="btn-accent inline-flex items-center gap-2 text-base shadow-glow">
-                <HeartIcon className="h-5 w-5" filled /> Reserve a Kitten
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          <motion.dl
-            custom={4}
-            initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            className="mt-10 grid max-w-md grid-cols-3 gap-4"
-          >
-            {[
-              { n: '500+', l: 'Kittens placed' },
-              { n: '14', l: 'Years breeding' },
-              { n: '100%', l: 'Health guaranteed' },
-            ].map((s) => (
-              <div key={s.l}>
-                <dt className="text-2xl font-extrabold text-forest">{s.n}</dt>
-                <dd className="text-sm text-muted">{s.l}</dd>
-              </div>
-            ))}
-          </motion.dl>
-        </div>
-
-        {/* Image slideshow */}
+      {/*
+        On mobile the photo comes first: a buyer should see a kitten before they
+        read anything. On desktop it returns to the right-hand column.
+      */}
+      <div className="container-page relative grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-2 lg:gap-12 lg:py-24">
+        {/* Photo */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="relative"
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="relative order-1 lg:order-2"
         >
-          <div className="relative h-[460px] overflow-hidden rounded-[2.5rem] shadow-lift ring-1 ring-black/5">
+          <div className="relative aspect-[5/4] overflow-hidden rounded-3xl shadow-lift ring-1 ring-black/5 sm:aspect-[4/3] lg:aspect-auto lg:h-[460px] lg:rounded-[2.5rem]">
             <AnimatePresence>
               <motion.img
                 key={index}
                 src={heroImages[index].src}
                 alt={heroImages[index].alt}
                 className="absolute inset-0 h-full w-full object-cover"
-                initial={{ opacity: 0, scale: 1.12 }}
-                animate={{ opacity: 1, scale: 1.04 }}
-                exit={{ opacity: 0, scale: 1.04 }}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1.03 }}
+                exit={{ opacity: 0, scale: 1.03 }}
                 transition={{
                   opacity: { duration: 0.7, ease: 'easeInOut' },
                   scale: { duration: SLIDE_INTERVAL / 1000 + 0.7, ease: 'easeOut' },
@@ -144,8 +77,14 @@ export default function Hero() {
               />
             </AnimatePresence>
 
-            {/* Slide indicators */}
-            <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+            {/* Trust strip — readable on mobile, where the floating card is hidden. */}
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent px-4 pb-4 pt-10 sm:hidden">
+              <p className="flex items-center gap-1.5 text-sm font-bold text-white">
+                <PawIcon className="h-4 w-4" /> Home-raised · Vet-checked · Vaccinated
+              </p>
+            </div>
+
+            <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2 sm:bottom-4">
               {heroImages.map((img, i) => (
                 <button
                   key={img.src}
@@ -171,6 +110,77 @@ export default function Hero() {
             <p className="text-xs text-muted">Vet-checked &amp; vaccinated</p>
           </motion.div>
         </motion.div>
+
+        {/* Copy */}
+        <div className="order-2 lg:order-1">
+          <motion.span
+            custom={0}
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="badge inline-flex items-center gap-1.5 bg-ember-100 text-ember-700"
+          >
+            <PawIcon className="h-4 w-4" /> Home-raised Maine Coon Kittens
+          </motion.span>
+
+          <motion.h1
+            custom={1}
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="mt-3 text-[2rem] font-extrabold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
+          >
+            Healthy Maine Coon kittens <span className="text-forest">raised with love</span>
+          </motion.h1>
+
+          <motion.p
+            custom={2}
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+          >
+            Vet-checked, vaccinated and well-socialised — ready to join your family, with
+            nationwide delivery available.
+          </motion.p>
+
+          {/*
+            One clear next step. The previous pair of equally-weighted buttons at
+            different widths, with the orange one pulsing forever, read as noise.
+          */}
+          <motion.div
+            custom={3}
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+          >
+            <Link
+              to="/cats"
+              className="btn-accent w-full text-base shadow-glow sm:w-auto sm:px-8"
+            >
+              <HeartIcon className="h-5 w-5" filled /> Reserve a Kitten
+            </Link>
+            <Link to="/cats" className="btn-ghost w-full text-base sm:w-auto">
+              View Available Kittens <ArrowRightIcon className="h-5 w-5" />
+            </Link>
+          </motion.div>
+
+          <motion.dl
+            custom={4}
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="mt-8 grid grid-cols-3 gap-3 rounded-2xl border border-forest-100 bg-white/70 p-4 sm:max-w-md sm:gap-4"
+          >
+            {stats.map((s) => (
+              <div key={s.l} className="text-center sm:text-left">
+                <dt className="text-xl font-extrabold text-forest sm:text-2xl">{s.n}</dt>
+                <dd className="mt-0.5 text-[11px] leading-tight text-muted sm:text-sm">{s.l}</dd>
+              </div>
+            ))}
+          </motion.dl>
+        </div>
       </div>
     </section>
   );

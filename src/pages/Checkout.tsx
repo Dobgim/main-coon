@@ -15,6 +15,7 @@ import {
 import PaymentBadges from '@/components/PaymentBadges';
 import { CartIcon, CheckIcon, WhatsAppIcon, ArrowRightIcon } from '@/components/Icons';
 import AdoptionContract from '@/components/AdoptionContract';
+import { type SignatureResult } from '@/components/SignaturePad';
 import { site } from '@/data/site';
 import Seo from '@/components/Seo';
 
@@ -67,6 +68,32 @@ export default function Checkout() {
     if (!data.paymentMethod) next.paymentMethod = 'Please choose how you want to pay.';
     setErrors(next);
     return Object.keys(next).length === 0;
+  };
+
+  /**
+   * The order email goes out before the contract is rendered, so the signature
+   * cannot ride along with it. Send a second notification once the buyer signs.
+   */
+  const handleSigned = async (signature: SignatureResult) => {
+    const signedAt = new Date(signature.signedAt).toLocaleString('en-US', {
+      dateStyle: 'long',
+      timeStyle: 'short',
+    });
+    await sendWeb3Form({
+      subject: `Contract SIGNED — ${ref} by ${data.name}`,
+      from_name: data.name,
+      replyto: data.email,
+      order_reference: ref,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      total: formatPrice(placedTotal),
+      payment_method: data.paymentMethod,
+      contract_status: `Signed electronically (${signature.method}) on ${signedAt}`,
+      signed_at: signedAt,
+      signature_method: signature.method,
+      action_required: `➡ ${data.name} has signed agreement ${ref} and is paying by ${data.paymentMethod}. Send your ${data.paymentMethod} details to collect ${formatPrice(placedTotal)}.`,
+    });
   };
 
   const itemsSummary = items
@@ -347,6 +374,7 @@ export default function Checkout() {
           email={data.email}
           phone={data.phone}
           address={data.address}
+          onSigned={handleSigned}
           items={placedItems.map((i) => ({
             name: i.name,
             optionLabel: i.optionLabel,
