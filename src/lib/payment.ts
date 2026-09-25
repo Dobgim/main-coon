@@ -32,3 +32,23 @@ export function paymentMethodsText(): string {
   if (methods.length === 0) return 'No payment methods configured yet (add them in site config).';
   return methods.map((m) => `${m.label}: ${m.value}`).join('\n');
 }
+
+/**
+ * The methods a buyer may pick at checkout. This is deliberately independent of
+ * which handles are filled in under `site.payment` — a buyer can say how they
+ * intend to pay before we've published the receiving account, and the site
+ * already advertises these four. Keep in step with <PaymentBadges />.
+ */
+export const SELECTABLE_PAYMENT_METHODS = [
+  'Zelle',
+  'Cash App',
+  'Chime',
+  'Apple Pay',
+] as const;
+
+export type SelectablePaymentMethod = (typeof SELECTABLE_PAYMENT_METHODS)[number];
+
+/** The configured handle for one method, or null when it isn't set up yet. */
+export function getPaymentMethod(label: string): PaymentMethod | null {
+  return getPaymentMethods().find((m) => m.label === label) ?? null;
+}

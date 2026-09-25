@@ -5,7 +5,13 @@ import { useCart, formatPrice } from '@/lib/cart';
 import { createOrder } from '@/lib/db';
 import { createInvoice, invoiceUrl as buildInvoiceUrl } from '@/lib/invoice';
 import { sendWeb3Form } from '@/lib/web3forms';
-import { getPaymentMethods, paymentInstructions, paymentMethodsText } from '@/lib/payment';
+import {
+  getPaymentMethod,
+  getPaymentMethods,
+  paymentInstructions,
+  paymentMethodsText,
+  SELECTABLE_PAYMENT_METHODS,
+} from '@/lib/payment';
 import PaymentBadges from '@/components/PaymentBadges';
 import { CartIcon, CheckIcon, WhatsAppIcon, ArrowRightIcon } from '@/components/Icons';
 import AdoptionContract from '@/components/AdoptionContract';
@@ -21,10 +27,19 @@ interface Buyer {
   email: string;
   phone: string;
   address: string;
+  /** Which method the buyer intends to pay with — required before ordering. */
+  paymentMethod: string;
   notes: string;
 }
 
-const empty: Buyer = { name: '', email: '', phone: '', address: '', notes: '' };
+const empty: Buyer = {
+  name: '',
+  email: '',
+  phone: '',
+  address: '',
+  paymentMethod: '',
+  notes: '',
+};
 
 export default function Checkout() {
   const { items, total, count, clear } = useCart();
@@ -49,6 +64,7 @@ export default function Checkout() {
     if (!data.email.trim()) next.email = 'An email is required.';
     else if (!emailPattern.test(data.email)) next.email = 'Enter a valid email.';
     if (!data.phone.trim()) next.phone = 'A phone number is required.';
+    if (!data.paymentMethod) next.paymentMethod = 'Please choose how you want to pay.';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -80,7 +96,9 @@ export default function Checkout() {
       email: data.email,
       phone: data.phone,
       address: data.address,
-      notes: `Ref ${orderRef}${data.notes ? ` — ${data.notes}` : ''}`,
+      notes: `Ref ${orderRef} — Paying by ${data.paymentMethod}${
+        data.notes ? ` — ${data.notes}` : ''
+      }`,
       items: orderItems,
       total,
     }).catch(() => null as string | null);
@@ -97,7 +115,9 @@ export default function Checkout() {
         address: data.address,
         items: orderItems,
         total,
-        notes: `Ref ${orderRef}${data.notes ? ` — ${data.notes}` : ''}`,
+        notes: `Ref ${orderRef} — Paying by ${data.paymentMethod}${
+          data.notes ? ` — ${data.notes}` : ''
+        }`,
       });
       if (invoice) {
         invId = invoice.id;
@@ -112,7 +132,7 @@ export default function Checkout() {
 
     // 4. Email the owner & trigger Web3Forms submission with full customer and invoice details
     await sendWeb3Form({
-      subject: `New Kitten Order ${orderRef} — ${formatPrice(total)} from ${data.name}`,
+      subject: `New Kitten Order ${orderRef} — ${formatPrice(total)} via ${data.paymentMethod} from ${data.name}`,
       from_name: data.name,
       replyto: data.email,
       order_reference: orderRef,
@@ -122,13 +142,18 @@ export default function Checkout() {
       delivery_address: data.address || 'Not provided',
       order: itemsSummary,
       total: formatPrice(total),
+      payment_method: data.paymentMethod,
       notes: data.notes || 'None',
       payment_details_for_buyer: paymentMethodsText(),
       invoice_number: invNum,
       invoice_link: invUrl || `Generated on checkout for ref: ${orderRef}`,
       contract_status: 'Official Reservation & Health Agreement Issued',
       action_required:
-        '➡ Contact client at ' + data.email + ' / ' + data.phone + ' with payment instructions.',
+        `➡ Client chose to pay by ${data.paymentMethod}. Contact them at ` +
+        data.email +
+        ' / ' +
+        data.phone +
+        ` with your ${data.paymentMethod} details.`,
     });
 
     // 5. Save state and show confirmation
@@ -145,6 +170,8 @@ export default function Checkout() {
   // Confirmation + Payment + Official Contract Screen
   if (done) {
     const methods = getPaymentMethods();
+    // Show the method the buyer actually picked, when we have its handle on file.
+    const chosen = getPaymentMethod(data.paymentMethod);
     const invoiceLink = invoiceId ? `/invoice/${invoiceId}` : null;
     const invoiceFullUrl = invoiceId ? buildInvoiceUrl(invoiceId) : '';
 
@@ -152,7 +179,7 @@ export default function Checkout() {
       `Hi! I placed order ${ref} (${data.name}).`,
       `Total ${formatPrice(placedTotal)}.`,
       invoiceFullUrl ? `Invoice: ${invoiceFullUrl}` : '',
-      `I would like to complete my payment and confirm my kitten reservation.`,
+      `I would like to pay by ${data.paymentMethod} and confirm my kitten reservation.`,
     ]
       .filter(Boolean)
       .join(' ');
@@ -231,8 +258,39 @@ export default function Checkout() {
             </div>
           </div>
 
+          <div className="mt-6 flex items-center justify-between gap-3 rounded-2xl border-2 border-ember/30 bg-ember/5 px-4 py-3">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-muted">
+                Your chosen payment method
+              </p>
+              <p className="text-lg font-black text-forest-900">{data.paymentMethod}</p>
+            </div>
+          </div>
+
           <h2 className="mt-6 text-lg font-extrabold text-forest-800">How to Complete Payment</h2>
-          {methods.length > 0 ? (
+          {chosen ? (
+            <div className="mt-4 rounded-2xl border border-sand/60 bg-sand/40 p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-forest-800">{chosen.label}</p>
+                  <p className="break-words text-sm text-ink/80">{chosen.value}</p>
+                </div>
+                <div className="flex shrink-0 gap-2">
+                  <CopyButton text={chosen.value} />
+                  {chosen.href && (
+                    <a
+                      href={chosen.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full bg-forest px-3 py-1.5 text-xs font-semibold text-white hover:bg-forest-700"
+                    >
+                      Open
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : methods.length > 0 ? (
             <ul className="mt-4 space-y-3">
               {methods.map((m) => (
                 <li key={m.label} className="rounded-2xl bg-sand/40 p-4 border border-sand/60">
@@ -260,7 +318,8 @@ export default function Checkout() {
             </ul>
           ) : (
             <p className="mt-3 rounded-2xl bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              Our team will email you the payment details shortly. You can also reach us on WhatsApp below.
+              We&apos;ll email your {data.paymentMethod} payment details shortly. You can also reach
+              us on WhatsApp below.
             </p>
           )}
 
@@ -337,12 +396,52 @@ export default function Checkout() {
               <input className="input" value={data.address} onChange={(e) => update('address', e.target.value)} placeholder="e.g. Evansville, IN 47713" />
             </Field>
           </div>
+
+          {/* Payment method — required, and passed straight through to the order email. */}
+          <fieldset className="mt-2">
+            <legend className="text-sm font-bold text-forest-800">
+              How would you like to pay? <span className="text-ember">*</span>
+            </legend>
+            <p className="mt-1 text-xs text-muted">
+              Pick one and we&apos;ll send you those details to complete the payment.
+            </p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {SELECTABLE_PAYMENT_METHODS.map((method) => {
+                const selected = data.paymentMethod === method;
+                return (
+                  <label
+                    key={method}
+                    className={[
+                      'flex cursor-pointer items-center gap-3 rounded-2xl border-2 px-4 py-3 transition',
+                      selected
+                        ? 'border-ember bg-ember/5'
+                        : 'border-sand bg-white hover:border-forest-200',
+                    ].join(' ')}
+                  >
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value={method}
+                      checked={selected}
+                      onChange={() => update('paymentMethod', method)}
+                      className="h-4 w-4 accent-[#e2620f]"
+                    />
+                    <span className="text-sm font-bold text-forest-900">{method}</span>
+                  </label>
+                );
+              })}
+            </div>
+            {errors.paymentMethod && (
+              <p className="mt-2 text-sm font-semibold text-ember">{errors.paymentMethod}</p>
+            )}
+          </fieldset>
+
           <Field label="Notes" hint="Optional — pickup/delivery preferences, questions">
             <textarea rows={3} className="input" value={data.notes} onChange={(e) => update('notes', e.target.value)} />
           </Field>
           <p className="rounded-2xl bg-forest-50 px-4 py-3 text-xs text-ink/75">
             No payment is taken on this page. After you place the order we&apos;ll contact you to
-            confirm availability and arrange secure payment (Zelle, Cash App, Chime or Apple Pay).
+            confirm availability and arrange secure payment.
           </p>
         </div>
 
