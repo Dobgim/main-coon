@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useCart, formatPrice } from '@/lib/cart';
 import { createOrder } from '@/lib/db';
 import { createInvoice, invoiceUrl as buildInvoiceUrl } from '@/lib/invoice';
-import { sendWeb3Form } from '@/lib/web3forms';
+import { sendEmail, fieldsFrom } from '@/lib/email';
 import {
   getPaymentMethod,
   getPaymentMethods,
@@ -79,10 +79,10 @@ export default function Checkout() {
       dateStyle: 'long',
       timeStyle: 'short',
     });
-    await sendWeb3Form({
+    await sendEmail({
       subject: `Contract SIGNED — ${ref} by ${data.name}`,
-      from_name: data.name,
-      replyto: data.email,
+      replyTo: data.email,
+      fields: fieldsFrom({
       order_reference: ref,
       name: data.name,
       email: data.email,
@@ -93,6 +93,7 @@ export default function Checkout() {
       signed_at: signedAt,
       signature_method: signature.method,
       action_required: `➡ ${data.name} has signed agreement ${ref} and is paying by ${data.paymentMethod}. Send your ${data.paymentMethod} details to collect ${formatPrice(placedTotal)}.`,
+      }),
     });
   };
 
@@ -158,10 +159,10 @@ export default function Checkout() {
     const invUrl = invId ? buildInvoiceUrl(invId) : '';
 
     // 4. Email the owner & trigger Web3Forms submission with full customer and invoice details
-    await sendWeb3Form({
+    await sendEmail({
       subject: `New Kitten Order ${orderRef} — ${formatPrice(total)} via ${data.paymentMethod} from ${data.name}`,
-      from_name: data.name,
-      replyto: data.email,
+      replyTo: data.email,
+      fields: fieldsFrom({
       order_reference: orderRef,
       name: data.name,
       email: data.email,
@@ -181,6 +182,7 @@ export default function Checkout() {
         ' / ' +
         data.phone +
         ` with your ${data.paymentMethod} details.`,
+      }),
     });
 
     // 5. Save state and show confirmation

@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import FormField from './FormField';
 import Modal from './Modal';
 import { appendSubmission } from '@/lib/localStorage-utils';
-import { sendEmail } from '@/lib/emailjs-config';
-import { sendWeb3Form } from '@/lib/web3forms';
+import { sendEmail, fieldsFrom } from '@/lib/email';
 import { submitContact } from '@/lib/db';
 
 interface ContactData {
@@ -45,17 +44,18 @@ export default function ContactForm() {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    await sendWeb3Form({
+    await sendEmail({
       subject: `New contact message: ${data.subject}`,
-      from_name: data.name,
-      name: data.name,
-      email: data.email,
-      phone: data.phone || 'Not provided',
-      topic: data.subject,
-      message: data.message,
+      replyTo: data.email,
+      fields: fieldsFrom({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || 'Not provided',
+        topic: data.subject,
+        message: data.message,
+      }),
     });
     await submitContact(data).catch(() => {});
-    await sendEmail({ form: 'contact', ...data });
     appendSubmission('mcin:contact', data);
     setSubmitting(false);
     setSuccess(true);
