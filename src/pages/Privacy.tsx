@@ -14,7 +14,7 @@ const sections: Array<{ h: string; p: string[] }> = [
   {
     h: 'Who we are',
     p: [
-      `${site.name} is a family-run Maine Coon cattery based in Evansville, Indiana. This policy explains what personal information we collect through this website, why we collect it, and what you can do about it.`,
+      `${site.name} is a family-run Maine Coon cattery located at ${site.address}. This policy explains what personal information we collect through this website, why we collect it, and what you can do about it.`,
       `If you have any question about this policy, email us at ${site.email}.`,
     ],
   },

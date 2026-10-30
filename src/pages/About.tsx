@@ -50,13 +50,27 @@ export default function About() {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: `About Us | ${site.name}`,
-    description: 'Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee.',
+    description: 'Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens at 219 S Grand Ave, Evansville, IN 47713, and our written health guarantee.',
     url: `${site.url}/about`,
     mainEntity: {
-      '@type': 'PetStore',
+      '@type': ['PetStore', 'AnimalShelter'],
       name: site.name,
       url: site.url,
       image: 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '219 S Grand Ave',
+        addressLocality: 'Evansville',
+        addressRegion: 'IN',
+        postalCode: '47713',
+        addressCountry: 'US',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 37.9698,
+        longitude: -87.5615,
+      },
+      areaServed: site.serviceAreas.map((area) => ({ '@type': 'AdministrativeArea', name: area })),
     },
   };
 
@@ -82,13 +96,13 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About Us — Maine Coon Breeder in Indiana"
-        description="Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee."
+        title="About Us — Maine Coon Breeder in Evansville, IN | 219 S Grand Ave"
+        description="Learn about our family cattery at 219 S Grand Ave, Evansville, IN 47713. Home-raised, DNA health-tested Maine Coon kittens, local pickup, and Tri-State pet delivery."
         jsonLd={[aboutPageSchema, breadcrumbJsonLd]}
       />
       <PageHero
         title={`About ${site.name}`}
-        subtitle="A small, passionate cattery raising healthy, well-socialised Maine Coon kittens for families across the US."
+        subtitle="A passionate home cattery at 219 S Grand Ave, Evansville, IN raising healthy, well-socialised Maine Coon kittens for Indiana, Kentucky, and US families."
         image={heroImg}
         breadcrumb="About Us"
       />
@@ -107,26 +121,28 @@ export default function About() {
           <div>
             <SectionHeading
               align="left"
-              eyebrow="Our story"
-              title="Raising exceptional Maine Coon kittens since 2010"
+              eyebrow="Our Evansville Story"
+              title="Dedicated Maine Coon Breeders Serving Evansville & The Tri-State"
               className="!mx-0"
             />
             <p className="mt-5 leading-relaxed text-ink/85">
-              {site.name} began with a simple love for this magnificent breed. Our kittens are
-              raised underfoot in our home — not in cages — so they grow up confident, affectionate
-              and beautifully socialised with people and other pets.
+              {site.name} was established in 2010 out of genuine love for the gentle giant breed. Based in our home at{' '}
+              <strong className="text-forest-800">219 S Grand Ave, Evansville, IN 47713</strong>, our kittens are raised
+              underfoot — never in cages — so they grow up confident, exceptionally affectionate, and accustomed to daily
+              household life.
             </p>
             <p className="mt-4 leading-relaxed text-ink/85">
-              Every kitten is health-checked, vaccinated and comes with a health guarantee. Over the
+              We focus on ethical breeding practices: genetic health testing (HCM, SMA, PKDef clear), licensed veterinary
+              examinations, age-appropriate core vaccinations, and a comprehensive written health guarantee. We take pride in
+              welcoming adopters from Evansville, Newburgh, Henderson KY, Owensboro KY, and across the nation. Over the
               years we&apos;ve placed{' '}
-              <strong className="text-forest-700">{site.rehomedCount} kittens</strong> with happy
-              families — and counting.
+              <strong className="text-forest-700">{site.rehomedCount} kittens</strong> in loving homes.
             </p>
             <div className="mt-6 rounded-2xl bg-forest-50 p-5">
-              <p className="font-bold text-forest-800">Our promise</p>
+              <p className="font-bold text-forest-800">Our Cattery Promise</p>
               <p className="mt-1 text-sm text-ink/80">
-                To raise healthy, happy, well-socialised Maine Coon kittens and match them with
-                loving families — with support for life.
+                To nurture robust, beautifully socialised Maine Coon companions, offer transparent local cattery pickups at
+                219 S Grand Ave, Evansville, IN, and provide families with lifetime breed advice and support.
               </p>
             </div>
           </div>
@@ -136,10 +152,10 @@ export default function About() {
       {/* Trust */}
       <section className="bg-sand/60 py-14">
         <div className="container-page grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <TrustBadge icon={<ShieldIcon />} title="Health Guarantee" subtitle="Vet-checked & vaccinated" />
+          <TrustBadge icon={<ShieldIcon />} title="Health Guarantee" subtitle="DNA-tested & vet certified" />
           <TrustBadge icon={<HeartIcon />} title="500+ Kittens Placed" subtitle="Since 2010" />
-          <TrustBadge icon={<PawIcon />} title="Nationwide Delivery" subtitle="Safe door-to-door transport" />
-          <TrustBadge icon={<StarIcon />} title="5-Star Breeder" subtitle="Trusted by families" />
+          <TrustBadge icon={<PawIcon />} title="Evansville Pickup" subtitle="219 S Grand Ave (47713)" />
+          <TrustBadge icon={<StarIcon />} title="Tri-State Delivery" subtitle="IN, KY & nationwide courier" />
         </div>
       </section>
 

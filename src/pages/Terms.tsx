@@ -42,7 +42,7 @@ const sections: Array<{ h: string; p: string[] }> = [
   {
     h: 'Delivery and collection',
     p: [
-      'You are welcome to collect your kitten in person. Where you choose nationwide delivery, travel is arranged with a pet courier or flight nanny and charged separately.',
+      `You are welcome to collect your kitten in person at our cattery located at ${site.address}. Where you choose regional Tri-State or nationwide delivery, travel is arranged with a certified pet courier or flight nanny and charged separately.`,
       'Delivery dates are estimates. We will not send a kitten that is unwell or too young to travel safely, and will reschedule instead.',
     ],
   },

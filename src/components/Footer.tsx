@@ -62,8 +62,24 @@ export default function Footer() {
 
         {/* Contact */}
         <div>
-          <h3 className="text-sm font-bold uppercase tracking-wider text-white">Get in touch</h3>
+          <h3 className="text-sm font-bold uppercase tracking-wider text-white">Cattery Location</h3>
           <ul className="mt-4 space-y-3 text-sm text-cream/70">
+            {site.address && (
+              <li className="flex items-start gap-2">
+                <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-ember-200" />
+                <div>
+                  <a
+                    href="https://maps.google.com/?q=219+S+Grand+Ave,+Evansville,+IN+47713"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-white transition hover:text-ember-200"
+                  >
+                    {site.address}
+                  </a>
+                  <p className="mt-0.5 text-xs text-cream/60">Vanderburgh County · Evansville, IN</p>
+                </div>
+              </li>
+            )}
             <li className="flex items-center gap-2">
               <PhoneIcon className="h-4 w-4 text-ember-200" />
               <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="hover:text-ember-200">
@@ -76,19 +92,22 @@ export default function Footer() {
                 {site.email}
               </a>
             </li>
-            {site.address && (
-              <li className="flex items-start gap-2">
-                <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-ember-200" />
-                <span>{site.address}</span>
-              </li>
-            )}
+            <li className="border-t border-white/10 pt-2 text-xs text-cream/60">
+              <span className="font-semibold text-white/90">Pickup &amp; Visits:</span> {site.hours}
+            </li>
           </ul>
         </div>
 
         {/* Newsletter + trust */}
         <div>
           <NewsletterSignup />
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-white">Tri-State Service Areas</p>
+            <p className="mt-1 text-xs leading-relaxed text-cream/70">
+              Local pickup in Evansville (47713) · Door-to-door delivery across Newburgh, Henderson KY, Owensboro KY, Jasper, &amp; nationwide.
+            </p>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
             <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
               <ShieldIcon className="h-4 w-4 text-ember-200" /> Health Guarantee
             </span>
@@ -115,9 +134,9 @@ export default function Footer() {
           </div>
         </div>
         <p className="container-page pb-6 text-center text-[11px] leading-relaxed text-cream/40">
-          {site.name} is a family-run Maine Coon cattery in Evansville, Indiana. Kittens are
-          vet-checked, vaccinated and microchipped before they travel, and every kitten comes with a
-          written health guarantee.
+          {site.name} is a family-operated Maine Coon cattery located at 219 S Grand Ave, Evansville, IN 47713.
+          Our kittens are DNA health-tested (HCM, SMA, PKDef clear), vet-certified, vaccinated, and microchipped before joining your family.
+          In-person cattery pickups and nationwide flight nanny courier delivery available.
         </p>
       </div>
     </footer>

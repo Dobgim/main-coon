@@ -187,7 +187,7 @@ async function run() {
   const blogPosts = parseBlogPosts();
 
   const siteUrl = 'https://royalmainecoonkiten.com';
-  const siteKeywords = 'Maine Coon kittens, Maine Coon kittens for sale, Maine Coon kittens Indiana, Maine Coon kittens Evansville, Maine Coon breeder, buy Maine Coon kitten, reserve Maine Coon kitten';
+  const siteKeywords = 'Maine Coon kittens for sale Evansville IN, Maine Coon breeders Evansville Indiana, Maine Coon kittens 219 S Grand Ave Evansville, Maine Coon kittens near me, Maine Coon kittens Indiana, Maine Coon kittens Kentucky, Maine Coon kittens Newburgh IN, Maine Coon kittens Henderson KY, Maine Coon kittens Owensboro KY, European Maine Coon kittens Evansville, Maine Coon adoption Evansville IN, Tri-State Maine Coon breeder, registered Maine Coon cattery Indiana';
   // Social platforms (WhatsApp, Facebook, X, LinkedIn) do NOT render SVG in link
   // previews, so an .svg logo here produces a blank share card. Use the first real
   // published kitten photo — a raster image of actual stock — and only fall back to
@@ -195,47 +195,68 @@ async function run() {
   const firstCatPhoto = catsList.find((c) => c.images && c.images[0])?.images[0];
   const defaultImage = firstCatPhoto || `${siteUrl}/logo.svg`;
 
-  // NOTE: Fabricated placeholder reviews were removed from here.
-  // Google's review-snippet policy requires ratings to come from genuine,
-  // verifiable customers, and inventing them risks a manual action that
-  // removes this site from rich results entirely. Re-add review/aggregateRating
-  // markup ONLY once you have real, attributable customer reviews.
-
   // Define metadata for static routes
   const routes = [
     {
       path: '',
-      title: 'Maine Coon Kittens for Sale in Evansville, Indiana | Royal Maine Coon Kittens',
-      description: 'Healthy, home-raised Maine Coon kittens for sale in Evansville, Indiana. Vet-checked, vaccinated gentle giants — reserve your Maine Coon kitten today, with nationwide delivery available.',
+      title: 'Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave | Royal Maine Coon Kittens',
+      description: 'Purebred, home-raised Maine Coon kittens for sale in Evansville, Indiana. Located at 219 S Grand Ave, Evansville, IN 47713. DNA health-tested, vet-checked gentle giants with in-person pickup and safe delivery to Newburgh, Henderson KY, Owensboro KY, and nationwide.',
       keywords: siteKeywords,
       robots: 'index,follow',
       imageUrl: defaultImage,
       jsonLd: {
         '@context': 'https://schema.org',
-        '@type': 'PetStore',
+        '@type': ['PetStore', 'AnimalShelter'],
         'name': 'Royal Maine Coon Kittens',
-        'description': 'Healthy, home-raised Maine Coon kittens for sale in Evansville, Indiana. Vet-checked, vaccinated gentle giants.',
+        'description': 'Purebred, home-raised Maine Coon kittens for sale at 219 S Grand Ave, Evansville, IN 47713. DNA health-tested gentle giants with in-person pickup and safe delivery to Newburgh, Henderson KY, Owensboro KY, and nationwide.',
         'url': siteUrl,
         'telephone': '(317) 225-7139',
         'email': 'royalmainecoonkitten159@gmail.com',
         'image': 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
         'priceRange': '$$$',
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': '219 S Grand Ave',
+          'addressLocality': 'Evansville',
+          'addressRegion': 'IN',
+          'postalCode': '47713',
+          'addressCountry': 'US'
+        },
+        'geo': {
+          '@type': 'GeoCoordinates',
+          'latitude': 37.9698,
+          'longitude': -87.5615
+        },
+        'openingHoursSpecification': [
+          {
+            '@type': 'OpeningHoursSpecification',
+            'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            'opens': '09:00',
+            'closes': '18:00'
+          }
+        ],
         'sameAs': [
           'https://www.facebook.com/share/1BbohnNhPm/?mibextid=wwXIfr',
-          'https://instagram.com/',
           'https://www.tiktok.com/@royalcoonkittens?_r=1&_t=ZT-97aIEINMEaT'
-        ].filter((u) => Boolean(u && u.trim() && u !== 'https://instagram.com/')),
+        ],
         'areaServed': [
+          { '@type': 'PostalAddress', 'postalCode': '47713', 'addressLocality': 'Evansville', 'addressRegion': 'IN' },
           { '@type': 'City', 'name': 'Evansville' },
+          { '@type': 'City', 'name': 'Newburgh' },
+          { '@type': 'City', 'name': 'Henderson' },
+          { '@type': 'City', 'name': 'Owensboro' },
+          { '@type': 'City', 'name': 'Jasper' },
+          { '@type': 'AdministrativeArea', 'name': 'Vanderburgh County' },
           { '@type': 'State', 'name': 'Indiana' },
+          { '@type': 'State', 'name': 'Kentucky' },
           { '@type': 'Country', 'name': 'United States' }
         ]
       }
     },
     {
       path: 'about',
-      title: 'About Us — Maine Coon Breeder in Indiana | Royal Maine Coon Kittens',
-      description: 'Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee.',
+      title: 'About Us — Maine Coon Breeder in Evansville, IN | 219 S Grand Ave',
+      description: 'Learn about our family cattery at 219 S Grand Ave, Evansville, IN 47713. Home-raised, DNA health-tested Maine Coon kittens, local pickup, and Tri-State pet delivery.',
       keywords: siteKeywords,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -244,13 +265,21 @@ async function run() {
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           'name': 'About Us — Royal Maine Coon Kittens',
-          'description': 'Learn about our family cattery, how we home-raise healthy, socialized Maine Coon kittens in Evansville, Indiana, and our written health guarantee.',
+          'description': 'Learn about our family cattery at 219 S Grand Ave, Evansville, IN 47713. Home-raised, DNA health-tested Maine Coon kittens, local pickup, and Tri-State pet delivery.',
           'url': `${siteUrl}/about`,
           'mainEntity': {
-            '@type': 'PetStore',
+            '@type': ['PetStore', 'AnimalShelter'],
             'name': 'Royal Maine Coon Kittens',
             'url': siteUrl,
-            'image': 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70'
+            'image': 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': '219 S Grand Ave',
+              'addressLocality': 'Evansville',
+              'addressRegion': 'IN',
+              'postalCode': '47713',
+              'addressCountry': 'US'
+            }
           }
         },
         {
@@ -275,8 +304,8 @@ async function run() {
     },
     {
       path: 'cats',
-      title: 'Available Maine Coon Kittens for Sale in Indiana | Royal Maine Coon Kittens',
-      description: 'Browse available Maine Coon kittens — vet-checked, vaccinated and home-raised in Indiana. Reserve your gentle giant today, with nationwide delivery.',
+      title: 'Available Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave',
+      description: 'Browse purebred Maine Coon kittens for sale in Evansville, Indiana. Raised at 219 S Grand Ave, Evansville, IN 47713. Vet-checked, vaccinated, DNA health-tested gentle giants. In-person pickup & safe delivery.',
       keywords: siteKeywords,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -314,8 +343,8 @@ async function run() {
     },
     {
       path: 'rehomed',
-      title: 'Happy Tails — Rehomed Maine Coons | Royal Maine Coon Kittens',
-      description: "Real families and their Maine Coons. See the happy endings from kittens we've placed in loving homes.",
+      title: 'Happy Tails — Maine Coon Adoptions in Evansville, IN & Tri-State',
+      description: "Real stories and reviews from families who adopted Maine Coon kittens from our cattery at 219 S Grand Ave, Evansville, IN 47713. Serving Evansville, Newburgh, Henderson KY, Owensboro KY, and beyond.",
       keywords: siteKeywords,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -340,8 +369,8 @@ async function run() {
     },
     {
       path: 'contact',
-      title: 'Contact Us — Royal Maine Coon Kittens Indiana',
-      description: 'Get in touch with Royal Maine Coon Kittens in Evansville, Indiana. Have questions about reserving a kitten, prices, or shipping options? Contact us today.',
+      title: 'Contact Us — Maine Coon Cattery in Evansville, IN | 219 S Grand Ave',
+      description: 'Contact Royal Maine Coon Kittens at 219 S Grand Ave, Evansville, IN 47713. Inquire about available kittens, schedule an in-person cattery appointment, or arrange Tri-State delivery.',
       keywords: siteKeywords,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -350,13 +379,21 @@ async function run() {
           '@context': 'https://schema.org',
           '@type': 'ContactPage',
           'name': 'Contact Us — Royal Maine Coon Kittens',
-          'description': 'Get in touch with Royal Maine Coon Kittens in Evansville, Indiana.',
+          'description': 'Contact Royal Maine Coon Kittens at 219 S Grand Ave, Evansville, IN 47713.',
           'url': `${siteUrl}/contact`,
           'mainEntity': {
-            '@type': 'PetStore',
+            '@type': ['PetStore', 'AnimalShelter'],
             'name': 'Royal Maine Coon Kittens',
             'telephone': '(317) 225-7139',
-            'email': 'royalmainecoonkitten159@gmail.com'
+            'email': 'royalmainecoonkitten159@gmail.com',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': '219 S Grand Ave',
+              'addressLocality': 'Evansville',
+              'addressRegion': 'IN',
+              'postalCode': '47713',
+              'addressCountry': 'US'
+            }
           }
         },
         {
@@ -485,16 +522,16 @@ async function run() {
     },
     {
       path: 'blog',
-      title: 'Blog — Maine Coon Care & Tips | Royal Maine Coon Kittens',
-      description: 'Read the latest articles about Maine Coon cats, grooming tips, and cattery news.',
+      title: 'Maine Coon Blog & Guides — Evansville, IN Cattery Advice | Royal Maine Coon Kittens',
+      description: 'Expert advice on Maine Coon growth, grooming, ethical breeder selection, and kitten care in Evansville, IN, Henderson KY, Owensboro KY, and the Tri-State area.',
       keywords: `${siteKeywords}, blog, cat care`,
       robots: 'index,follow',
       imageUrl: defaultImage,
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Blog',
-        'name': 'Blog | Royal Maine Coon Kittens',
-        'description': 'Read the latest articles about Maine Coon cats, grooming tips, and cattery news.',
+        'name': 'Maine Coon Blog & Guides | Royal Maine Coon Kittens',
+        'description': 'Expert advice on Maine Coon growth, grooming, ethical breeder selection, and kitten care in Evansville, IN, Henderson KY, Owensboro KY, and the Tri-State area.',
         'url': `${siteUrl}/blog`,
         'publisher': {
           '@type': 'Organization',

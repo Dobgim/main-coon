@@ -78,13 +78,13 @@ export default function Cats() {
   return (
     <>
       <Seo
-        title="Available Maine Coon Kittens for Sale in Indiana"
-        description="Browse available Maine Coon kittens — vet-checked, vaccinated and home-raised in Indiana. Reserve your gentle giant today, with nationwide delivery."
+        title="Available Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave"
+        description="Browse purebred Maine Coon kittens for sale in Evansville, Indiana. Raised at 219 S Grand Ave, Evansville, IN 47713. Vet-checked, vaccinated, DNA health-tested gentle giants. In-person pickup & safe delivery."
         jsonLd={itemListSchema ? [itemListSchema, breadcrumbJsonLd] : breadcrumbJsonLd}
       />
       <PageHero
         title="Available Maine Coon Kittens"
-        subtitle="Browse our available Maine Coon kittens — vet-checked, vaccinated and ready for their new homes. Nationwide delivery available."
+        subtitle="Raised cage-free at 219 S Grand Ave, Evansville, IN 47713. Vet-checked, vaccinated, and DNA health-tested. Local cattery pickup and safe delivery to Newburgh, Henderson KY, Owensboro KY, and nationwide."
         image={heroImg}
       />
 
@@ -99,6 +99,23 @@ export default function Cats() {
           </aside>
 
           <div>
+            {/* Local Evansville Pickup & Delivery Notice */}
+            <div className="mb-6 rounded-2xl bg-forest-50 border border-forest-100 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm">
+              <div className="flex items-center gap-2.5 text-forest-800">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-forest text-white font-bold">
+                  📍
+                </span>
+                <div>
+                  <p className="font-bold text-forest-900">
+                    Cattery Location: 219 S Grand Ave, Evansville, IN 47713
+                  </p>
+                  <p className="text-muted">
+                    Schedule an in-person visit or reserve with door-to-door delivery across the Tri-State &amp; nationwide.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {loading ? (
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {Array.from({ length: 6 }).map((_, i) => (

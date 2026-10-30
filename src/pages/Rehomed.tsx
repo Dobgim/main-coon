@@ -52,13 +52,13 @@ export default function Rehomed() {
   return (
     <>
       <Seo
-        title="Happy Tails — Rehomed Maine Coons"
-        description="Real families and their Maine Coons. See the happy endings from kittens we've placed in loving homes."
+        title="Happy Tails — Maine Coon Adoptions in Evansville, IN & Tri-State"
+        description="Real stories and reviews from families who adopted Maine Coon kittens from our cattery at 219 S Grand Ave, Evansville, IN 47713. Serving Evansville, Newburgh, Henderson KY, Owensboro KY, and beyond."
         jsonLd={breadcrumbJsonLd}
       />
       <PageHero
-        title="Our Rehoming Stories"
-        subtitle="Every adoption is a happy ending years in the making. Here are some of our favourites."
+        title="Evansville & Tri-State Adoption Stories"
+        subtitle="Meet the gentle giants adopted from our Evansville cattery at 219 S Grand Ave and thriving in homes across Indiana, Kentucky, and the nation."
         image={heroImg}
         breadcrumb="Rehomed Cats"
       >

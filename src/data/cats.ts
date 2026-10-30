@@ -24,8 +24,8 @@ export const cats: Cat[] = [
     ageGroup: 'Young',
     gender: 'Male',
     color: 'Brown classic tabby',
-    location: 'Denver, Colorado',
-    region: 'Colorado',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -39,9 +39,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.jacky,
     personality: ['Affectionate', 'Playful', 'Talkative'],
     shortDescription:
-      'A gentle 2-year-old male Brown Classic Tabby Maine Coon cat in Denver, Colorado. Oliver is fully vet-checked, microchipped, and loves warm laps.',
+      'A gentle 2-year-old male Brown Classic Tabby Maine Coon cat in Evansville, IN (47713). Oliver is fully vet-checked, microchipped, and loves warm laps.',
     story:
-      'Are you looking to add a gentle giant to your Colorado home? Meet Oliver, a stunning 2-year-old male Brown Classic Tabby Maine Coon cat available for adoption in Denver. Oliver is the definition of a loyal companion — he loves nothing more than following you from room to room, offering soft chirrups to check on your day, and curling up in your lap for an evening cuddle. Oliver is fully socialized and raised in a cage-free home environment. He is excellent with children and other cats, making him a perfect fit for active households. He comes vet-checked, fully vaccinated, neutered, microchipped and backed by our 100% health guarantee. If you want a confident, affectionate family member who will bond deeply with you, Oliver is ready to meet you.',
+      'Are you looking to add a gentle giant to your home in Evansville, Southwestern Indiana, or Western Kentucky? Meet Oliver, a stunning 2-year-old male Brown Classic Tabby Maine Coon cat raised at our cattery at 219 S Grand Ave, Evansville, IN 47713. Oliver is the definition of a loyal companion — he loves following you from room to room, offering soft chirrups to check on your day, and curling up in your lap for an evening cuddle. Oliver is fully socialized and raised in our cage-free home environment. He is excellent with children and other cats, making him a perfect fit for active households. He comes vet-checked, fully vaccinated, neutered, microchipped and backed by our 100% health guarantee. Available for in-person cattery pickup in Evansville or safe delivery across Newburgh, Henderson KY, Owensboro KY, and nationwide.',
     images: [img('1514888286974-6c03e2ca1dba'), img('1533738363-b7f9aef128ce')],
   },
   {
@@ -51,8 +51,8 @@ export const cats: Cat[] = [
     ageGroup: 'Kitten',
     gender: 'Female',
     color: 'Silver tabby',
-    location: 'Seattle, Washington',
-    region: 'Washington',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -66,9 +66,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.marek,
     personality: ['Curious', 'Bouncy', 'Gentle'],
     shortDescription:
-      'A playful and curious 8-month-old female Silver Tabby Maine Coon kitten in Seattle, WA. Fully vaccinated, socialized, and great with children.',
+      'A playful and curious 8-month-old female Silver Tabby Maine Coon kitten in Evansville, IN. Fully vaccinated, socialized, and great with children.',
     story:
-      'Introduce a burst of playful energy into your home with Luna! This gorgeous 8-month-old female Silver Tabby Maine Coon kitten is available for adoption in Seattle, Washington. Luna is extremely curious and loves exploring her surroundings, chasing feather wands, and popping in and out of boxes. As a young kitten, Luna is highly adaptable and has been raised underfoot to guarantee she is exceptionally socialized. She is great with children, friendly cats, and cat-friendly dogs. Luna is indoor-only, vet-checked, fully vaccinated, spayed, and microchipped. She comes with our standard health guarantee and transition pack. If you want a lively, sweet, and beautiful kitten, Luna is the perfect fit.',
+      'Introduce a burst of playful energy into your home with Luna! This gorgeous 8-month-old female Silver Tabby Maine Coon kitten is nurtured at our home cattery at 219 S Grand Ave, Evansville, IN 47713. Luna is extremely curious and loves exploring her surroundings, chasing feather wands, and popping in and out of play tunnels. Luna has been raised underfoot to guarantee she is exceptionally socialized. She is great with children, friendly cats, and cat-friendly dogs. Luna is indoor-only, vet-checked, fully vaccinated, spayed, and microchipped. She comes with our written health guarantee and transition pack. Available for local pickup in Evansville, IN or white-glove delivery to Newburgh, Henderson KY, Owensboro KY, and across the US.',
     images: [img('1518791841217-8f162f1e1131'), img('1561948955-570b270e7c36')],
   },
   {
@@ -78,8 +78,8 @@ export const cats: Cat[] = [
     ageGroup: 'Adult',
     gender: 'Male',
     color: 'Red mackerel tabby',
-    location: 'Boulder, Colorado',
-    region: 'Colorado',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Pending',
     neutered: true,
     vaccinated: true,
@@ -93,9 +93,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.jacky,
     personality: ['Calm', 'Loyal', 'Independent'],
     shortDescription:
-      'A dignified 5-year-old Red Mackerel Tabby Maine Coon cat in Boulder, CO. Calm, loyal, and seeking a quiet, single-pet household.',
+      'A dignified 5-year-old Red Mackerel Tabby Maine Coon cat in Evansville, IN. Calm, loyal, and seeking a quiet, single-pet household.',
     story:
-      'Meet Max, a majestic 5-year-old male Red Mackerel Tabby Maine Coon cat residing in Boulder, Colorado. Max is a quiet, independent gentleman with a striking ginger coat and classic ear tufts. He is extremely loyal to his primary caregiver and enjoys lounging on a sunny windowsill or receiving a relaxing grooming session. Because Max prefers a peaceful environment, he is looking for a home where he can be the only pet — no other cats or dogs. He is excellent with older, respectful children. Max is fully vet-checked, neutered, microchipped, and vaccinated. If you are looking for a calm, low-maintenance, and devoted companion, Max will fill your home with warmth.',
+      'Meet Max, a majestic 5-year-old male Red Mackerel Tabby Maine Coon cat residing at our cattery at 219 S Grand Ave, Evansville, IN 47713. Max is a quiet, independent gentleman with a striking ginger coat and classic ear tufts. He is extremely loyal to his primary caregiver and enjoys lounging on a sunny windowsill or receiving a relaxing grooming session. Because Max prefers a peaceful environment, he is looking for a home where he can be the only pet — no other cats or dogs. He is excellent with older, respectful children. Max is fully vet-checked, neutered, microchipped, and vaccinated. Max is ready to join a loving home in Evansville, Newburgh, or surrounding Tri-State communities.',
     images: [img('1574158622682-e40e69881006'), img('1543852786-1cf6624b9987')],
   },
   {
@@ -105,8 +105,8 @@ export const cats: Cat[] = [
     ageGroup: 'Adult',
     gender: 'Female',
     color: 'Tortoiseshell',
-    location: 'San Diego, California',
-    region: 'California',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -120,9 +120,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.sarah,
     personality: ['Sweet', 'Shy at first', 'Devoted'],
     shortDescription:
-      'A beautiful, quiet 3-year-old female Tortoiseshell Maine Coon cat in San Diego, CA. Best suited for a peaceful, adult-only indoor home.',
+      'A beautiful, quiet 3-year-old female Tortoiseshell Maine Coon cat in Evansville, IN. Best suited for a peaceful, adult-only indoor home.',
     story:
-      'Are you looking for a unique, gorgeous companion? Meet Willow, a beautiful 3-year-old female Tortoiseshell Maine Coon cat available for adoption in San Diego, California. Willow features a rich, colorful tortoiseshell coat and has a sweet, gentle soul. While she is shy at first, she blossoms into a devoted shadow once she trusts you. Willow thrives in calm, quiet environments. For this reason, she is best suited for an adult-only home without dogs — she gets along great with other friendly cats. She is an indoor-only cat, vet-checked, fully vaccinated, spayed, and microchipped. If you have the patience to let her settle in at her own pace, Willow will reward you with lifelong devotion.',
+      'Are you looking for a unique, gorgeous companion in the Evansville or Tri-State area? Meet Willow, a beautiful 3-year-old female Tortoiseshell Maine Coon cat available at our cattery at 219 S Grand Ave, Evansville, IN 47713. Willow features a rich, colorful tortoiseshell coat and has a sweet, gentle soul. While she is shy at first, she blossoms into a devoted shadow once she trusts you. Willow thrives in calm, quiet environments and is best suited for an adult-only home without dogs. She gets along great with other friendly cats. Indoor-only, vet-checked, fully vaccinated, spayed, and microchipped. Available for scheduled pickup in Evansville or regional delivery.',
     images: [img('1592194996308-7b43878e84a6'), img('1606214174585-fe31582dc6ee')],
   },
   {
@@ -132,8 +132,8 @@ export const cats: Cat[] = [
     ageGroup: 'Young',
     gender: 'Male',
     color: 'Black smoke',
-    location: 'Boston, Massachusetts',
-    region: 'Massachusetts',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -147,9 +147,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.marek,
     personality: ['Friendly', 'Outgoing', 'Adventurous'],
     shortDescription:
-      'An adventurous, highly social 1-year-old male Black Smoke Maine Coon cat in Boston, MA. Great with kids, other cats, and friendly dogs.',
+      'An adventurous, highly social 1-year-old male Black Smoke Maine Coon cat in Evansville, IN (47713). Great with kids, other cats, and friendly dogs.',
     story:
-      'Say hello to Finn, an incredibly handsome 1-year-old male Black Smoke Maine Coon cat available for adoption in Boston, Massachusetts. Finn has a rare, stunning "black smoke" coat that looks solid black at rest but reveals a bright silver undercoat when he moves — he is the ultimate social butterfly. Finn greets visitors at the door, loves active play, and gets along with absolutely everyone — including children, other cats, and cat-friendly dogs. He is vet-checked, vaccinated, neutered, microchipped, and comes with a complete health guarantee. If you want a playful, large, and striking Maine Coon to join your family, Finn is ready for his new home.',
+      'Say hello to Finn, an incredibly handsome 1-year-old male Black Smoke Maine Coon cat available for adoption at 219 S Grand Ave, Evansville, IN 47713. Finn has a rare, stunning "black smoke" coat that looks solid black at rest but reveals a bright silver undercoat when he moves — he is the ultimate social butterfly. Finn greets visitors at the door, loves active play, and gets along with absolutely everyone — including children, other cats, and cat-friendly dogs. He is vet-checked, vaccinated, neutered, microchipped, and comes with a complete health guarantee. Perfect for families in Evansville, Newburgh, Henderson KY, or Owensboro KY looking for a showstopper companion.',
     images: [img('1573865526739-10659fec78a5'), img('1514888286974-6c03e2ca1dba')],
   },
   {
@@ -159,8 +159,8 @@ export const cats: Cat[] = [
     ageGroup: 'Senior',
     gender: 'Female',
     color: 'Blue tabby',
-    location: 'Fort Collins, Colorado',
-    region: 'Colorado',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -174,9 +174,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.jacky,
     personality: ['Cuddly', 'Mellow', 'Lap-loving'],
     shortDescription:
-      'A mellow, lap-loving 9-year-old female Blue Tabby Maine Coon cat in Fort Collins, CO. Enjoys quiet environments, soft beds, and gentle strokes.',
+      'A mellow, lap-loving 9-year-old female Blue Tabby Maine Coon cat in Evansville, IN. Enjoys quiet environments, soft beds, and gentle strokes.',
     story:
-      'Looking for a calm companion who asks for nothing but love? Meet Maisie, a mellow 9-year-old female Blue Tabby (grey) Maine Coon cat available for adoption in Fort Collins, Colorado. Senior cats like Maisie make the most rewarding companions — she is quiet, sweet, and perfectly content spending her day napping in a warm lap. Maisie is strictly indoor-only, vet-checked, fully vaccinated, spayed, and microchipped. To ensure her comfort, she would prefer a peaceful home as the only pet. If you are looking to open your heart to a gorgeous grey senior Maine Coon who is already house-trained and loves cuddles, Maisie is waiting for you.',
+      'Looking for a calm companion who asks for nothing but love? Meet Maisie, a mellow 9-year-old female Blue Tabby (grey) Maine Coon cat available at our cattery at 219 S Grand Ave, Evansville, IN 47713. Senior Maine Coons make the most rewarding companions — she is quiet, sweet, and perfectly content spending her day napping in a warm lap. Maisie is strictly indoor-only, vet-checked, fully vaccinated, spayed, and microchipped. She prefers a peaceful home as the only pet. If you are looking to open your heart to a gorgeous senior Maine Coon in Evansville or Western Kentucky, Maisie is waiting for you.',
     images: [img('1596854407944-bf87f6fdd49e'), img('1592194996308-7b43878e84a6')],
   },
   {
@@ -186,8 +186,8 @@ export const cats: Cat[] = [
     ageGroup: 'Adult',
     gender: 'Male',
     color: 'Brown tabby & white',
-    location: 'Austin, Texas',
-    region: 'Texas',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -201,9 +201,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.sarah,
     personality: ['Goofy', 'Food-motivated', 'Soft'],
     shortDescription:
-      'A goofy, lovable 4-year-old male Brown Tabby & White Maine Coon cat in Austin, TX. Food-motivated, loves family play, and gets along with other cats.',
+      'A goofy, lovable 4-year-old male Brown Tabby & White Maine Coon cat in Evansville, IN. Food-motivated, loves family play, and gets along with other cats.',
     story:
-      'Add some laughter to your home with Rocco! This goofy and lovable 4-year-old male Brown Tabby & White Maine Coon cat is available for adoption in Austin, Texas. Rocco is a big, soft character who is highly food-motivated and will happily perform tricks or follow you around if there is a treat involved. Rocco is extremely socialized and loves the company of children and other friendly cats — no dogs, please. He enjoys puzzle feeders, active playtime, and a thorough chin scratch. Rocco is fully vet-checked, vaccinated, neutered, microchipped, and ready for his forever home. If you want a playful cattery giant with a heart of gold, Rocco is your boy.',
+      'Add some laughter to your home with Rocco! This goofy and lovable 4-year-old male Brown Tabby & White Maine Coon cat is available for adoption at 219 S Grand Ave, Evansville, IN 47713. Rocco is a big, soft character who is highly food-motivated and will happily perform tricks or follow you around if there is a treat involved. Rocco is socialized and loves the company of children and other friendly cats. He enjoys puzzle feeders, active playtime, and a thorough chin scratch. Fully vet-checked, vaccinated, neutered, microchipped, and ready for his forever home in Evansville, Newburgh, or surrounding Tri-State areas.',
     images: [img('1543852786-1cf6624b9987'), img('1573865526739-10659fec78a5')],
   },
   {
@@ -213,8 +213,8 @@ export const cats: Cat[] = [
     ageGroup: 'Kitten',
     gender: 'Female',
     color: 'Cream tabby',
-    location: 'Tacoma, Washington',
-    region: 'Washington',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Adopted',
     neutered: true,
     vaccinated: true,
@@ -228,9 +228,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.marek,
     personality: ['Playful', 'Affectionate', 'Brave'],
     shortDescription:
-      'A brave and affectionate female Cream Tabby Maine Coon kitten adopted in Tacoma, WA. See her success story and view our available list.',
+      'A brave and affectionate female Cream Tabby Maine Coon kitten adopted in Evansville, IN. See her success story and view our available list.',
     story:
-      'Success Story: Poppy has found her forever home! This confident, brave, and affectionate female Cream Tabby Maine Coon kitten was hand-raised in our cattery in Tacoma, Washington. As a bottle-fed rescue kitten, Poppy developed a deep bond with humans and was quickly adopted by a loving family. While Poppy is no longer available, she represents our cattery\'s commitment to breeding and raising healthy, well-socialized Maine Coon kittens. If you are looking for a cream tabby or other premium Maine Coon kittens in Washington, we invite you to view our active listings page or join our waitlist today.',
+      'Success Story: Poppy has found her forever home in Newburgh, IN! This confident, brave, and affectionate female Cream Tabby Maine Coon kitten was hand-raised in our cattery at 219 S Grand Ave, Evansville, IN 47713. As a bottle-fed rescue kitten, Poppy developed a deep bond with humans and was quickly adopted by a wonderful local family. While Poppy is no longer available, she represents our cattery\'s commitment to breeding and raising healthy, well-socialized Maine Coon kittens for Indiana and Kentucky families.',
     images: [img('1561948955-570b270e7c36'), img('1518791841217-8f162f1e1131')],
   },
   {
@@ -240,8 +240,8 @@ export const cats: Cat[] = [
     ageGroup: 'Senior',
     gender: 'Male',
     color: 'Brown classic tabby',
-    location: 'Dallas, Texas',
-    region: 'Texas',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -255,9 +255,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.jacky,
     personality: ['Dignified', 'Quiet', 'Affectionate'],
     shortDescription:
-      'A dignified, quiet 7-year-old male Brown Classic Tabby Maine Coon cat in Dallas, TX. Enjoys a calm, peaceful home environment and gentle strokes.',
+      'A dignified, quiet 7-year-old male Brown Classic Tabby Maine Coon cat in Evansville, IN. Enjoys a calm, peaceful home environment and gentle strokes.',
     story:
-      'Meet Bramble, a dignified and handsome 7-year-old male Brown Classic Tabby Maine Coon cat looking for a quiet retirement home in Dallas, Texas. Bramble has striking classic tabby swirls and a calm, sweet temperament. He is a gentle soul who asks for nothing more than slow strokes, soft beds, and peaceful company. Bramble would thrive in a quiet household without dogs or young children, though he gets along well with other calm cats. He is vet-checked, fully vaccinated, neutered, and microchipped. If you want a mature companion who will add a peaceful presence to your home, Bramble is ready to bond with you.',
+      'Meet Bramble, a dignified and handsome 7-year-old male Brown Classic Tabby Maine Coon cat looking for a quiet retirement home at 219 S Grand Ave, Evansville, IN 47713. Bramble has striking classic tabby swirls and a calm, sweet temperament. He is a gentle soul who asks for nothing more than slow strokes, soft beds, and peaceful company. Bramble would thrive in a quiet household without dogs or young children, though he gets along well with other calm cats. He is vet-checked, fully vaccinated, neutered, and microchipped. Ready for in-person cattery pickup in Evansville or delivery to surrounding Tri-State areas.',
     images: [img('1606214174585-fe31582dc6ee'), img('1574158622682-e40e69881006')],
   },
   {
@@ -267,8 +267,8 @@ export const cats: Cat[] = [
     ageGroup: 'Young',
     gender: 'Female',
     color: 'Silver shaded',
-    location: 'New York, New York',
-    region: 'New York',
+    location: 'Evansville, IN (219 S Grand Ave)',
+    region: 'Evansville & Tri-State',
     status: 'Available',
     neutered: true,
     vaccinated: true,
@@ -282,9 +282,9 @@ export const cats: Cat[] = [
     coordinator: coordinators.sarah,
     personality: ['Elegant', 'Affectionate', 'Chatty'],
     shortDescription:
-      'An elegant, talkative 2-year-old female Silver Shaded Maine Coon cat in New York, NY. Fully vaccinated, microchipped, and loves interactive play.',
+      'An elegant, talkative 2-year-old female Silver Shaded Maine Coon cat in Evansville, IN. Fully vaccinated, microchipped, and loves interactive play.',
     story:
-      'Add an air of elegance to your home with Nala! This stunning 2-year-old female Silver Shaded Maine Coon cat is available for adoption in New York City. Nala has a breathtaking, shimmering silver shaded coat and a chatty, outgoing personality — she loves to hold full "conversations" with her owners and tell you all about her day. Nala is highly interactive, loving playtime with feather toys and settling down on a cozy blanket near you. She gets along great with children and other friendly cats — no dogs, please. Nala is strictly indoor-only, vet-checked, microchipped, and fully vaccinated. If you want a beautiful, conversational companion in New York, Nala is ready to move in.',
+      'Add an air of elegance to your home with Nala! This stunning 2-year-old female Silver Shaded Maine Coon cat is available for adoption at our cattery at 219 S Grand Ave, Evansville, IN 47713. Nala has a breathtaking, shimmering silver shaded coat and a chatty, outgoing personality — she loves to hold full "conversations" with her owners and tell you all about her day. Highly interactive, loving playtime with feather toys and settling down on a cozy blanket near you. Great with children and other friendly cats. Strictly indoor-only, vet-checked, microchipped, and fully vaccinated. Available for pickup in Evansville, IN or courier delivery.',
     images: [img('1495360010541-f48722b34f7d'), img('1596854407944-bf87f6fdd49e')],
   },
 ];

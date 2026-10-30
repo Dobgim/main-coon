@@ -57,13 +57,13 @@ export default function Blog() {
   return (
     <>
       <Seo
-        title="Blog — Maine Coon Care & Tips"
-        description="Read the latest articles about Maine Coon cats, grooming tips, and cattery news."
+        title="Maine Coon Blog & Guides — Evansville, IN Cattery Advice"
+        description="Expert advice on Maine Coon growth, grooming, ethical breeder selection, and kitten care in Evansville, IN, Henderson KY, Owensboro KY, and the Tri-State area."
         jsonLd={[blogPageSchema, breadcrumbJsonLd]}
       />
       <PageHero
-        title="Our Blog"
-        subtitle="Tips, news, and everything you need to know about Maine Coon cats."
+        title="Maine Coon Blog & Guides"
+        subtitle="Breeder advice, grooming guides, and essential kitten tips from our cattery at 219 S Grand Ave, Evansville, IN 47713."
         image={heroImg}
         breadcrumb="Blog"
       />

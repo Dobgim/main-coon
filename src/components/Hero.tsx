@@ -118,9 +118,9 @@ export default function Hero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="badge inline-flex items-center gap-1.5 bg-ember-100 text-ember-700"
+            className="badge inline-flex items-center gap-1.5 bg-ember-100 text-ember-700 font-semibold"
           >
-            <PawIcon className="h-4 w-4" /> Home-raised Maine Coon Kittens
+            <PawIcon className="h-4 w-4" /> Evansville, IN · 219 S Grand Ave · Tri-State Cattery
           </motion.span>
 
           <motion.h1
@@ -130,7 +130,7 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-3 text-[2rem] font-extrabold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl"
           >
-            Healthy Maine Coon kittens <span className="text-forest">raised with love</span>
+            Maine Coon Kittens in Evansville, IN <span className="text-forest">Raised with Love</span>
           </motion.h1>
 
           <motion.p
@@ -140,8 +140,8 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
           >
-            Vet-checked, vaccinated and well-socialised — ready to join your family, with
-            nationwide delivery available.
+            Purebred, DNA health-tested Maine Coon kittens raised cage-free in our home at 219 S Grand Ave, Evansville, IN 47713.
+            In-person cattery pickup and safe door-to-door delivery across Newburgh, Henderson KY, Owensboro KY, and nationwide.
           </motion.p>
 
           {/*

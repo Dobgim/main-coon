@@ -55,7 +55,7 @@ export default function CatDetail() {
   const productJsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: `${cat.name} — ${cat.color} Maine Coon Cat`,
+    name: `${cat.name} — ${cat.color} Maine Coon Cat in Evansville, IN`,
     description: cat.shortDescription || cat.story,
     image: cat.images,
     category: 'Maine Coon Kitten',
@@ -70,6 +70,19 @@ export default function CatDetail() {
           : cat.status === 'Pending'
             ? 'https://schema.org/LimitedAvailability'
             : 'https://schema.org/InStock',
+      seller: {
+        '@type': 'PetStore',
+        name: site.name,
+        telephone: site.phone,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: '219 S Grand Ave',
+          addressLocality: 'Evansville',
+          addressRegion: 'IN',
+          postalCode: '47713',
+          addressCountry: 'US',
+        },
+      },
     },
   };
 
@@ -155,8 +168,8 @@ export default function CatDetail() {
   return (
     <div className="container-page py-10 md:py-14">
       <Seo
-        title={`${cat.name} — ${cat.color} Maine Coon Kitten`}
-        description={cat.shortDescription || `Meet ${cat.name}, a ${cat.color} Maine Coon kitten available now.`}
+        title={`${cat.name} — ${cat.color} Maine Coon Kitten in Evansville, IN`}
+        description={cat.shortDescription || `Meet ${cat.name}, a ${cat.color} Maine Coon kitten raised at 219 S Grand Ave, Evansville, IN 47713. Available for in-person cattery pickup and safe delivery.`}
         image={cat.images[0]}
         jsonLd={jsonLdData}
       />

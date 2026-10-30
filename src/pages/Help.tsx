@@ -12,10 +12,13 @@ const heroImg =
 export default function Help() {
   return (
     <>
-      <Seo title="How to Help" />
+      <Seo
+        title="How to Help Maine Coons in Evansville, IN & Tri-State"
+        description="Learn how to foster, volunteer, and support Maine Coon rehoming and care in Evansville, Indiana (219 S Grand Ave)."
+      />
       <PageHero
-        title="How You Can Help"
-        subtitle="There are so many ways to make a difference for Maine Coons in need — find the one that's right for you."
+        title="How You Can Help in Evansville & The Tri-State"
+        subtitle="Explore ways to support foster care, cattery volunteering, and rehoming assistance for Maine Coons in Southwestern Indiana and Western Kentucky."
         image={heroImg}
         breadcrumb="How to Help"
       />
