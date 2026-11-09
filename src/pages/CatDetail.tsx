@@ -16,7 +16,7 @@ import {
 import PurchasePanel from '@/components/PurchasePanel';
 import Seo from '@/components/Seo';
 import { useCat } from '@/hooks/useCats';
-import { site } from '@/data/site';
+import { site, BUSINESS_ID } from '@/data/site';
 import { catFaqs } from '@/data/catFaqs';
 import { getOptimizedImageUrl } from '@/lib/image-utils';
 
@@ -72,6 +72,7 @@ export default function CatDetail() {
             : 'https://schema.org/InStock',
       seller: {
         '@type': 'PetStore',
+        '@id': BUSINESS_ID,
         name: site.name,
         telephone: site.phone,
         address: {

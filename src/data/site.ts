@@ -106,16 +106,42 @@ export const site = {
   },
 } as const;
 
+/** Stable entity ids so every page's structured data points at one business. */
+export const BUSINESS_ID = `${site.url}/#business`;
+export const WEBSITE_ID = `${site.url}/#website`;
+
 export const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': ['PetStore', 'AnimalShelter'],
+  '@type': 'PetStore',
+  '@id': BUSINESS_ID,
   name: site.name,
+  alternateName: 'Royal Maine Coon Kittens Cattery',
   description: site.seoDescription,
+  slogan: site.shortPitch,
   url: site.url,
-  telephone: site.phone,
+  logo: `${site.url}/logo.svg`,
+  telephone: '+1-317-225-7139',
   email: site.email,
+  foundingDate: String(site.foundedYear),
   image: 'https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=1200&q=70',
   priceRange: '$$$',
+  currenciesAccepted: 'USD',
+  knowsAbout: [
+    'Maine Coon cats',
+    'Maine Coon kittens',
+    'Cat breeding',
+    'Feline genetic health testing (HCM, SMA, PKDef)',
+    'Maine Coon grooming',
+    'Maine Coon nutrition and growth',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    telephone: '+1-317-225-7139',
+    email: site.email,
+    areaServed: 'US',
+    availableLanguage: 'English',
+  },
   address: {
     '@type': 'PostalAddress',
     streetAddress: '219 S Grand Ave',

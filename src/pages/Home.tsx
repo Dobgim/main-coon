@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Seo from '@/components/Seo';
 import Hero from '@/components/Hero';
-import { localBusinessSchema } from '@/data/site';
+import { localBusinessSchema, site, BUSINESS_ID, WEBSITE_ID } from '@/data/site';
+import siteFaqs from '@/data/siteFaqs.json';
 import CatSlideshow from '@/components/CatSlideshow';
 import SectionHeading from '@/components/SectionHeading';
 import CatGrid from '@/components/CatGrid';
@@ -72,6 +73,28 @@ const adoptionSteps = [
   },
 ];
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': WEBSITE_ID,
+  url: site.url,
+  name: site.name,
+  inLanguage: 'en-US',
+  publisher: { '@id': BUSINESS_ID },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: siteFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+
+const homeJsonLd = [localBusinessSchema, websiteSchema, faqSchema];
+
 const cardVariants = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number) => ({
@@ -91,7 +114,7 @@ export default function Home() {
       <Seo
         title="Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave"
         description="Purebred Maine Coon kittens for sale in Evansville, Indiana. Located at 219 S Grand Ave, Evansville, IN 47713. Vet-checked, DNA health-tested gentle giants with in-person pickup and safe delivery to Newburgh, Henderson KY, Owensboro KY, and nationwide."
-        jsonLd={localBusinessSchema}
+        jsonLd={homeJsonLd}
       />
       <Hero />
 
@@ -490,6 +513,28 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Frequently asked questions */}
+      <section className="container-page py-16 md:py-24" aria-labelledby="faq-heading">
+        <SectionHeading
+          eyebrow="Questions & answers"
+          title={<span id="faq-heading">Maine Coon kitten FAQs</span>}
+          description="Straight answers about our kittens, health testing, reservations and delivery from our Evansville, IN cattery."
+        />
+        <div className="mx-auto mt-10 max-w-3xl divide-y divide-forest-100 rounded-3xl border border-forest-100 bg-white">
+          {siteFaqs.map((f) => (
+            <details key={f.question} className="group p-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left">
+                <h3 className="text-base font-extrabold text-forest-800 sm:text-lg">{f.question}</h3>
+                <span className="shrink-0 text-xl font-bold text-ember-600 transition group-open:rotate-45" aria-hidden>
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 leading-relaxed text-ink/85">{f.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 

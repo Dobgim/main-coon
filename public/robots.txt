@@ -1,5 +1,38 @@
+# Royal Maine Coon Kittens — https://royalmainecoonkiten.com
+# Search engines and AI answer engines are welcome to read and cite this site.
+# Machine-readable summary: https://royalmainecoonkiten.com/llms.txt
+# Full knowledge file:      https://royalmainecoonkiten.com/llms-full.txt
+
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /checkout
+Disallow: /cart
+Disallow: /invoice
+
+# AI search & answer engines (explicitly allowed)
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: DuckAssistBot
+User-agent: meta-externalagent
+User-agent: MistralAI-User
+User-agent: YouBot
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin
+Disallow: /checkout
+Disallow: /cart
+Disallow: /invoice
 
 Sitemap: https://royalmainecoonkiten.com/sitemap.xml
