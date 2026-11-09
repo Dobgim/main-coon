@@ -1,4 +1,5 @@
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import { site } from '@/data/site';
 import PageHero from '@/components/PageHero';
 import DonationForm from '@/components/DonationForm';
@@ -30,8 +31,8 @@ export default function Donate() {
   return (
     <>
       <Seo
-        title="Support Maine Coon Care & Rescue in Evansville, IN | Donate"
-        description="Support veterinary care, nutritious food, and medical treatment for Maine Coons in need at our Evansville, IN cattery (219 S Grand Ave)."
+        title={pageMeta.donate.title}
+        description={pageMeta.donate.description}
         jsonLd={breadcrumbJsonLd}
       />
       <PageHero

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { site } from '@/data/site';
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import PageHero from '@/components/PageHero';
 import CatGrid from '@/components/CatGrid';
 import FilterSidebar, { defaultFilters, type CatFilters } from '@/components/FilterSidebar';
@@ -78,8 +79,8 @@ export default function Cats() {
   return (
     <>
       <Seo
-        title="Available Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave"
-        description="Browse purebred Maine Coon kittens for sale in Evansville, Indiana. Raised at 219 S Grand Ave, Evansville, IN 47713. Vet-checked, vaccinated, DNA health-tested gentle giants. In-person pickup & safe delivery."
+        title={pageMeta.cats.title}
+        description={pageMeta.cats.description}
         jsonLd={itemListSchema ? [itemListSchema, breadcrumbJsonLd] : breadcrumbJsonLd}
       />
       <PageHero

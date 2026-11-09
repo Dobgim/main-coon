@@ -1,4 +1,5 @@
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import PageHero from '@/components/PageHero';
 import ContactForm from '@/components/ContactForm';
 import {
@@ -66,8 +67,8 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title="Contact Us — Maine Coon Cattery in Evansville, IN | 219 S Grand Ave"
-        description="Contact Royal Maine Coon Kittens at 219 S Grand Ave, Evansville, IN 47713. Inquire about available kittens, schedule an in-person cattery appointment, or arrange Tri-State delivery."
+        title={pageMeta.contact.title}
+        description={pageMeta.contact.description}
         jsonLd={[contactPageSchema, breadcrumbJsonLd]}
       />
       <PageHero

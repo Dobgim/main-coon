@@ -366,10 +366,40 @@ function webPage(type, name, description, url, extra = {}) {
   };
 }
 
-/** First phrase of a color field, so long admin descriptions don't bloat titles. */
+// Mirrors src/lib/seoText.ts — keep titles <= 60 and descriptions <= 155 chars.
+const TITLE_MAX = 60;
+const DESC_MAX = 155;
+
+function clampAtWord(text, max) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${(lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:—–-]+$/, '')}…`;
+}
+
+function fitTitle(base, brand = 'Royal Maine Coon Kittens') {
+  const clean = String(base).replace(/\s+/g, ' ').trim();
+  if (clean.includes(brand)) return clampAtWord(clean, TITLE_MAX);
+  const branded = `${clean} | ${brand}`;
+  return branded.length <= TITLE_MAX ? branded : clampAtWord(clean, TITLE_MAX);
+}
+
+function fitDescription(text) {
+  const clean = String(text).replace(/\s+/g, ' ').trim();
+  if (clean.length <= DESC_MAX) return clean;
+  const window = clean.slice(0, DESC_MAX);
+  const sentenceEnd = Math.max(window.lastIndexOf('. '), window.lastIndexOf('! '), window.lastIndexOf('? '));
+  if (sentenceEnd >= 80) return window.slice(0, sentenceEnd + 1);
+  return clampAtWord(clean, DESC_MAX);
+}
+
 function shortColor(color) {
   const first = String(color || '').split(/[,(;.]/)[0].trim();
-  return first.length > 40 ? `${first.slice(0, 40).trim()}…` : first;
+  return first.length > 30 ? clampAtWord(first, 30) : first;
+}
+
+function loadPageMeta() {
+  return JSON.parse(fs.readFileSync(path.resolve(projectRoot, 'src/data/pageMeta.json'), 'utf8'));
 }
 
 function yesNo(v) {
@@ -479,19 +509,20 @@ async function run() {
   const activeCats = catsList.filter((c) => c.status !== 'Adopted');
   const availableCats = catsList.filter((c) => c.status === 'Available');
 
-  const homeDesc = 'Purebred, home-raised Maine Coon kittens for sale in Evansville, Indiana. Located at 219 S Grand Ave, Evansville, IN 47713. DNA health-tested, vet-checked gentle giants with in-person pickup and safe delivery to Newburgh, Henderson KY, Owensboro KY, and nationwide.';
-  const aboutDesc = 'Learn about our family cattery at 219 S Grand Ave, Evansville, IN 47713. Home-raised, DNA health-tested Maine Coon kittens, local pickup, and Tri-State pet delivery.';
-  const catsDesc = 'Browse purebred Maine Coon kittens for sale in Evansville, Indiana. Raised at 219 S Grand Ave, Evansville, IN 47713. Vet-checked, vaccinated, DNA health-tested gentle giants. In-person pickup & safe delivery.';
-  const rehomedDesc = 'Stories from families who brought home Maine Coon kittens from our cattery at 219 S Grand Ave, Evansville, IN 47713. Serving Evansville, Newburgh, Henderson KY, Owensboro KY, and beyond.';
-  const contactDesc = 'Contact Royal Maine Coon Kittens at 219 S Grand Ave, Evansville, IN 47713. Inquire about available kittens, schedule an in-person cattery appointment, or arrange Tri-State delivery.';
-  const blogDesc = 'Expert advice on Maine Coon growth, grooming, ethical breeder selection, and kitten care in Evansville, IN, Henderson KY, Owensboro KY, and the Tri-State area.';
+  const meta = loadPageMeta();
+  const homeDesc = meta.home.description;
+  const aboutDesc = meta.about.description;
+  const catsDesc = meta.cats.description;
+  const rehomedDesc = meta.rehomed.description;
+  const contactDesc = meta.contact.description;
+  const blogDesc = meta.blog.description;
 
   const home = ['Home', siteUrl];
 
   const routes = [
     {
       path: '',
-      title: 'Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave | Royal Maine Coon Kittens',
+      title: meta.home.title,
       description: homeDesc,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -526,7 +557,7 @@ ${faqHtml(siteFaqs, 'Maine Coon kitten FAQs')}`,
     },
     {
       path: 'about',
-      title: 'About Us — Maine Coon Breeder in Evansville, IN | 219 S Grand Ave',
+      title: meta.about.title,
       description: aboutDesc,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -545,7 +576,7 @@ ${faqHtml(siteFaqs, 'Maine Coon kitten FAQs')}`,
     },
     {
       path: 'cats',
-      title: 'Available Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave',
+      title: meta.cats.title,
       description: catsDesc,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -573,7 +604,7 @@ ${catListHtml(catsList)}`,
     },
     {
       path: 'rehomed',
-      title: 'Happy Tails — Maine Coon Adoptions in Evansville, IN & Tri-State',
+      title: meta.rehomed.title,
       description: rehomedDesc,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -586,7 +617,7 @@ ${catListHtml(catsList)}`,
     },
     {
       path: 'contact',
-      title: 'Contact Us — Maine Coon Cattery in Evansville, IN | 219 S Grand Ave',
+      title: meta.contact.title,
       description: contactDesc,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -607,8 +638,8 @@ ${factsTable([
     },
     {
       path: 'help',
-      title: 'How to Help | Royal Maine Coon Kittens',
-      description: 'Ways to support Royal Maine Coon Kittens in Evansville, IN — share our kittens, follow us, or get in touch.',
+      title: meta.help.title,
+      description: meta.help.description,
       robots: 'index,follow',
       imageUrl: defaultImage,
       lastmod: today,
@@ -617,8 +648,8 @@ ${factsTable([
     },
     {
       path: 'donate',
-      title: 'Donate | Royal Maine Coon Kittens',
-      description: 'Support Royal Maine Coon Kittens in Evansville, IN with a donation or wishlist gift.',
+      title: meta.donate.title,
+      description: meta.donate.description,
       robots: 'index,follow',
       imageUrl: defaultImage,
       lastmod: today,
@@ -645,7 +676,7 @@ ${factsTable([
     },
     {
       path: 'blog',
-      title: 'Maine Coon Blog & Guides — Evansville, IN Cattery Advice | Royal Maine Coon Kittens',
+      title: meta.blog.title,
       description: blogDesc,
       robots: 'index,follow',
       imageUrl: defaultImage,
@@ -678,7 +709,7 @@ ${factsTable([
     const url = `${siteUrl}/blog/${post.slug}`;
     routes.push({
       path: `blog/${post.slug}`,
-      title: `${post.title} | Royal Maine Coon Kittens`,
+      title: post.title,
       description: post.excerpt,
       robots: 'index,follow',
       imageUrl: post.image,
@@ -714,7 +745,7 @@ ${post.content}
   for (const cat of catsList) {
     const url = `${siteUrl}/cats/${cat.slug}`;
     const color = shortColor(cat.color);
-    const title = `${cat.name} — ${color} Maine Coon Kitten`;
+    const title = `${cat.name} — ${color} Maine Coon Kitten`; // fitted when written
     const description = cat.short_description || `Meet ${cat.name}, a healthy, vet-checked ${color} Maine Coon kitten available from ${business.name} in Evansville, IN.`;
     const imageUrl = cat.images[0] || defaultImage;
     const availability =
@@ -785,8 +816,8 @@ ${faqHtml(faqs, `Questions about ${cat.name}`)}
 
   for (const r of routes) {
     const canonicalUrl = `${siteUrl}/${r.path}`;
-    const escapedDesc = esc(r.description);
-    const escapedTitle = esc(r.title);
+    const escapedDesc = esc(fitDescription(r.description));
+    const escapedTitle = esc(fitTitle(r.title));
 
     let seoContent = `
     <!-- SEO_TAGS_START -->
@@ -833,6 +864,9 @@ ${faqHtml(faqs, `Questions about ${cat.name}`)}
       fs.writeFileSync(path.resolve(targetDir, 'index.html'), outputHtml);
     }
   }
+
+  const tooLong = routes.filter((r) => fitTitle(r.title).length > TITLE_MAX || fitDescription(r.description).length > DESC_MAX + 1);
+  if (tooLong.length) console.warn('[prerender] Meta length issues:', tooLong.map((r) => r.path));
 
   // -------------------------------------------------------------------------
   // sitemap.xml

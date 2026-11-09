@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/SectionHeading';
 import TrustBadge from '@/components/TrustBadge';
@@ -96,8 +97,8 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About Us — Maine Coon Breeder in Evansville, IN | 219 S Grand Ave"
-        description="Learn about our family cattery at 219 S Grand Ave, Evansville, IN 47713. Home-raised, DNA health-tested Maine Coon kittens, local pickup, and Tri-State pet delivery."
+        title={pageMeta.about.title}
+        description={pageMeta.about.description}
         jsonLd={[aboutPageSchema, breadcrumbJsonLd]}
       />
       <PageHero

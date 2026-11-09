@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import PageHero from '@/components/PageHero';
 import { blogPosts } from '@/data/blog';
 import { site } from '@/data/site';
@@ -57,8 +58,8 @@ export default function Blog() {
   return (
     <>
       <Seo
-        title="Maine Coon Blog & Guides — Evansville, IN Cattery Advice"
-        description="Expert advice on Maine Coon growth, grooming, ethical breeder selection, and kitten care in Evansville, IN, Henderson KY, Owensboro KY, and the Tri-State area."
+        title={pageMeta.blog.title}
+        description={pageMeta.blog.description}
         jsonLd={[blogPageSchema, breadcrumbJsonLd]}
       />
       <PageHero

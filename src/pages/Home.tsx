@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import Hero from '@/components/Hero';
 import { localBusinessSchema, site, BUSINESS_ID, WEBSITE_ID } from '@/data/site';
 import siteFaqs from '@/data/siteFaqs.json';
@@ -112,8 +113,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="Maine Coon Kittens for Sale in Evansville, IN | 219 S Grand Ave"
-        description="Purebred Maine Coon kittens for sale in Evansville, Indiana. Located at 219 S Grand Ave, Evansville, IN 47713. Vet-checked, DNA health-tested gentle giants with in-person pickup and safe delivery to Newburgh, Henderson KY, Owensboro KY, and nationwide."
+        title={pageMeta.home.title}
+        description={pageMeta.home.description}
         jsonLd={homeJsonLd}
       />
       <Hero />

@@ -64,7 +64,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: '3',
     slug: 'finding-reputable-maine-coon-breeder-evansville-in',
-    title: 'Finding a Reputable Maine Coon Breeder in Evansville, IN & The Tri-State',
+    title: 'Finding a Reputable Maine Coon Breeder in Evansville, IN',
     date: '2024-03-12',
     author: 'Royal Maine Coon Kittens',
     excerpt: 'Looking for a Maine Coon kitten in Evansville, Indiana or surrounding areas like Newburgh, Henderson KY, and Owensboro? Here is what to verify before reserving your kitten.',
@@ -96,7 +96,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: '4',
     slug: 'maine-coon-kitten-adoption-care-guide-indiana',
-    title: 'Maine Coon Kitten Adoption & Care: Evansville, IN Local Guide',
+    title: 'Maine Coon Kitten Care Guide for Evansville, IN',
     date: '2024-05-18',
     author: 'Royal Maine Coon Kittens',
     excerpt: 'A complete guide for Indiana and Kentucky families welcoming a Maine Coon kitten. Learn about climate care, local veterinary readiness, and nutritional needs.',

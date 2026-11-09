@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { site } from '@/data/site';
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import PageHero from '@/components/PageHero';
 import RehomedCard from '@/components/RehomedCard';
 import Reveal from '@/components/Reveal';
@@ -52,8 +53,8 @@ export default function Rehomed() {
   return (
     <>
       <Seo
-        title="Happy Tails — Maine Coon Adoptions in Evansville, IN & Tri-State"
-        description="Real stories and reviews from families who adopted Maine Coon kittens from our cattery at 219 S Grand Ave, Evansville, IN 47713. Serving Evansville, Newburgh, Henderson KY, Owensboro KY, and beyond."
+        title={pageMeta.rehomed.title}
+        description={pageMeta.rehomed.description}
         jsonLd={breadcrumbJsonLd}
       />
       <PageHero

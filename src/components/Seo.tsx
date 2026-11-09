@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { site } from '@/data/site';
+import { fitTitle, fitDescription } from '@/lib/seoText';
 
 interface SeoProps {
   /** Page title (without the brand suffix). Omit on the home page. */
@@ -39,8 +40,8 @@ export default function Seo({ title, description, image, noindex, jsonLd }: SeoP
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const fullTitle = title ? `${title} | ${site.name}` : `${site.name} — Maine Coon Kittens`;
-    const desc = description ?? site.seoDescription;
+    const fullTitle = title ? fitTitle(title, site.name) : `${site.name} — Maine Coon Kittens`;
+    const desc = fitDescription(description ?? site.seoDescription);
     const url = `${site.url}${pathname}`;
     const img = image ?? DEFAULT_IMAGE;
 

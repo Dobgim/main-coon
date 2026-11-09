@@ -17,6 +17,7 @@ import PurchasePanel from '@/components/PurchasePanel';
 import Seo from '@/components/Seo';
 import { useCat } from '@/hooks/useCats';
 import { site, BUSINESS_ID } from '@/data/site';
+import { shortColor } from '@/lib/seoText';
 import { catFaqs } from '@/data/catFaqs';
 import { getOptimizedImageUrl } from '@/lib/image-utils';
 
@@ -169,7 +170,7 @@ export default function CatDetail() {
   return (
     <div className="container-page py-10 md:py-14">
       <Seo
-        title={`${cat.name} — ${cat.color} Maine Coon Kitten in Evansville, IN`}
+        title={`${cat.name} — ${shortColor(cat.color)} Maine Coon Kitten`}
         description={cat.shortDescription || `Meet ${cat.name}, a ${cat.color} Maine Coon kitten raised at 219 S Grand Ave, Evansville, IN 47713. Available for in-person cattery pickup and safe delivery.`}
         image={cat.images[0]}
         jsonLd={jsonLdData}

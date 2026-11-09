@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '@/components/Seo';
+import pageMeta from '@/data/pageMeta.json';
 import PageHero from '@/components/PageHero';
 import HelpCard from '@/components/HelpCard';
 import Reveal from '@/components/Reveal';
@@ -13,8 +14,8 @@ export default function Help() {
   return (
     <>
       <Seo
-        title="How to Help Maine Coons in Evansville, IN & Tri-State"
-        description="Learn how to foster, volunteer, and support Maine Coon rehoming and care in Evansville, Indiana (219 S Grand Ave)."
+        title={pageMeta.help.title}
+        description={pageMeta.help.description}
       />
       <PageHero
         title="How You Can Help in Evansville & The Tri-State"
