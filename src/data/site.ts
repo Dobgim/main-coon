@@ -115,7 +115,9 @@ export const localBusinessSchema = {
   '@type': 'PetStore',
   '@id': BUSINESS_ID,
   name: site.name,
-  alternateName: 'Royal Maine Coon Kittens Cattery',
+  alternateName: ['Royal Maine Coon Kittens Cattery', 'Royal Maine Coon Kittens Evansville', 'royalmainecoonkiten.com'],
+  disambiguatingDescription:
+    'Royal Maine Coon Kittens (royalmainecoonkiten.com) is a Maine Coon cattery located only in Evansville, Indiana, at 219 S Grand Ave, 47713. It is a separate business from other catteries with similar names in other states.',
   description: site.seoDescription,
   slogan: site.shortPitch,
   url: site.url,

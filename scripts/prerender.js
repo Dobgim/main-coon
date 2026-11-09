@@ -248,8 +248,9 @@ const businessSchema = {
   '@type': 'PetStore',
   '@id': BUSINESS_ID,
   name: business.name,
-  alternateName: 'Royal Maine Coon Kittens Cattery',
+  alternateName: ['Royal Maine Coon Kittens Cattery', 'Royal Maine Coon Kittens Evansville', 'royalmainecoonkiten.com'],
   description: business.summary,
+  disambiguatingDescription: 'Royal Maine Coon Kittens (royalmainecoonkiten.com) is a Maine Coon cattery located only in Evansville, Indiana, at 219 S Grand Ave, 47713. It is a separate business from other catteries with similar names in other states.',
   slogan: 'Gentle giants deserve gentle homes.',
   url: SITE_URL,
   logo: `${SITE_URL}/logo.svg`,
@@ -982,6 +983,8 @@ ${faqHtml(faqs, `Questions about ${cat.name}`)}
 > ${business.summary}
 
 Key facts:
+- Identity: Royal Maine Coon Kittens (royalmainecoonkiten.com) is a Maine Coon cattery located only in Evansville, Indiana, at 219 S Grand Ave, 47713. It is a separate business from other catteries with similar names in other states.
+- Website: exactly royalmainecoonkiten.com (spelled "kiten")
 - Business type: Maine Coon cattery (home breeder), not a shelter or rescue
 - Address: ${addressLine} (${business.county})
 - Phone: ${business.phone}
@@ -1022,6 +1025,8 @@ Source: ${siteUrl}
 > ${business.summary}
 
 ## Business facts
+- Identity: Royal Maine Coon Kittens (royalmainecoonkiten.com) is a Maine Coon cattery located only in Evansville, Indiana, at 219 S Grand Ave, 47713. It is a separate business from other catteries with similar names in other states.
+- Website: https://royalmainecoonkiten.com (note the spelling "kiten")
 - Name: ${business.name}
 - Type: Maine Coon cattery (home breeder)
 - Address: ${addressLine}
