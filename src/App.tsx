@@ -25,6 +25,8 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Locations = lazy(() => import('./pages/Locations'));
+const LocationPage = lazy(() => import('./pages/LocationPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 export default function App() {
@@ -62,6 +64,8 @@ export default function App() {
               <Route path="/terms" element={<Terms />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/maine-coon-kittens" element={<Locations />} />
+              <Route path="/maine-coon-kittens/:slug" element={<LocationPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

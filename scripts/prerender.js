@@ -398,6 +398,15 @@ function shortColor(color) {
   return first.length > 30 ? clampAtWord(first, 30) : first;
 }
 
+function loadLocations() {
+  try {
+    return JSON.parse(fs.readFileSync(path.resolve(projectRoot, 'src/data/locations.json'), 'utf8'));
+  } catch (err) {
+    console.warn('[prerender] Could not read locations.json:', err.message);
+    return [];
+  }
+}
+
 function loadPageMeta() {
   return JSON.parse(fs.readFileSync(path.resolve(projectRoot, 'src/data/pageMeta.json'), 'utf8'));
 }
@@ -510,6 +519,7 @@ async function run() {
   const availableCats = catsList.filter((c) => c.status === 'Available');
 
   const meta = loadPageMeta();
+  const locations = loadLocations();
   const homeDesc = meta.home.description;
   const aboutDesc = meta.about.description;
   const catsDesc = meta.cats.description;
@@ -705,6 +715,68 @@ ${factsTable([
     },
   ];
 
+  routes.push({
+    path: 'maine-coon-kittens',
+    title: meta.areas.title,
+    description: meta.areas.description,
+    robots: 'index,follow',
+    imageUrl: defaultImage,
+    lastmod: today,
+    jsonLd: [
+      webPage('CollectionPage', 'Areas We Serve', meta.areas.description, `${siteUrl}/maine-coon-kittens`),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Areas served by Royal Maine Coon Kittens',
+        itemListElement: locations.map((l, i) => ({
+          '@type': 'ListItem', position: i + 1, name: l.place, url: `${siteUrl}/maine-coon-kittens/${l.slug}`,
+        })),
+      },
+      breadcrumb([home, ['Areas We Serve', `${siteUrl}/maine-coon-kittens`]]),
+    ],
+    body: `<h1>Maine Coon Kittens in Indiana &amp; Kentucky</h1>
+<p>Our cattery is at ${business.street}, ${business.city}, ${business.region} ${business.postalCode}. Choose your area for drive times, pickup and delivery options, and local answers. We also deliver nationwide.</p>
+<ul>${locations.map((l) => `<li><a href="/maine-coon-kittens/${esc(l.slug)}">${esc(l.h1)}</a> — ${esc(l.distance)}</li>`).join('')}</ul>`,
+  });
+
+  for (const loc of locations) {
+    const url = `${siteUrl}/maine-coon-kittens/${loc.slug}`;
+    routes.push({
+      path: `maine-coon-kittens/${loc.slug}`,
+      title: loc.title,
+      description: loc.description,
+      robots: 'index,follow',
+      imageUrl: defaultImage,
+      lastmod: today,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          '@id': `${url}#service`,
+          name: loc.h1,
+          serviceType: 'Maine Coon kittens for sale',
+          description: loc.description,
+          url,
+          provider: { '@id': BUSINESS_ID },
+          areaServed: { '@type': loc.type, name: loc.place },
+        },
+        faqPageSchema(loc.faqs),
+        breadcrumb([home, ['Areas We Serve', `${siteUrl}/maine-coon-kittens`], [loc.place, url]]),
+      ],
+      body: `<h1>${esc(loc.h1)}</h1>
+<p>${esc(loc.intro)}</p>
+<h2>How far is the cattery from ${esc(loc.place)}?</h2><p>${esc(loc.distance)}</p>
+<h2>Pickup and delivery for ${esc(loc.place)}</h2><p>${esc(loc.getting)}</p>
+<h2>Good to know</h2><p>${esc(loc.local)}</p>
+<h2>Every kitten comes with</h2>
+<ul>${business.included.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+<h2>Kittens available now</h2>
+${catListHtml(availableCats.slice(0, 6))}
+${faqHtml(loc.faqs, `Maine Coon kittens in ${loc.place}: FAQs`)}
+<p>We also serve: ${locations.filter((o) => o.slug !== loc.slug).map((o) => `<a href="/maine-coon-kittens/${esc(o.slug)}">${esc(o.place)}</a>`).join(', ')}.</p>`,
+    });
+  }
+
   for (const post of blogPosts) {
     const url = `${siteUrl}/blog/${post.slug}`;
     routes.push({
@@ -886,6 +958,7 @@ ${faqHtml(faqs, `Questions about ${cat.name}`)}
     else if (r.path === 'cats') { changefreq = 'daily'; priority = '0.9'; }
     else if (r.path.startsWith('cats/')) { priority = '0.8'; }
     else if (r.path === 'blog') { priority = '0.8'; }
+    else if (r.path.startsWith('maine-coon-kittens')) { priority = '0.8'; }
     else if (r.path.startsWith('blog/')) { changefreq = 'monthly'; priority = '0.7'; }
     else if (r.path === 'about' || r.path === 'contact') { priority = '0.7'; }
 
@@ -924,6 +997,9 @@ Key facts:
 - [About the cattery](${siteUrl}/about): history, breeding practices and services
 - [Contact and visits](${siteUrl}/contact): phone, email, address and appointment requests
 - [Happy families](${siteUrl}/rehomed): families who brought home our kittens
+
+## Areas served
+${locations.map((l) => `- [${l.h1}](${siteUrl}/maine-coon-kittens/${l.slug}): ${l.distance}`).join('\n')}
 
 ## Guides
 ${blogPosts.map((p) => `- [${p.title}](${siteUrl}/blog/${p.slug}): ${p.excerpt}`).join('\n')}
@@ -976,6 +1052,9 @@ ${business.serviceAreas.map((s) => `- ${s}`).join('\n')}
 
 ## Frequently asked questions
 ${siteFaqs.map((f) => `### ${f.question}\n${f.answer}`).join('\n\n')}
+
+## Areas served in detail
+${locations.map((l) => `### ${l.h1}\nURL: ${siteUrl}/maine-coon-kittens/${l.slug}\n\n${l.intro}\n\n- Distance: ${l.distance}\n- Pickup and delivery: ${l.getting}\n\n${l.faqs.map((f) => `**${f.question}** ${f.answer}`).join('\n\n')}`).join('\n\n')}
 
 ## Kittens currently listed (${activeCats.length})
 ${activeCats.map(kittenBlock).join('\n\n') || 'No kittens are listed right now.'}

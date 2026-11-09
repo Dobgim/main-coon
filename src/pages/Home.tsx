@@ -94,6 +94,16 @@ const faqSchema = {
   })),
 };
 
+/** Service-area badges that have their own landing page. */
+const areaPages: Array<[string, string]> = [
+  ['Evansville', 'evansville-in'],
+  ['Newburgh', 'newburgh-in'],
+  ['Henderson', 'henderson-ky'],
+  ['Owensboro', 'owensboro-ky'],
+  ['Indianapolis', 'indianapolis-in'],
+  ['Louisville', 'louisville-ky'],
+];
+
 const homeJsonLd = [localBusinessSchema, websiteSchema, faqSchema];
 
 const cardVariants = {
@@ -493,15 +503,27 @@ export default function Home() {
                 'Indianapolis, IN',
                 'Louisville, KY',
                 'Nationwide White-Glove Delivery',
-              ].map((loc) => (
-                <span
-                  key={loc}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-semibold text-forest-800 shadow-soft border border-forest-100"
-                >
-                  <PinIcon className="h-3.5 w-3.5 text-ember-600" />
-                  {loc}
-                </span>
-              ))}
+              ].map((loc) => {
+                const page = areaPages.find(([prefix]) => loc.startsWith(prefix));
+                const cls =
+                  'inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-semibold text-forest-800 shadow-soft border border-forest-100';
+                return page ? (
+                  <Link key={loc} to={`/maine-coon-kittens/${page[1]}`} className={`${cls} hover:text-ember-600`}>
+                    <PinIcon className="h-3.5 w-3.5 text-ember-600" />
+                    {loc}
+                  </Link>
+                ) : (
+                  <span key={loc} className={cls}>
+                    <PinIcon className="h-3.5 w-3.5 text-ember-600" />
+                    {loc}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="mt-5">
+              <Link to="/maine-coon-kittens" className="text-sm font-bold text-forest hover:text-ember-600">
+                See all areas we serve &rarr;
+              </Link>
             </div>
 
             <div className="mt-8 pt-6 border-t border-forest-200/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

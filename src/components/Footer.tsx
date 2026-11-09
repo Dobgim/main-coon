@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
+import locations from '@/data/locations.json';
 import NewsletterSignup from './NewsletterSignup';
 import {
   FacebookIcon,
@@ -25,7 +26,7 @@ const quickLinks = [
 export default function Footer() {
   return (
     <footer className="mt-20 bg-forest-800 text-cream/90">
-      <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {/* Brand + social */}
         <div>
           <Logo variant="light" />
@@ -54,6 +55,20 @@ export default function Footer() {
               <li key={l.to}>
                 <Link to={l.to} className="text-cream/70 transition hover:text-ember-200">
                   {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Areas served — internal links to local landing pages */}
+        <nav aria-label="Areas we serve">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-white">Areas We Serve</h3>
+          <ul className="mt-4 space-y-2 text-sm">
+            {locations.map((l) => (
+              <li key={l.slug}>
+                <Link to={`/maine-coon-kittens/${l.slug}`} className="text-cream/70 transition hover:text-ember-200">
+                  Maine Coon kittens {l.place}
                 </Link>
               </li>
             ))}
